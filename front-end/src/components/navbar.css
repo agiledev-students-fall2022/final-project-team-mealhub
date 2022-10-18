@@ -1,0 +1,27 @@
+.custom-start {
+    color: #eb6f3f !important;
+    opacity: 95%;
+}
+
+.custom-start:hover {
+    opacity: 100%;
+}
+
+.custom-signup {
+    color: #565454 !important;
+    opacity: 90%;
+}
+
+.custom-signup:hover {
+    opacity: 100%;
+}
+
+.custom-btn {
+    background: #eb6f3f !important;
+    border: none;
+    opacity: 95%;
+}
+
+.custom-btn:hover {
+    opacity: 100%;
+}
