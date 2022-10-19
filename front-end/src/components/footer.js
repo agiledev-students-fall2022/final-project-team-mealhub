@@ -7,7 +7,7 @@ import './navbar.css';
 function Footer() {
     return (
         <Container>
-            <Navbar collapseOnSelect expand="lg" fixed="bottom" style={{borderTop: '1px solid #f0f0f0'}}>
+            <Navbar collapseOnSelect expand="lg" sticky="bottom" style={{borderTop: '1px solid #f0f0f0', backgroundColor: '#fff'}}>
                 <Container className='d-flex justify-content-center'>
                     <Nav>
                         <NavLink className='d-flex justify-content-center me-2 ms-2'>© 2022 MealHub</NavLink>

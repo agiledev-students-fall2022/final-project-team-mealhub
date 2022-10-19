@@ -7,7 +7,7 @@ import './navbar.css';
 
 function NavbarComponent() {
     return (
-        <Navbar collapseOnSelect expand="lg" sticky="top" style={{borderBottom: '1px solid #f0f0f0'}}>
+        <Navbar collapseOnSelect expand="lg" sticky="top" style={{borderBottom: '1px solid #f0f0f0', backgroundColor: '#fff'}}>
             <Container>
                 <Navbar.Brand href="#home"><img src={Logo} height="35" alt="MealHub"/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>

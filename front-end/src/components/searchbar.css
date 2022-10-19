@@ -1,0 +1,15 @@
+.custom-btn2 {
+    background: #eb6f3f !important;
+    border: none;
+    opacity: 90%;
+}
+
+.custom-btn2:hover {
+    opacity: 100%;
+}
+
+.searchbar:focus {
+    outline: none;
+    border-color: #eb6f3f !important;
+    box-shadow: none;
+  }
