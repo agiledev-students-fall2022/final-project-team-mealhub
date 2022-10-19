@@ -5,9 +5,9 @@ import Footer from "./components/footer";
 import Card from "./components/card";
 import React from "react";
 import axios from "axios";
+import SearchBarComponent from "./components/searchbar";
 
 // mock data
-
 const rand = function () {
 	return Math.floor(Math.random() * 2);
 };
@@ -31,8 +31,8 @@ function App() {
 	return (
 		<div>
 			<NavbarComponent />
-			<h1 className="main-heading">Suggestions</h1>
-
+			<SearchBarComponent />
+			<h1 className="main-heading pt-5">Suggestions</h1>
 			<div>
 				{cardData &&
 					cardData.map((e) => {
