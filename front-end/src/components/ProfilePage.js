@@ -59,7 +59,7 @@ function ProfilePage() {
       </div>
 
       <div id="button">
-        <Button href="#EditProfilePage" className="custom-btn ms-2 me-2">
+        <Button href={"/editProfilePage"} className="custom-btn ms-2 me-2">
           Edit profile
         </Button>
       </div>
