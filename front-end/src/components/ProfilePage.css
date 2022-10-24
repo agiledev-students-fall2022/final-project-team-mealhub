@@ -1,0 +1,25 @@
+#title {
+    text-align: center;
+    font-size: larger;
+  }
+  
+  #info {
+    margin: auto;
+    max-width: fit-content;
+  }
+  
+  #pfImg {
+    text-align: center;
+    size: 100px;
+  }
+  
+  #button {
+    text-align: center;
+  }
+  
+  #changeImageText {
+    text-align: center;
+    font-size: small;
+    color: grey;
+  }
+  
