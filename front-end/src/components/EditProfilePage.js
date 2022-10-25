@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProfilePage.css";
-import Footer from "./footer";
 import Image from "react-bootstrap/Image";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -54,7 +53,7 @@ function EditProfilePage() {
       </div>
 
       {/*------------------------------Form section------------------------*/}
-      <div id="info">
+      <div id="infoEdit">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Name</Form.Label>
@@ -125,7 +124,6 @@ function EditProfilePage() {
           </Button>{" "}
         </Form>
       </div>
-      <Footer />
     </div>
   );
 }
