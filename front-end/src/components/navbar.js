@@ -16,8 +16,8 @@ function NavbarComponent() {
                     </Nav>
                     <Nav>
                         <Nav.Link href="./createGroup" className='custom-start ms-2 me-2'><b>Start a new group</b></Nav.Link>
-                        <Nav.Link href="#sign-up" className='custom-signup ms-2 me-2'>Sign up</Nav.Link>
-                        <Button href="#sign-in" className='custom-btn ms-2 me-2'>Sign in</Button>
+                        <Nav.Link href="./Register" className='custom-signup ms-2 me-2'>Sign up</Nav.Link>
+                        <Button href="./Login" className='custom-btn ms-2 me-2'>Sign in</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

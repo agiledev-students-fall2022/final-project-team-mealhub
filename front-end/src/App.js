@@ -12,6 +12,8 @@ import ProfilePage from "./components/ProfilePage";
 import EditProfilePage from "./components/EditProfilePage";
 import EditImage from "./components/EditImage";
 import Group from "./components/group";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 // mock data
 const rand = function () {
@@ -43,6 +45,8 @@ function App() {
           <Route path="/editProfilePage" element={<EditProfilePage />} />
           <Route path="/addImage" element={<EditImage />} />
           <Route path="/createGroup" element={<Group />} />
+		  <Route path="/Login" element={<Login />} />
+		  <Route path="/Register" element={<Register />} />
         </Routes>
       </Router>
 

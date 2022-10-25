@@ -22,7 +22,7 @@ function Login() {
           <MDBCard className='text-dark my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px' ,backgroundColor: "#ffffff"}}>
             <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
 
-              <h2 className="fw-bold mb-2 text-uppercase">Sign in</h2>
+              <h2 className="fw-bold mb-2 text-uppercase">Welcome Back</h2>
               <p className="text-black-50 mb-5">Please enter your login and password!</p>
               
   
