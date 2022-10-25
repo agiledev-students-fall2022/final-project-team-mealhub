@@ -15,7 +15,7 @@ function NavbarComponent() {
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#start-a-new-group" className='custom-start ms-2 me-2'><b>Start a new group</b></Nav.Link>
+                        <Nav.Link href="./createGroup" className='custom-start ms-2 me-2'><b>Start a new group</b></Nav.Link>
                         <Nav.Link href="#sign-up" className='custom-signup ms-2 me-2'>Sign up</Nav.Link>
                         <Button href="#sign-in" className='custom-btn ms-2 me-2'>Sign in</Button>
                     </Nav>
