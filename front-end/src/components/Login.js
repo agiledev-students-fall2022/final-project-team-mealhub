@@ -1,3 +1,5 @@
+import NavbarComponent from './navbar';
+import Footer from './footer';
 import React from 'react';
 import './Login.css';
 import {
@@ -14,6 +16,8 @@ from 'mdb-react-ui-kit';
 
 function Login() {
   return (
+    <div>
+    <NavbarComponent />
     <MDBContainer fluid>    
 
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -55,6 +59,8 @@ function Login() {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    <Footer />
+    </div>
   );
 }
 
