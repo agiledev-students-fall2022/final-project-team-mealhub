@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfilePage from "./components/ProfilePage";
 import EditProfilePage from "./components/EditProfilePage";
 import EditImage from "./components/EditImage";
+import Group from "./components/group";
 
 // mock data
 const rand = function () {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/profilePage" element={<ProfilePage />} />
           <Route path="/editProfilePage" element={<EditProfilePage />} />
           <Route path="/addImage" element={<EditImage />} />
+          <Route path="/createGroup" element={<Group />} />
         </Routes>
       </Router>
 

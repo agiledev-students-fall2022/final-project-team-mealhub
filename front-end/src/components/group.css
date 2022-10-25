@@ -1,0 +1,123 @@
+#title{
+    font-size: 2.0em;
+    font-weight: bold;
+    /* margin-left: 1.0em; */
+}
+
+
+.cusines {
+  padding-bottom: 5%;
+}
+
+.img-fluid {
+  max-width: 100%;
+  max-height: 92% !important;
+}
+
+#SubmitBtn {
+  background-color: #eb6f3e;
+}
+
+/* #form3{
+    padding-top: 5%;
+} */
+.input-group-text {
+  background-color: #fff;
+}
+
+.range .thumb:after {
+  background: #eb6f3e !important;
+  /* width: 75%;  */
+}
+.range input[type="range"]::-moz-range-thumb {
+  background: #eb6f3e;
+  /* width: 75%;  */
+}
+.range input[type="range"]::-webkit-slider-thumb {
+  background: #eb6f3e;
+}
+.range input[type="range"]::-ms-thumb {
+  background: #eb6f3e;
+}
+
+.col-md-9 {
+  width: 75% !important;
+}
+
+.form-range {
+  height: 1.5rem;
+  padding: 2%;
+  background-color: transparent;
+  appearance: none;
+}
+
+.input-group-text {
+  color: #ffffff !important;
+  background-color: #eb6f3e !important;
+}
+
+.form-dollar {
+  padding: 2%;
+}
+
+@media (min-width: 450px) {
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    padding: inherit;
+    padding-top: 3% !important;
+    margin-top: 3% !important;
+    z-index: 0;
+  }
+  #dollarRow {
+    width: 40% !important;
+    margin-left: -2%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    z-index: 0;
+    padding: inherit;
+    /* padding-top: 9% !important; */
+    margin-top: 8% !important;
+  }
+
+  #dollarRow {
+    width: 40% !important;
+    /* margin-left: -2%; */
+  }
+}
+
+#imgDiv {
+  padding-bottom: -5% !important;
+}
+
+@media (min-width: 768px) {
+  #imgDiv {
+    position: relative;
+    max-width: inherit;
+    flex: 0 0 auto;
+    width: 40%;
+    margin-bottom: -5%;
+    /* padding-left: 4%; */
+  }
+}
+
+@media (min-width: 992px) {
+  .mainCard {
+    flex: 0 0 auto;
+    width: 70.333333% !important;
+    margin-bottom: 2%;
+    padding-bottom: 1% !important;
+    padding-top: 1%;
+  }
+}
