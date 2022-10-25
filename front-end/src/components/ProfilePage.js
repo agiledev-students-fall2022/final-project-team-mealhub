@@ -63,7 +63,6 @@ function ProfilePage() {
           Edit profile
         </Button>
       </div>
-      <Footer />
     </Container>
   );
 }

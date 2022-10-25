@@ -7,7 +7,13 @@
     margin: auto;
     max-width: fit-content;
   }
-  
+
+  #infoEdit {
+    margin: auto;
+    max-width: fit-content;
+    padding-bottom: 100px;
+  }
+
   #pfImg {
     text-align: center;
     size: 100px;
@@ -15,6 +21,7 @@
   
   #button {
     text-align: center;
+    padding-bottom: 100px;
   }
   
   #changeImageText {
