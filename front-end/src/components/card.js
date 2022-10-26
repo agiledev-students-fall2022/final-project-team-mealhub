@@ -19,7 +19,14 @@ function Card({ data, key }) {
 						<Item.Meta>
 							<span>{data.date}</span>
 						</Item.Meta>
-						<Item.Header as="a">{data.restaurant}</Item.Header>
+						<Item.Header
+							as="a"
+							onClick={() => {
+								setOpen(true);
+							}}
+						>
+							{data.restaurant}
+						</Item.Header>
 						<Item.Description>{data.location}</Item.Description>
 						<Item.Meta>
 							<span>{data.remaining + " spots left"}</span>
@@ -29,7 +36,6 @@ function Card({ data, key }) {
 								floated="right"
 								onClick={() => {
 									setOpen(true);
-									console.log("clicked");
 								}}
 							>
 								Join
