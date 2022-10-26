@@ -32,7 +32,7 @@ function ProfilePage() {
         <p>My Profile</p>
       </div>
       <div id="pfImg">
-        <Image src={data.profileImage} roundedCircle height="140" width="140" />
+        <Image src="https://picsum.photos/100/100" roundedCircle height="140" width="140" />
       </div>
       <div id="info">
         <Form.Group>
