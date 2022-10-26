@@ -1,6 +1,6 @@
 .custom-start {
     color: #eb6f3f !important;
-    opacity: 95%;
+    opacity: 90%;
 }
 
 .custom-start:hover {
@@ -19,7 +19,7 @@
 .custom-btn {
     background: #eb6f3f !important;
     border: none;
-    opacity: 95%;
+    opacity: 90%;
 }
 
 .custom-btn:hover {
