@@ -187,11 +187,11 @@ button, input, optgroup, select, textarea {
   box-shadow: none;
 }
 
-/* .css-1s2u09g-control:focus {
+.css-1s2u09g-control::selection {
   outline: none !important;
   border-color: #eb6f3f !important;
   box-shadow: none;
-} */
+}
 
 .css-1pahdxg-control:hover {
 
@@ -211,13 +211,29 @@ button, input, optgroup, select, textarea {
   /* background-color: #eb6f3f !important; */
 }
 
+.css-1s2u09g-control::after {
+  border-color: #eb6f3f !important;
+  box-shadow: #eb6f3f !important;
+  /* background-color: #eb6f3f !important; */
+}
+
 .css-qc6sy-singleValue:hover {
   border-color: #eb6f3f !important;
   box-shadow: #eb6f3f !important;
   /* background-color: #eb6f3f !important; */
 }
 
+.css-qc6sy-singleValue::after {
+  border-color: #eb6f3f !important;
+  box-shadow: #eb6f3f !important;
+  /* background-color: #eb6f3f !important; */
+}
+
 .css-6j8wv5-Input::selection {
+  background-color: #eb6f3f !important;
+}
+
+.css-6j8wv5-Input::after {
   background-color: #eb6f3f !important;
 }
 
@@ -229,6 +245,13 @@ button, input, optgroup, select, textarea {
   background-color: #eb6f3f !important;
 } */
 .css-1n7v3ny-option:hover {
+  background-color: #eb6f3f !important;
+}
+.css-1n7v3ny-option::after {
+  background-color: #eb6f3f !important;
+}
+
+.css-26l3qy-menu::selection {
   background-color: #eb6f3f !important;
 }
 
@@ -251,3 +274,5 @@ button, input, optgroup, select, textarea {
   border-color: #eb6f3f !important;
   box-shadow: none;
 }
+
+
