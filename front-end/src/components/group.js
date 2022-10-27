@@ -4,7 +4,7 @@ import Footer from "./footer";
 import Select from "react-select";
 import React, { useState } from "react";
 import coverImg from "../assets/createGroup.jpg";
-// import { RHFInput } from 'react-hook-form-input';
+import { Button } from "semantic-ui-react";
 
 import {
   MDBBtn,
@@ -84,6 +84,7 @@ function Group() {
     });
     setSelected(null);
     setValue(20);
+    console.log("Form reset");
   };
 
   return (
@@ -105,8 +106,8 @@ function Group() {
                   </MDBCol>
 
                   <MDBCol md="6">
-                    <MDBCardBody className="text-black d-flex flex-column justify-content-center">
-                      <h3 className="mb-4 fw-bold" id= "title">
+                    <MDBCardBody className="text-black d-flex flex-column justify-content-left">
+                      <h3 className="mb-4 fw-bold" id="title">
                         Create New Group
                       </h3>
 
@@ -222,22 +223,6 @@ function Group() {
                           />
                         </MDBCol>
 
-                        {/* <MDBCol md="1">
-                        <MDBInputGroup
-                          textBefore="$"
-                          wrapperClass="mb-4"
-                          label="Amount in $"
-                          size="lg"
-                          id="formDollar"
-                          type="Number"
-                        >
-                          <MDBInput
-                            onChange={(e) => setValue(e.target.value)}
-                            value={value}
-                          />
-                        </MDBInputGroup>
-                      </MDBCol> */}
-
                         <MDBCol md="3" id="dollarRow">
                           <MDBInputGroup className="mb-2" textBefore="$">
                             <input
@@ -253,18 +238,30 @@ function Group() {
                         </MDBCol>
                       </MDBRow>
 
-                      <div className="d-flex justify-content-end pt-3">
-                        <MDBBtn color="light" size="lg" onClick={resetForm}>
-                          Reset all
-                        </MDBBtn>
-                        <MDBBtn
-                          id="SubmitBtn"
-                          className="ms-2"
-                          color="warning"
-                          size="lg"
-                        >
-                          Submit Group
-                        </MDBBtn>
+                      <div className="Buttons">
+                        <MDBRow>
+                          <MDBCol>
+                            <Button
+                              class="ui right floated button"
+                              content="Reset All"
+                              labelPosition="right"
+                              icon="redo"
+                              onClick={resetForm}
+                              id="butTton"
+                            />
+                          </MDBCol>
+
+                          <MDBCol>
+                            <Button
+                              content="Submit Group"
+                              labelPosition="right"
+                              icon="chevron right"
+                              // onClick={resetForm}
+                              id="SubmitBtn"
+                              href = "/"
+                            />
+                          </MDBCol>
+                        </MDBRow>
                       </div>
                     </MDBCardBody>
                   </MDBCol>
