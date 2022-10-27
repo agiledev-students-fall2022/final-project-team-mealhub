@@ -12,7 +12,18 @@
     opacity: 90%;
 }
 
+.footerLink{
+    color: #565454 !important;
+    opacity: 90%;
+}
+
+.footerLink:hover{
+    color: #565454 !important;
+    opacity: 100%;
+}
+
 .custom-signup:hover {
+    color: #565454 !important;
     opacity: 100%;
 }
 

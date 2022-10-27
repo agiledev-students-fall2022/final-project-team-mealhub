@@ -13,15 +13,18 @@
 }
 
 .custom-signup:hover {
+    color: #565454 !important;
     opacity: 100%;
 }
 
 .custom-btn {
     background: #eb6f3f !important;
+    color:#fff !important;
     border: none;
     opacity: 90%;
 }
 
 .custom-btn:hover {
+    color:#fff !important;
     opacity: 100%;
 }
