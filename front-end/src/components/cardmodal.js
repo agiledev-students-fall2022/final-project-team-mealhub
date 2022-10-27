@@ -67,10 +67,10 @@ function CardModal(props) {
 						Close
 					</Button>
 					<Button
-						content="Join Now!"
+						content={props.joined ? "Joined!" : "Join"}
 						labelPosition="right"
 						icon="checkmark"
-						onClick={props.handleClose}
+						onClick={props.handleJoined}
 					/>
 				</Modal.Actions>
 			</Modal>
