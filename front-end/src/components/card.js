@@ -18,7 +18,6 @@ function Card({ data, key }) {
 						size="small"
 						src={"https://picsum.photos/200"}
 						onClick={() => {
-							// setOpen(true);
 							setOpen(true);
 						}}
 					/>
