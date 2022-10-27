@@ -4,9 +4,9 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //Imported for routes
-import ProfilePage from "./components/ProfilePage";
-import EditProfilePage from "./components/EditProfilePage";
-import EditImage from "./components/EditImage";
+import ProfilePage from "./pages/ProfilePage";
+import EditProfilePage from "./pages/EditProfilePage";
+import EditImage from "./pages/EditImage";
 import Group from "./components/group";
 import Login from "./components/Login";
 import Register from "./components/Register";
