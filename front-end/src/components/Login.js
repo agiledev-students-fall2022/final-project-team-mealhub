@@ -60,23 +60,33 @@ function Login() {
 									</a>
 								</p>
 								<MDBCol>
-								<Button class="ui button"
-								content="Login"
-								labelPosition="center"
-								icon="chevron right"
-								id="SubmitBtn"
-								href="/"
-								/>
-							</MDBCol>
+									<Button
+										class="ui button"
+										content="Login"
+										labelPosition="center"
+										icon="chevron right"
+										id="SubmitBtn"
+										href="/"
+									/>
+								</MDBCol>
 
-							<hr className="my-4 w-100" />
+								<hr className="my-4 w-100" />
 
-							<p className="text-black-50 mb-1">or sign in with:</p>
+								<p className="text-black-50 mb-1">or sign in with:</p>
 
 								<div className="d-flex flex-row mt-3 mb-5">
-									<Icon name="facebook f" size="large" id="paddingright" />
-									<Icon name="google" size="large" id="paddingleft" />
-									
+									<Icon
+										name="facebook f"
+										size="large"
+										id="paddingright"
+										className="socials"
+									/>
+									<Icon
+										name="google"
+										size="large"
+										id="paddingleft"
+										className="socials"
+									/>
 								</div>
 
 								<div>
