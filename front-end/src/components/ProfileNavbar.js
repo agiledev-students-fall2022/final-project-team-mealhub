@@ -3,7 +3,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Logo from "../assets/logo.png";
-import './navbar.css';
+import "./navbar.css";
+import { CgProfile } from "react-icons/cg";
 
 function ProfileNavbarComponent() {
   return (
@@ -21,14 +22,14 @@ function ProfileNavbarComponent() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <Nav.Link
-              href={"/createGroup"}
-              className="custom-start ms-2 me-2"
-            >
+            <Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
               <b>Start a new group</b>
             </Nav.Link>
-            <Button href={"/"} className="custom-btn ms-2 me-2">
-              Log out
+            <Nav.Link href="./" className="custom-signup ms-2 me-2">
+              Logout
+            </Nav.Link>
+            <Button href="./profilePage" className="custom-btn ms-2 me-2">
+              <CgProfile />
             </Button>
           </Nav>
         </Navbar.Collapse>
