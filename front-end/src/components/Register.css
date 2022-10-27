@@ -6,3 +6,9 @@
 {
     padding-left: 20%;
 }
+
+#formControlLg:focus {
+    outline: none !important;
+    border-color: #eb6f3f !important;
+    box-shadow: none;
+  }

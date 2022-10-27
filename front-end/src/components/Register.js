@@ -2,6 +2,7 @@ import NavbarComponent from "./navbar";
 import Footer from "./footer";
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
+import "./Register.css";
 
 import {
 	MDBBtn,
