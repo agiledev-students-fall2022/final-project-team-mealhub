@@ -134,6 +134,7 @@ function Explore() {
 			.get(`https://my.api.mockaroo.com/mealhub.json?key=2f898fd0`)
 			.then((response) => {
 				setCardData(response.data);
+				console.log(response.data);
 			});
 	}, []);
 
