@@ -1,11 +1,11 @@
-import "./App.css";
+import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavbarComponent from "./components/navbar";
-import Footer from "./components/footer";
-import Card from "./components/card";
+import NavbarComponent from "../components/navbar";
+import Footer from "../components/footer";
+import Card from "../components/card";
 import React from "react";
 import axios from "axios";
-import SearchBarComponent from "./components/searchbar";
+import SearchBarComponent from "../components/searchbar";
 
 // mock data
 const rand = function () {
