@@ -3,11 +3,11 @@ import "./ProfilePage.css";
 import Image from "react-bootstrap/Image";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ProfileNavbarComponent from "./ProfileNavbar";
+import ProfileNavbarComponent from "../components/ProfileNavbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import Footer from "./footer";
+import Footer from "../components/footer";
 
 function EditProfilePage() {
   const [data, setData] = useState([]);

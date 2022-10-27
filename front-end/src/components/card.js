@@ -9,11 +9,19 @@ function Card({ data, key }) {
 	// 	modalOpen: false,
 	// };
 	const [open, setOpen] = React.useState(false);
+	const [joined, setJoined] = React.useState(false);
 	return (
 		<div className="card-component">
 			<Item.Group>
 				<Item>
-					<Item.Image size="small" src={"https://picsum.photos/200"} />
+					<Item.Image
+						size="small"
+						src={"https://picsum.photos/200"}
+						onClick={() => {
+							// setOpen(true);
+							setOpen(true);
+						}}
+					/>
 
 					<Item.Content>
 						<Item.Meta>
@@ -35,10 +43,11 @@ function Card({ data, key }) {
 							<Button
 								floated="right"
 								onClick={() => {
-									setOpen(true);
+									// setOpen(true);
+									setJoined(!joined);
 								}}
 							>
-								Join
+								{joined ? "Joined!" : "Join"}
 							</Button>
 						</Item.Extra>
 					</Item.Content>
@@ -48,6 +57,10 @@ function Card({ data, key }) {
 			<Cardmodal // The invisible modal itself
 				key={key}
 				modalOpen={open}
+				joined={joined}
+				handleJoined={() => {
+					setJoined(!joined);
+				}}
 				handleClose={() => {
 					setOpen(false);
 				}}

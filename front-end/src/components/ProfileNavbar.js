@@ -14,7 +14,7 @@ function ProfileNavbarComponent() {
       style={{ borderBottom: "1px solid #f0f0f0" }}
     >
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href={"/"}>
           <img src={Logo} height="35" alt="MealHub" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -22,12 +22,12 @@ function ProfileNavbarComponent() {
           <Nav className="me-auto"></Nav>
           <Nav>
             <Nav.Link
-              href="#start-a-new-group"
+              href={"/createGroup"}
               className="custom-start ms-2 me-2"
             >
               <b>Start a new group</b>
             </Nav.Link>
-            <Button href="#home" className="custom-btn ms-2 me-2">
+            <Button href={"/"} className="custom-btn ms-2 me-2">
               Log out
             </Button>
           </Nav>
