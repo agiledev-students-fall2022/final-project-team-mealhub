@@ -125,24 +125,25 @@ const rand = function () {
 // 		name: "Niel McGrudder",
 // 	},
 // ];
+const devURL = "https://my.api.mockaroo.com/mealhub.json?key=2f898fd0";
+const prodURL = "https://my.api.mockaroo.com/mealhub.json?key=533f5110";
 
+//my.api.mockaroo.com/mealhub.json?key=533f5110
 function Explore() {
 	const [cardData, setCardData] = React.useState(null);
 
 	React.useEffect(() => {
-		axios
-			.get(`https://my.api.mockaroo.com/mealhub.json?key=2f898fd0`)
-			.then((response) => {
-				setCardData(response.data);
-				console.log(response.data);
-			});
+		axios.get(`${prodURL}`).then((response) => {
+			setCardData(response.data);
+			console.log(response.data);
+		});
 	}, []);
 
 	return (
 		<div>
 			<NavbarComponent />
 			<SearchBarComponent />
-			<h1 className="main-heading pt-5">Suggestions</h1>
+			<h1 className="main-heading pt-5">Available Groups</h1>
 			<div>
 				{cardData &&
 					cardData.map((e) => {
