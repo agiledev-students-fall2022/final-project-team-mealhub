@@ -44,5 +44,5 @@
 }
 
 .footer{
-    z-index: 3 !important;
+    z-index: -1 !important;
 }
