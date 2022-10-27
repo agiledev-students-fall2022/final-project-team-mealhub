@@ -102,7 +102,7 @@
 
   #dollarRow {
     padding-top: 2% !important;
-    width: 25% !important;
+    width: 30% !important;
     margin-left: -2%;
     margin-right: -5% !important;
   }
@@ -230,4 +230,24 @@ button, input, optgroup, select, textarea {
 } */
 .css-1n7v3ny-option:hover {
   background-color: #eb6f3f !important;
+}
+
+#range:focus {
+  outline: none !important;
+  border-color: #eb6f3f !important;
+  box-shadow: none;
+}
+
+#range::-webkit-slider-thumb {
+  background: #eb6f3f !important;
+}
+
+#range::-moz-range-thumb {
+  background: #eb6f3f !important;
+}
+
+.thumb:focus {
+  outline: none !important;
+  border-color: #eb6f3f !important;
+  box-shadow: none;
 }

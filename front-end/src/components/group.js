@@ -7,7 +7,6 @@ import coverImg from "../assets/createGroup.jpg";
 import { Button } from "semantic-ui-react";
 
 import {
-  MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -226,7 +225,7 @@ function Group() {
                       />
 
                       <MDBRow>
-                        <MDBCol md="7">
+                        <MDBCol md="8">
                           <MDBRange
                             defaultValue={20}
                             name="budget"
@@ -240,7 +239,7 @@ function Group() {
                           />
                         </MDBCol>
 
-                        <MDBCol md="3" id="dollarRow">
+                        <MDBCol md="2" id="dollarRow">
                           <MDBInputGroup className="mb-2" textBefore="$">
                             <input
                               className="form-control"
