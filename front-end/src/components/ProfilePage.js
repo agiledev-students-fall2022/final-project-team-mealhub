@@ -7,6 +7,7 @@ import ProfileNavbarComponent from "./ProfileNavbar";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
+import Footer from "./footer";
 
 function ProfilePage() {
 	const [data, setData] = useState([]);
@@ -67,6 +68,7 @@ function ProfilePage() {
 					Edit profile
 				</Button>
 			</div>
+			<Footer />
 		</Container>
 	);
 }
