@@ -1,7 +1,8 @@
 import NavbarComponent from "./navbar";
 import Footer from "./footer";
 import React from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
+
 import "./Login.css";
 import {
 	MDBBtn,
@@ -38,7 +39,7 @@ function Login() {
 								<MDBInput
 									wrapperClass="mb-4 mx-5 w-100"
 									labelClass="text-black"
-									label="Email address"
+									placeholder="Email address"
 									id="formControlLg"
 									type="email"
 									className="form-control"
@@ -47,7 +48,7 @@ function Login() {
 								<MDBInput
 									wrapperClass=" mb-4 mx-5 w-100"
 									labelClass="text-black"
-									label="Password"
+									placeholder="Password"
 									id="formControlLg"
 									type="password"
 									size="lg"
@@ -73,23 +74,9 @@ function Login() {
 							<p className="text-black-50 mb-1">or sign in with:</p>
 
 								<div className="d-flex flex-row mt-3 mb-5">
-									<MDBBtn
-										tag="a"
-										color="none"
-										className="m-3"
-										style={{ color: "black" }}
-									>
-										<MDBIcon fab icon="facebook-f" size="lg" />
-									</MDBBtn>
-
-									<MDBBtn
-										tag="a"
-										color="none"
-										className="m-3"
-										style={{ color: "black" }}
-									>
-										<MDBIcon fab icon="google" size="lg" />
-									</MDBBtn>
+									<Icon name="facebook f" size="large" id="paddingright" />
+									<Icon name="google" size="large" id="paddingleft" />
+									
 								</div>
 
 								<div>

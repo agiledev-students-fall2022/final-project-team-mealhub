@@ -1,7 +1,7 @@
 import NavbarComponent from "./navbar";
 import Footer from "./footer";
 import React from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 
 import {
 	MDBBtn,
@@ -36,7 +36,7 @@ function Register() {
 							<MDBInput
 								wrapperClass="mb-4 mx-5 w-100"
 								labelClass="text-black"
-								label="First Name"
+								placeholder="First Name"
 								id="formControlLg"
 								type="text"
 								size="lg"
@@ -44,7 +44,7 @@ function Register() {
 							<MDBInput
 								wrapperClass="mb-4 mx-5 w-100"
 								labelClass="text-black"
-								label="Last Name"
+								placeholder="Last Name"
 								id="formControlLg"
 								type="text"
 								size="lg"
@@ -52,7 +52,7 @@ function Register() {
 							<MDBInput
 								wrapperClass="mb-4 mx-5 w-100"
 								labelClass="text-black"
-								label="Email address"
+								placeholder="Email address"
 								id="formControlLg"
 								type="email"
 								size="lg"
@@ -60,7 +60,7 @@ function Register() {
 							<MDBInput
 								wrapperClass=" mb-4 mx-5 w-100"
 								labelClass="text-black"
-								label="Password"
+								placeholder="Password"
 								id="formControlLg"
 								type="password"
 								size="lg"
@@ -68,7 +68,7 @@ function Register() {
 							<MDBInput
 								wrapperClass=" mb-4 mx-5 w-100"
 								labelClass="text-black"
-								label="Confirm Password"
+								placeholder="Confirm Password"
 								id="formControlLg"
 								type="password"
 								size="lg"
@@ -89,23 +89,8 @@ function Register() {
 							<p className="text-black-50 mb-1">or sign up with:</p>
 
 							<div className="d-flex flex-row mt-3 mb-5">
-								<MDBBtn
-									tag="a"
-									color="none"
-									className="m-3"
-									style={{ color: "black" }}
-								>
-									<MDBIcon fab icon="facebook-f" size="lg" />
-								</MDBBtn>
-
-								<MDBBtn
-									tag="a"
-									color="none"
-									className="m-3"
-									style={{ color: "black" }}
-								>
-									<MDBIcon fab icon="google" size="lg" />
-								</MDBBtn>
+							<Icon name="facebook f" size="large" id="paddingright" />
+							<Icon name="google" size="large" id="paddingleft" />
 							</div>
 
 							<div>
