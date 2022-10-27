@@ -4,9 +4,10 @@ import Footer from "./footer";
 import Select from "react-select";
 import React, { useState } from "react";
 import coverImg from "../assets/createGroup.jpg";
-import { Button } from "semantic-ui-react";
+// import { RHFInput } from 'react-hook-form-input';
 
 import {
+  MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -56,7 +57,6 @@ function Group() {
     date: "",
     time: "",
     budget: "",
-    name: "",
     budgetDollar: "20",
   });
 
@@ -80,12 +80,10 @@ function Group() {
       date: "",
       time: "",
       budget: "",
-      name: "",
       budgetDollar: "20",
     });
     setSelected(null);
     setValue(20);
-    console.log("Form reset");
   };
 
   return (
@@ -107,15 +105,15 @@ function Group() {
                   </MDBCol>
 
                   <MDBCol md="6">
-                    <MDBCardBody className="text-black d-flex flex-column justify-content-left">
-                      <h3 className="mb-4 fw-bold" id="title">
+                    <MDBCardBody className="text-black d-flex flex-column justify-content-center">
+                      <h3 className="mb-4 fw-bold" id= "title">
                         Create New Group
                       </h3>
 
                       <MDBInput
                         value={formValue.restaurant}
                         wrapperClass="mb-4"
-                        placeholder="Restaurant Name"
+                        label="Restaurant Name"
                         validation="Please enter Restaurant Name"
                         required
                         size="lg"
@@ -126,7 +124,7 @@ function Group() {
                       />
                       <MDBInput
                         wrapperClass="mb-4"
-                        placeholder="Location"
+                        label="Location"
                         name="location"
                         value={formValue.location}
                         size="lg"
@@ -139,7 +137,7 @@ function Group() {
 
                       <MDBInput
                         wrapperClass="mb-4"
-                        placeholder="Number of Attendees"
+                        label="Number of Attendees"
                         name="attendees"
                         value={formValue.attendees}
                         size="lg"
@@ -154,7 +152,7 @@ function Group() {
                         <MDBCol md="6">
                           <MDBInput
                             wrapperClass="mb-4"
-                            placeholder="Date"
+                            label="Date"
                             name="date"
                             value={formValue.date}
                             size="lg"
@@ -170,7 +168,7 @@ function Group() {
                           <MDBInput
                             wrapperClass="mb-4"
                             label=""
-                            placeholder="time"
+                            name="time"
                             value={formValue.time}
                             size="lg"
                             id="form3"
@@ -186,7 +184,6 @@ function Group() {
                         <Select
                           options={cusines}
                           name="cusines"
-                          id="form3"
                           onChange={handleChange}
                           placeholder="Choose Cusine"
                           value={selected}
@@ -199,25 +196,11 @@ function Group() {
                       <MDBInput
                         className="form-control"
                         wrapperClass="mb-4"
-                        placeholder="Your name"
-                        name="name"
-                        value={formValue.name}
-                        size="lg"
-                        id="form3"
-                        type="text"
-                        onChange={onChange}
-                        validation="Enter your name"
-                        required
-                      />
-
-                      <MDBInput
-                        className="form-control"
-                        wrapperClass="mb-4"
-                        placeholder="Email ID"
+                        label="Email ID"
                         name="email"
                         value={formValue.email}
                         size="lg"
-                        id="form3"
+                        id="form6"
                         type="email"
                         onChange={onChange}
                         validation="Please enter Restaurant Name"
@@ -225,7 +208,7 @@ function Group() {
                       />
 
                       <MDBRow>
-                        <MDBCol md="8">
+                        <MDBCol md="7">
                           <MDBRange
                             defaultValue={20}
                             name="budget"
@@ -239,7 +222,23 @@ function Group() {
                           />
                         </MDBCol>
 
-                        <MDBCol md="2" id="dollarRow">
+                        {/* <MDBCol md="1">
+                        <MDBInputGroup
+                          textBefore="$"
+                          wrapperClass="mb-4"
+                          label="Amount in $"
+                          size="lg"
+                          id="formDollar"
+                          type="Number"
+                        >
+                          <MDBInput
+                            onChange={(e) => setValue(e.target.value)}
+                            value={value}
+                          />
+                        </MDBInputGroup>
+                      </MDBCol> */}
+
+                        <MDBCol md="3" id="dollarRow">
                           <MDBInputGroup className="mb-2" textBefore="$">
                             <input
                               className="form-control"
@@ -248,37 +247,24 @@ function Group() {
                               onChange={(e) => setValue(e.target.value)}
                               value={value}
                               validation="Please enter Restaurant Name"
-                              id = "form3"
                               required
                             />
                           </MDBInputGroup>
                         </MDBCol>
                       </MDBRow>
 
-                      <div className="Buttons">
-                        <MDBRow>
-                          <MDBCol>
-                            <Button
-                              class="ui right floated button"
-                              content="Reset All"
-                              labelPosition="right"
-                              icon="redo"
-                              onClick={resetForm}
-                              id="butTton"
-                            />
-                          </MDBCol>
-
-                          <MDBCol>
-                            <Button
-                              content="Submit Group"
-                              labelPosition="right"
-                              icon="chevron right"
-                              // onClick={resetForm}
-                              id="SubmitBtn"
-                              href="/"
-                            />
-                          </MDBCol>
-                        </MDBRow>
+                      <div className="d-flex justify-content-end pt-3">
+                        <MDBBtn color="light" size="lg" onClick={resetForm}>
+                          Reset all
+                        </MDBBtn>
+                        <MDBBtn
+                          id="SubmitBtn"
+                          className="ms-2"
+                          color="warning"
+                          size="lg"
+                        >
+                          Submit Group
+                        </MDBBtn>
                       </div>
                     </MDBCardBody>
                   </MDBCol>

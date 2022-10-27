@@ -1,11 +1,9 @@
-#title {
-  font-size: 2em;
-  font-weight: bold;
-  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif !important;
-  text-align: center;
-
-  /* margin-left: 1.0em; */
+#title{
+    font-size: 2.0em;
+    font-weight: bold;
+    /* margin-left: 1.0em; */
 }
+
 
 .cusines {
   padding-bottom: 5%;
@@ -13,16 +11,15 @@
 
 .img-fluid {
   max-width: 100%;
-  max-height: 98.5% !important;
+  max-height: 92% !important;
 }
 
 #SubmitBtn {
-  color: rgb(255, 255, 255);
   background-color: #eb6f3e;
 }
 
 /* #form3{
-  padding-top: 5%;
+    padding-top: 5%;
 } */
 .input-group-text {
   background-color: #fff;
@@ -41,12 +38,6 @@
 }
 .range input[type="range"]::-ms-thumb {
   background: #eb6f3e;
-}
-
-.range:focus {
-  outline: none !important;
-  border-color: #eb6f3f !important;
-  box-shadow: none;
 }
 
 .col-md-9 {
@@ -82,7 +73,7 @@
     z-index: 0;
   }
   #dollarRow {
-    width: 42% !important;
+    width: 40% !important;
     margin-left: -2%;
   }
 }
@@ -101,10 +92,8 @@
   }
 
   #dollarRow {
-    padding-top: 2% !important;
-    width: 30% !important;
-    margin-left: -2%;
-    margin-right: -5% !important;
+    width: 40% !important;
+    /* margin-left: -2%; */
   }
 }
 
@@ -117,8 +106,8 @@
     position: relative;
     max-width: inherit;
     flex: 0 0 auto;
-    width: 45%;
-    margin-bottom: -1%;
+    width: 40%;
+    margin-bottom: -5%;
     /* padding-left: 4%; */
   }
 }
@@ -127,127 +116,8 @@
   .mainCard {
     flex: 0 0 auto;
     width: 70.333333% !important;
-    margin-bottom: 0%;
-    padding-bottom: -2% !important;
+    margin-bottom: 2%;
+    padding-bottom: 1% !important;
     padding-top: 1%;
   }
-}
-
-#butTton {
-  /* max-width: fit- !important;
-  max-height: 2% !important; */
-  padding-bottom: -200px !important;
-}
-
-.thumb-value {
-  color: rgb(255, 255, 255);
-}
-
-.Buttons {
-  padding-top: 1%;
-  padding-bottom: 1%;
-  margin-right: -25%;
-}
-
-.form-outline {
-  margin-bottom: 1.7rem !important;
-  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif !important;
-  font-size: 14px !important;
-}
-
-.input {
-  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif !important;
-  font-size: 14px !important;
-}
-
-button, input, optgroup, select, textarea {
-  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif !important;
-  font-size: 14px !important;
-  /* font-family: sans-serif; */
-  /* font-size: 100%; */
-  line-height: 1.15;
-  margin: 0;
-}
-
-.form-label {
-  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif !important;
-  font-size: 14px !important;
-  margin-left: 2% !important;
-}
-
-#form3:focus {
-  outline: none !important;
-  border-color: #eb6f3f !important;
-  box-shadow: none;
-}
-
-.cusines:focus {
-  outline: none !important;
-  border-color: #eb6f3f !important;
-  box-shadow: none;
-}
-
-/* .css-1s2u09g-control:focus {
-  outline: none !important;
-  border-color: #eb6f3f !important;
-  box-shadow: none;
-} */
-
-.css-1pahdxg-control:hover {
-
-  border-color: #eb6f3f !important;
-  box-shadow: #eb6f3f !important;
-
-}
-.css-1pahdxg-control {
-
-  border-color: #eb6f3f !important;
-  box-shadow: none !important;
-
-}
-.css-1s2u09g-control:hover {
-  border-color: #eb6f3f !important;
-  box-shadow: #eb6f3f !important;
-  /* background-color: #eb6f3f !important; */
-}
-
-.css-qc6sy-singleValue:hover {
-  border-color: #eb6f3f !important;
-  box-shadow: #eb6f3f !important;
-  /* background-color: #eb6f3f !important; */
-}
-
-.css-6j8wv5-Input::selection {
-  background-color: #eb6f3f !important;
-}
-
-/* .css-26l3qy-menu:hover{
-  background-color: #eb6f3f !important;
-} */
-
-/* .css-41u8z7-MenuList{
-  background-color: #eb6f3f !important;
-} */
-.css-1n7v3ny-option:hover {
-  background-color: #eb6f3f !important;
-}
-
-#range:focus {
-  outline: none !important;
-  border-color: #eb6f3f !important;
-  box-shadow: none;
-}
-
-#range::-webkit-slider-thumb {
-  background: #eb6f3f !important;
-}
-
-#range::-moz-range-thumb {
-  background: #eb6f3f !important;
-}
-
-.thumb:focus {
-  outline: none !important;
-  border-color: #eb6f3f !important;
-  box-shadow: none;
 }
