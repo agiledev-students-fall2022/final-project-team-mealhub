@@ -1,4 +1,8 @@
+import NavbarComponent from "./navbar";
+import Footer from "./footer";
 import React from "react";
+import { Button } from "semantic-ui-react";
+
 import {
 	MDBBtn,
 	MDBContainer,
@@ -12,6 +16,8 @@ import {
 
 function Register() {
 	return (
+		<div>
+		<NavbarComponent />
 		<MDBContainer fluid>
 			<MDBRow className="d-flex justify-content-center align-items-center h-100">
 				<MDBCol col="12">
@@ -68,15 +74,19 @@ function Register() {
 								size="lg"
 							/>
 
-							<MDBBtn
-								outline
-								className="mx-2 px-5 fw-bold"
-								color="white"
-								size="lg"
-								style={{ backgroundColor: "#eb6f3e" }}
-							>
-								Sign Up
-							</MDBBtn>
+							<MDBCol>
+								<Button class="ui button"
+								content="Sign Up"
+								labelPosition="center"
+								icon="chevron right"
+								id="SubmitBtn"
+								href="/"
+								/>
+							</MDBCol>
+
+							<hr className="my-4 w-100" />
+
+							<p className="text-black-50 mb-1">or sign up with:</p>
 
 							<div className="d-flex flex-row mt-3 mb-5">
 								<MDBBtn
@@ -115,6 +125,8 @@ function Register() {
 				</MDBCol>
 			</MDBRow>
 		</MDBContainer>
+		<Footer />
+		</div>
 	);
 }
 
