@@ -57,6 +57,7 @@ function Group() {
     date: "",
     time: "",
     budget: "",
+    name: "",
     budgetDollar: "20",
   });
 
@@ -80,6 +81,7 @@ function Group() {
       date: "",
       time: "",
       budget: "",
+      name: "",
       budgetDollar: "20",
     });
     setSelected(null);
@@ -114,7 +116,7 @@ function Group() {
                       <MDBInput
                         value={formValue.restaurant}
                         wrapperClass="mb-4"
-                        label="Restaurant Name"
+                        placeholder="Restaurant Name"
                         validation="Please enter Restaurant Name"
                         required
                         size="lg"
@@ -125,7 +127,7 @@ function Group() {
                       />
                       <MDBInput
                         wrapperClass="mb-4"
-                        label="Location"
+                        placeholder="Location"
                         name="location"
                         value={formValue.location}
                         size="lg"
@@ -138,7 +140,7 @@ function Group() {
 
                       <MDBInput
                         wrapperClass="mb-4"
-                        label="Number of Attendees"
+                        placeholder="Number of Attendees"
                         name="attendees"
                         value={formValue.attendees}
                         size="lg"
@@ -153,7 +155,7 @@ function Group() {
                         <MDBCol md="6">
                           <MDBInput
                             wrapperClass="mb-4"
-                            label="Date"
+                            placeholder="Date"
                             name="date"
                             value={formValue.date}
                             size="lg"
@@ -169,7 +171,7 @@ function Group() {
                           <MDBInput
                             wrapperClass="mb-4"
                             label=""
-                            name="time"
+                            placeholder="time"
                             value={formValue.time}
                             size="lg"
                             id="form3"
@@ -185,6 +187,7 @@ function Group() {
                         <Select
                           options={cusines}
                           name="cusines"
+                          id="form3"
                           onChange={handleChange}
                           placeholder="Choose Cusine"
                           value={selected}
@@ -197,11 +200,25 @@ function Group() {
                       <MDBInput
                         className="form-control"
                         wrapperClass="mb-4"
-                        label="Email ID"
+                        placeholder="Your name"
+                        name="name"
+                        value={formValue.name}
+                        size="lg"
+                        id="form3"
+                        type="text"
+                        onChange={onChange}
+                        validation="Enter your name"
+                        required
+                      />
+
+                      <MDBInput
+                        className="form-control"
+                        wrapperClass="mb-4"
+                        placeholder="Email ID"
                         name="email"
                         value={formValue.email}
                         size="lg"
-                        id="form6"
+                        id="form3"
                         type="email"
                         onChange={onChange}
                         validation="Please enter Restaurant Name"
@@ -232,6 +249,7 @@ function Group() {
                               onChange={(e) => setValue(e.target.value)}
                               value={value}
                               validation="Please enter Restaurant Name"
+                              id = "form3"
                               required
                             />
                           </MDBInputGroup>
@@ -258,7 +276,7 @@ function Group() {
                               icon="chevron right"
                               // onClick={resetForm}
                               id="SubmitBtn"
-                              href = "/"
+                              href="/"
                             />
                           </MDBCol>
                         </MDBRow>
