@@ -30,3 +30,13 @@
     color: grey;
   }
   
+  #changeImage{
+    margin: auto;
+    max-width: fit-content;
+    
+  }
+
+  #imageUpload{
+    border-radius: 50%;
+
+  }

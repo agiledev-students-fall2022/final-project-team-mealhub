@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import "./ProfilePage.css";
 
 function EditImage() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <div>
+    <div id="changeImage">
       <h1>Change Profile Image</h1>
       {selectedImage && (
         <div>
@@ -33,6 +34,7 @@ function EditImage() {
       <Button href={"/profilePage"} variant="secondary">
         Done
       </Button>{" "}
+     
     </div>
   );
 }
