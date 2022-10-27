@@ -10,6 +10,7 @@ function CardModal(props) {
 				size="small"
 				open={props.modalOpen}
 				closeOnEscape={true}
+				onClose={props.handleClose}
 				closeOnRootNodeClick={true}
 				closeOnDocumentClick={true}
 				// closeIcon={true}

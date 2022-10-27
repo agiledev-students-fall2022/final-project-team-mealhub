@@ -18,7 +18,6 @@ function Card({ data, key }) {
 						size="small"
 						src={data.image}
 						onClick={() => {
-							// setOpen(true);
 							setOpen(true);
 						}}
 					/>
