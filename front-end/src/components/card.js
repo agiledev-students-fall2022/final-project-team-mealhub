@@ -16,7 +16,7 @@ function Card({ data, key }) {
 				<Item>
 					<Item.Image
 						size="small"
-						src={"https://picsum.photos/200"}
+						src={data.image}
 						onClick={() => {
 							// setOpen(true);
 							setOpen(true);
