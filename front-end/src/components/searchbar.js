@@ -5,7 +5,7 @@ import './searchbar.css';
 function SearchBarComponent() {
     return (
         <div className='mt-5' style={{display: 'flex',  justifyContent:'center'}}>
-            <Form className="d-flex" style={{width: '30%'}}>
+            <Form className="d-flex" style={{minWidth: '30%'}}>
                 <Form.Control
                     type="search"
                     placeholder="Search for groups..."

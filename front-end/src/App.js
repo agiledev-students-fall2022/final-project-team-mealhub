@@ -1,16 +1,14 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-//Imported for routes
 import ProfilePage from "./components/ProfilePage";
 import EditProfilePage from "./components/EditProfilePage";
 import EditImage from "./components/EditImage";
 import Group from "./components/group";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Explore from "./explore";
+import Explore from "./pages/explore";
 
 function App() {
 	return (
