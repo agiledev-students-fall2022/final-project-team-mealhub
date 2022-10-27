@@ -42,3 +42,7 @@
     padding-top: 3.5%;
     padding-bottom: 2%;
 }
+
+.footer{
+    z-index: 3 !important;
+}
