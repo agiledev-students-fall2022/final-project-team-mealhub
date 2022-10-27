@@ -7,6 +7,7 @@ import ProfileNavbarComponent from "./ProfileNavbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import Footer from "./footer";
 
 function EditProfilePage() {
   const [data, setData] = useState([]);
@@ -124,6 +125,7 @@ function EditProfilePage() {
           </Button>{" "}
         </Form>
       </div>
+      < Footer/>
     </div>
   );
 }
