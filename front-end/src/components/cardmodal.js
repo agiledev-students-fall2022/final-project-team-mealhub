@@ -12,7 +12,7 @@ function CardModal(props) {
 				closeOnEscape={true}
 				closeOnRootNodeClick={true}
 				closeOnDocumentClick={true}
-				closeIcon={true}
+				// closeIcon={true}
 			>
 				<Modal.Content image>
 					<Image size="small" src={props.data.image} />

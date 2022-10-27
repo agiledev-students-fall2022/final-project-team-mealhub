@@ -9,3 +9,7 @@
     padding-top: 100px !important;
     font-size: 1.5rem;
 }
+
+a:hover{
+    color: #eb6f3f !important;
+}
