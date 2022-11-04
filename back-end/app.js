@@ -14,17 +14,20 @@ app.use(express.urlencoded({ extended: true }));
 WILL NEED TO USE PARAMETERS ONCE LOGIN IS FIXED
 */
 app.get("/profilePage/:id", async (req, res, next) => {
-  try {
-    // insert the environmental variable into the URL we're requesting
-    const response = await axios.get(
-      `https://my.api.mockaroo.com/user_profiles.json?key=18bea250`
-    );
-    res.json(response.data[0]); // pass data along directly to client
-  } catch (err) {
-    res.json({
-      success: false,
-    });
-  }
+	try {
+		// insert the environmental variable into the URL we're requesting
+		const response = await axios.get(
+			`https://my.api.mockaroo.com/user_profiles.json?key=18bea250`
+		);
+		res.json(response.data[0]); // pass data along directly to client
+	} catch (err) {
+		res.json({
+			success: false,
+		});
+	}
 });
+
+// router for login and explore
+app.use("/", require("./routes/index"));
 
 module.exports = app;
