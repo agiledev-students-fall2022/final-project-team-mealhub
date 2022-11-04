@@ -1,6 +1,7 @@
 // import and instantiate express
 const express = require("express");
 const app = express();
+require("dotenv").config();
 
 //import useful middleware
 const axios = require("axios");
@@ -9,10 +10,20 @@ const axios = require("axios");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const morgan = require("morgan"); // log requests
+
+// displaying loggin details in dev
+if (process.env.NODE_ENV === "development") {
+	app.use(morgan("dev"));
+}
+
 //----------------------Fetch profile page api data-----------------------------------
 /*
 WILL NEED TO USE PARAMETERS ONCE LOGIN IS FIXED
 */
+// router for login and explore
+app.use("/", require("./routes/index"));
+
 app.get("/profilePage/:id", async (req, res, next) => {
 	try {
 		// insert the environmental variable into the URL we're requesting
@@ -26,8 +37,5 @@ app.get("/profilePage/:id", async (req, res, next) => {
 		});
 	}
 });
-
-// router for login and explore
-app.use("/", require("./routes/index"));
 
 module.exports = app;
