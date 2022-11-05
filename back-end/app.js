@@ -1,6 +1,7 @@
 // import and instantiate express
 const express = require("express");
 const app = express();
+require("dotenv").config();
 
 //import useful middleware
 const axios = require("axios");
@@ -9,22 +10,32 @@ const axios = require("axios");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const morgan = require("morgan"); // log requests
+
+// displaying loggin details in dev
+if (process.env.NODE_ENV === "development") {
+	app.use(morgan("dev"));
+}
+
 //----------------------Fetch profile page api data-----------------------------------
 /*
 WILL NEED TO USE PARAMETERS ONCE LOGIN IS FIXED
 */
+// router for login and explore
+app.use("/", require("./routes/index"));
+
 app.get("/profilePage/:id", async (req, res, next) => {
-  try {
-    // insert the environmental variable into the URL we're requesting
-    const response = await axios.get(
-      `https://my.api.mockaroo.com/user_profiles.json?key=18bea250`
-    );
-    res.json(response.data[0]); // pass data along directly to client
-  } catch (err) {
-    res.json({
-      success: false,
-    });
-  }
+	try {
+		// insert the environmental variable into the URL we're requesting
+		const response = await axios.get(
+			`https://my.api.mockaroo.com/user_profiles.json?key=18bea250`
+		);
+		res.json(response.data[0]); // pass data along directly to client
+	} catch (err) {
+		res.json({
+			success: false,
+		});
+	}
 });
 
 module.exports = app;
