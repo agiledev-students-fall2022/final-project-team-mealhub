@@ -23,6 +23,9 @@ WILL NEED TO USE PARAMETERS ONCE LOGIN IS FIXED
 */
 // router for login and explore
 app.use("/", require("./routes/index"));
+app.use("/search", require("./routes/search"));
+
+
 
 app.get("/profilePage/:id", async (req, res, next) => {
 	try {
