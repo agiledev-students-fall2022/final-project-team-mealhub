@@ -1,10 +1,12 @@
 import "./group.css";
+import axios from "axios";
 import NavbarComponent from "./navbar";
 import Footer from "./footer";
 import Select from "react-select";
 import React, { useState } from "react";
 import coverImg from "../assets/createGroup.jpg";
 import { Button } from "semantic-ui-react";
+
 
 import {
   MDBContainer,
@@ -35,16 +37,6 @@ function Group() {
     setSelected(selected);
     console.log("Option selected:", selected);
   };
-  //   const numberFormat = (value) =>
-  //     new Intl.NumberFormat("en-IN", {
-  //       style: "currency",
-  //       currency: "USD",
-  //     }).format(value);
-
-  // const numCheck = (value) => {
-  // value = value.replace(/\D/g,'');
-  // return ("$" +(value));
-  // };
 
   const [formValue, setFormValue] = useState({
     restaurant: "",
@@ -86,6 +78,38 @@ function Group() {
     setValue(20);
     console.log("Form reset");
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted");
+    console.log(formValue);
+    console.log(selected);
+    console.log(value);
+
+    axios
+      .post("http://localhost:5000/api/groups", {
+        restaurant: formValue.restaurant,
+        email: formValue.email,
+        cuisine: selected,
+        attendees: formValue.attendees,
+        price: formValue.price,
+        location: formValue.location,
+        date: formValue.date,
+        time: formValue.time,
+        budget: formValue.budget,
+        name: formValue.name,
+        budgetDollar: value,
+      })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
 
   return (
     <div>
@@ -278,9 +302,11 @@ function Group() {
 
                           <MDBCol>
                             <Button
+                              type="submit"
                               content="Submit Group"
                               labelPosition="right"
                               icon="chevron right"
+                              onClick={onSubmit}
                               // onClick={resetForm}
                               id="SubmitBtn"
                               href="/"

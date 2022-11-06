@@ -20,4 +20,6 @@ app.use("/search", require("./routes/search"));
 //router for profilePage and editProfilePage
 app.use("/profilePage", require("./routes/profilePage"));
 app.use(require("./routes/editProfilePage"));
+//router for createGroup
+app.use("/createGroup", require("./routes/createGroup"));
 module.exports = app;
