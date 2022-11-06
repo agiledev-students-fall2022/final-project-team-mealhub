@@ -2,6 +2,8 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
+const cors = require("cors");
+app.use(cors());
 
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json());
