@@ -22,6 +22,7 @@ app.use("/search", require("./routes/search"));
 //router for profilePage and editProfilePage
 app.use("/profilePage", require("./routes/profilePage"));
 app.use(require("./routes/editProfilePage"));
-module.exports = app;
 //router for editImage
 app.use(require("./routes/editImage"));
+
+module.exports = app;
