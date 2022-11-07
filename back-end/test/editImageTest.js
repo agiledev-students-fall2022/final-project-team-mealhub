@@ -6,7 +6,7 @@ const server = require("../app");
 chai.should();
 chai.use(chaiHttp);
 
-describe("TEST API- PROFILE RELATED PAGES", () => {
+describe("TEST API- editImage", () => {
     /**
      * Test the POST route for uploadImage
      */
