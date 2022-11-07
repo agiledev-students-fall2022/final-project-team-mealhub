@@ -2,16 +2,19 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import "./ProfilePage.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function EditImage() {
     const [selectedImage, setSelectedImage] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", selectedImage);
         console.log(formData);
-        axios.post("http://localhost:8080/uploadImage", formData);
+        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData);
+        navigate("/profilePage");
     };
 
     return (
