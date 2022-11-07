@@ -142,7 +142,8 @@ function Explore() {
 	return (
 		<div>
 			<NavbarComponent />
-			<SearchBarComponent />
+			<SearchBarComponent setCardData={setCardData} />
+
 			<h1 className="main-heading pt-5">Available Groups</h1>
 			<div>
 				{cardData &&
