@@ -5,6 +5,7 @@ require("dotenv").config();
 const cors = require("cors");
 app.use(cors());
 
+
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +23,8 @@ app.use("/search", require("./routes/search"));
 //router for profilePage and editProfilePage
 app.use("/profilePage", require("./routes/profilePage"));
 app.use(require("./routes/editProfilePage"));
-//router for editImage
 app.use(require("./routes/editImage"));
+app.use("/createGroup", require("./routes/createGroup"));
+
 
 module.exports = app;
