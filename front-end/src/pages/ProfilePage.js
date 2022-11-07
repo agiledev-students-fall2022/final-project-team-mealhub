@@ -17,7 +17,7 @@ function ProfilePage() {
         try {
             //get data for id=2 (placeholder)
             const response = await axios.get(
-                "http://localhost:8080/profilePage/2"
+                `${process.env.REACT_APP_URL}/profilePage/2`
             );
             setData(response.data);
         } catch (err) {

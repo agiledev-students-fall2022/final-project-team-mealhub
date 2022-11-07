@@ -1,25 +1,13 @@
 import "./group.css";
-import NavbarComponent from "./navbar";
-import Footer from "./footer";
 import Select from "react-select";
 import React, { useState } from "react";
-import coverImg from "../assets/createGroup.jpg";
 import { Button } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import {
-	MDBContainer,
-	MDBCard,
-	MDBCardBody,
-	MDBCardImage,
-	MDBRow,
-	MDBCol,
-	MDBInput,
-	MDBRange,
-	MDBInputGroup,
-	MDBValidation,
-} from "mdb-react-ui-kit";
+import { MDBRow, MDBCol, MDBInput, MDBValidation } from "mdb-react-ui-kit";
 
-function FilterFields() {
+function FilterFields(props) {
 	const [selected, setSelected] = useState(null);
 	const [cusines, setCusine] = useState([
 		{ label: "American", value: "American" },
@@ -48,16 +36,12 @@ function FilterFields() {
 
 	const [formValue, setFormValue] = useState({
 		restaurant: "",
-		email: "",
 		cuisine: "",
 		attendees: "",
-		price: "",
 		location: "",
 		date: "",
 		time: "",
-		budget: "",
-		name: "",
-		budgetDollar: "20",
+		budget: props.budget,
 	});
 
 	const onChange = (e) => {
@@ -71,22 +55,47 @@ function FilterFields() {
 		document.getElementById("form").reset();
 		setFormValue({
 			restaurant: "",
-			email: "",
 			cuisine: "Select",
 			attendees: "",
-			price: "",
 			location: "",
 			date: "",
 			time: "",
-			budget: "",
-			name: "",
-			budgetDollar: "20",
+			budget: props.budget,
 		});
 		setSelected(null);
 		setValue(20);
-		console.log("Form reset");
 	};
 
+	//---------------form submission--------------------------------
+
+	const navigate = useNavigate();
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		let newData = {
+			...formValue,
+		};
+		if (newData.restaurant === "") newData.restaurant = formValue.restaurant;
+		if (newData.cuisine === "") newData.cuisine = formValue.cuisine;
+		if (newData.location === "") newData.location = formValue.location;
+		if (newData.date === "") newData.date = formValue.date;
+		if (newData.time === "") newData.time = formValue.time;
+		if (newData.budget === "") newData.budget = formValue.budget;
+
+		axios
+			.post(`${process.env.REACT_APP_URL}/filter`, newData)
+			.then((response) => {
+				// console.log(response.data);
+				// set the card data to the new data recieved
+				// props.setCardData
+				props.setCardData(response.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+
+		navigate("/");
+		props.close();
+	};
 	return (
 		<div>
 			<MDBValidation id="form" className="row g-3" noValidate>
@@ -192,9 +201,9 @@ function FilterFields() {
 								floated="right"
 								labelPosition="right"
 								icon="chevron right"
-								// onClick={resetForm}
+								onClick={handleSubmit}
 								id="SubmitBtn"
-								href="/"
+								// href="/"
 							/>
 						</MDBCol>
 					</MDBRow>
