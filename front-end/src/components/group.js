@@ -26,7 +26,8 @@ import {
 function Group() {
   
   // `${process.env.REACT_APP_URL}/createGroup`
-  const url = "http://localhost:8080/createGroup";
+  const url = "http://localhost:3001/createGroup";
+  // console.log(`${process.env.REACT_APP_URL}/createGroup`)
   const [selected, setSelected] = useState(null);
   const [cusines, setCusine] = useState([
     { label: "American", value: "American" },
@@ -87,6 +88,7 @@ function Group() {
 		console.log("Form reset");
 	};
 
+  const navigate = useNavigate();
   const onSubmit = (e) => {
     // if ( isEmailValid ) {
     //   okButton.disabled = false;
@@ -100,11 +102,12 @@ function Group() {
 		console.log(formValue);
 		console.log(selected);
 		console.log(value);
+    // console.log(`${process.env.REACT_APP_URL}/createGroup`)
 
     if (formValue.name && formValue.email && formValue.restaurant && selected && formValue.time && formValue.date && formValue.attendees && formValue.location){
       // SubmitBtn.disabled = false; 
     axios
-      .post(url, {
+      .post(`${process.env.REACT_APP_URL}/createGroup`, {
         restaurant: formValue.restaurant,
         email: formValue.email,
         cuisine: selected.value,
@@ -118,6 +121,7 @@ function Group() {
       .then((res) => {
         console.log("sent Data");
         console.log(res.data);
+        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
