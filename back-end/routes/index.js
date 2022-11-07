@@ -15,7 +15,6 @@ router.get("/", (req, res) => {
 router.get("/explore", async (req, res) => {
 	try {
 		// requesting resource
-
 		const response = await axios.get(
 			`https://my.api.mockaroo.com/mealhub.json?key=2f898fd0`
 		);
