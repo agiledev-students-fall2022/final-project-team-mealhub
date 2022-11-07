@@ -8,7 +8,6 @@ import coverImg from "../assets/createGroup.jpg";
 import { Button } from "semantic-ui-react";
 
 import {
-  MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -25,7 +24,6 @@ import {
 function Group() {
   const url = "http://localhost:8080/createGroup";
   const [selected, setSelected] = useState(null);
-  const [validated, setValidated] = useState(false);
   const [cusines, setCusine] = useState([
     { label: "American", value: "American" },
     { label: "Indian", value: "Indian" },
@@ -39,15 +37,6 @@ function Group() {
   const handleChange = (selected) => {
     setSelected(selected);
     console.log("Option selected:", selected);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    }
-    setValidated(true);
   };
 
   const [formValue, setFormValue] = useState({
@@ -132,7 +121,7 @@ function Group() {
       .post(url, {
         restaurant: formValue.restaurant,
         email: formValue.email,
-        cuisine: selected,
+        cuisine: selected.value,
         attendees: formValue.attendees,
         location: formValue.location,
         date: formValue.date,
@@ -141,17 +130,16 @@ function Group() {
         budgetDollar: value,
       })
       .then((res) => {
-        // console.log(res);
         console.log("sent Data");
         console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
+        
       });
     }
     else {
       console.log("Please fill out all required fields");
-      // SubmitBtn.disabled = tr; 
     }
   };
 
