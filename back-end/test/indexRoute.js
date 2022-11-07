@@ -11,9 +11,10 @@ describe("Explore", function () {
 		it("should show all groups", function (done) {
 			request(express())
 				.get("/explore")
-				// .expect(200, done)
+				.expect("Content-Type", /json/)
 				.end((err, res) => {
 					assert.equal(typeof res.body, "object");
+					// assert.equal(res.status, 200);
 					// res.should.have.status(200);
 					//      res.body.should.be.a('object');
 					done();

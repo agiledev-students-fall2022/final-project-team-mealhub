@@ -4,10 +4,6 @@ import Box from "@mui/material/Box";
 import Slider, { SliderThumb } from "@mui/material/Slider";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import FilterFields from "./filterFields";
 import { styled } from "@mui/material/styles";
@@ -60,6 +56,7 @@ PriceThumbComponent.propTypes = {
 };
 
 function Filter(props) {
+	const [budget, setBudget] = React.useState([20, 40]);
 	return (
 		<Modal
 			closeIcon
@@ -67,6 +64,7 @@ function Filter(props) {
 			onClose={props.handleClose}
 			closeOnEscape
 			closeOnRootNodeClick={true}
+			// å
 			closeOnDocumentClick={true}
 		>
 			<Header icon="" content="Filter" className="filter-header" />
@@ -74,18 +72,27 @@ function Filter(props) {
 				<Box>
 					<Typography gutterBottom>Meal Budget</Typography>
 					<PriceSlider
+						// key={`slider-${budget}`}
 						valueLabelDisplay="auto"
 						slots={{ thumb: PriceThumbComponent }}
+						onChange={(e) => {
+							setBudget(e.target.value);
+						}}
 						getAriaLabel={(index) =>
 							index === 0 ? "Minimum price" : "Maximum price"
 						}
-						defaultValue={[20, 40]}
+						defaultValue={[...budget]}
 						disableSwap
 					/>
 					<Typography>MealHub Plus</Typography>
 					<Switch defaultChecked color="warning" />
 
-					<FilterFields />
+					<FilterFields
+						budget={budget}
+						setCardData={props.setCardData}
+						open={props.filterOpen}
+						close={props.handleClose}
+					/>
 				</Box>
 			</Modal.Content>
 			<Modal.Actions>
