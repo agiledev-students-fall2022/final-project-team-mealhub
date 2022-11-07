@@ -19,7 +19,7 @@ router.use((req, res, next) => {
   next();
 });
 
-const url = "http://localhost:8080/createGroup";
+// const url = "http://localhost:8080/createGroup";
 const groupData = [];
 
 router.use(express.json());

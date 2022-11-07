@@ -6,6 +6,7 @@ import Select from "react-select";
 import React, { useState } from "react";
 import coverImg from "../assets/createGroup.jpg";
 import { Button } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
 
 import {
   MDBContainer,
@@ -22,6 +23,8 @@ import {
 } from "mdb-react-ui-kit";
 
 function Group() {
+  
+  // `${process.env.REACT_APP_URL}/createGroup`
   const url = "http://localhost:8080/createGroup";
   const [selected, setSelected] = useState(null);
   const [cusines, setCusine] = useState([
@@ -79,28 +82,6 @@ function Group() {
     setValue(20);
     console.log("Form reset");
   };
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Form submitted");
-  //   console.log(formValue);
-  //   console.log(selected);
-  //   console.log(value);
-  //   axios.post(url, formValue).then((res) => {
-  //   try
-  //   {
-  //     axios.post(url, formValue).then((res) => {
-  //       console.log(res);
-  //       console.log("sent")
-  //       resetForm();
-  //     });
-  //   }
-  //   catch (err) {
-  //     console.error(err.message);
-  //     res.status(500).send("Server error");
-  //   }
-  //   });
-  // };
 
   const onSubmit = (e) => {
     // if ( isEmailValid ) {
