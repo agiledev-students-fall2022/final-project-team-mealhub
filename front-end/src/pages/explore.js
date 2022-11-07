@@ -135,7 +135,7 @@ function Explore() {
 	React.useEffect(() => {
 		axios.get(`${prodURL}`).then((response) => {
 			setCardData(response.data);
-			console.log(response.data);
+			//console.log(response.data);
 		});
 	}, []);
 
