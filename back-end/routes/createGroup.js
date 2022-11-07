@@ -2,30 +2,45 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const { check, validationResult } = require("express-validator");
-const cors = require('cors');
+const cors = require("cors");
 
 // router.use(cors());
 router.use(cors());
-router.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Headers, *, Access-Control-Allow-Origin', 'Origin, X-Requested-with, Content_Type,Accept,Authorization','http://localhost:8080');
-    if(req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods','PUT,POST,PATCH,DELETE,GET');
-        return res.status(200).json({});
-    }
-    next();
+router.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Headers, *, Access-Control-Allow-Origin",
+    "Origin, X-Requested-with, Content_Type,Accept,Authorization",
+    "http://localhost:8080"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT,POST,PATCH,DELETE,GET");
+    return res.status(200).json({});
+  }
+  next();
 });
 
-const url = "http://localhost:8080/createGroup";
-const groupData= [];
+// const url = "http://localhost:8080/createGroup";
+const groupData = [];
 
-router.use(express.json())
-router.post('/', (req, res) => {
-    console.log(req.body); 
-    groupData.push(req.body);
-    res.json({ response: 'Data recieved by the Server' });
+router.use(express.json());
+router.post("/", (req, res) => {
+  // console.log(req.body);
+  groupData.push(req.body);
+  res.send({groupData});
+  // res.json({groupData});
+
+  console.log(groupData);
 });
 
-// 
+
+
+// router.get('/', (req, res) => {
+//     console.log(req.body);
+//     res.json(groupData);
+//     console.log("got data")
+
+// });
+
 // router.post("/group", [
 //     check("groupName", "Group name is required").not().isEmpty(),
 //     check("groupDescription", "Group description is required").not().isEmpty(),
@@ -65,7 +80,5 @@ router.post('/', (req, res) => {
 //         });
 //     res.redirect("/createGroup");
 // });
-
-
 
 module.exports = router;
