@@ -182,7 +182,7 @@ function Group() {
                       </MDBValidationItem>
 
                       <MDBValidationItem
-                        feedback="Please provide the date"
+                        feedback="Please provide the Number of Attendees"
                         invalid
                       >
                         <MDBInput
