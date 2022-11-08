@@ -16,6 +16,24 @@ import {
 } from "mdb-react-ui-kit";
 
 function Login() {
+	const [email, setEmail] = React.useState("");
+	const [password, setPassword] = React.useState("");
+
+	const handleSubmit = (event) => {
+        event.preventDefault();}
+	
+		//const onChange to update the value
+		// const onChange = (event) => {
+		// 	const { name, value } = event.target;
+		// 	if (name === "email") {
+		// 		setEmail(value);
+		// 	} else if (name === "password") {
+		// 		setPassword(value);
+		// 	}
+
+		console.log(email, password);
+		// };
+
 	return (
 		<div>
 			<NavbarComponent />
@@ -44,6 +62,8 @@ function Login() {
 									type="email"
 									className="form-control"
 									size="lg"
+									onChange={(e) => setEmail(e.target.value)}
+									value={email}
 								/>
 								<MDBInput
 									wrapperClass=" mb-4 mx-5 w-100"
@@ -52,6 +72,8 @@ function Login() {
 									id="formControlLg"
 									type="password"
 									size="lg"
+									onChange={(e) => setPassword(e.target.value)}
+									value={password}
 								/>
 
 								<p className="small mb-3 pb-lg-2">
@@ -67,6 +89,7 @@ function Login() {
 										icon="chevron right"
 										id="SubmitBtn"
 										href="/"
+										onClick={handleSubmit}
 									/>
 								</MDBCol>
 
