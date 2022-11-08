@@ -9,7 +9,6 @@ import axios from "axios";
 function SearchBarComponent({ setCardData }) {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [searchStr, setSearchStr] = useState("");
-	const [data, setData] = useState("");
 
 	const getResponse = async () => {
 		try {
@@ -18,7 +17,7 @@ function SearchBarComponent({ setCardData }) {
 					search: searchStr,
 				},
 			});
-			setData(response.data);
+			setCardData(response.data)
 		} catch (err) {
 			console.log(err);
 		}
