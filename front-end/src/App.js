@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //Imported for routes
+import MyGroup from "./pages/myGroup";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage";
 import EditImage from "./pages/EditImage";
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/createGroup" element={<Group />} />
 					<Route path="/Login" element={<Login />} />
 					<Route path="/Register" element={<Register />} />
+					<Route path="/myGroup" element={<MyGroup />} />
 				</Routes>
 			</Router>
 		</div>
