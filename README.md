@@ -23,6 +23,86 @@ Each user has the ability to either create a room for a specific cuisine, or joi
 ## Project History
 Being part of the billions of people who enjoy hanging out with others and eating, we wanted to find an easier way to coordinate this favorite pastime of ours.  Originally, we discussed and agreed on the fact that meeting new people nowadays has become very difficult, so we thought to ourselves, "Why not create an application where you can meet new people?".  However, being the foodies we are, we also considered creating an application where we could find local good eats.  Then the magic happened, and we realized that we should combine the two, since finding people to eat with can be difficult, and sometimes going alone to new places to eat can be a bit boring or lonely, but more importantly sometimes the best bonds can be made over a good meal.  These ideas ultimately led to the creation of MealHub.
 
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+#### Backend:
+
+`PORT=3001`
+
+`NODE_ENV=development`
+
+#### Frontend:
+
+`PORT=3000`
+
+`REACT_APP_URL=http://localhost:3001`
+
+## Deployment
+
+To deploy this project run
+
+#### Frontend:
+
+```bash
+npm start
+```
+
+#### Backend:
+
+```bash
+nodemon server.js
+```
+
+## Run Locally
+
+Clone the project
+
+```bash
+git clone https://github.com/agiledev-students-fall2022/final-project-team-mealhub.git
+```
+
+Go to the project directory
+
+```bash
+cd final-project-team-mealhub
+```
+
+Install dependencies (in both frontend and backend)
+
+```bash
+cd front-end
+npm install
+```
+AND
+```bash
+cd back-end
+npm install
+```
+
+Start the server
+
+```bash
+nodemon server
+```
+
+Start the front-end
+
+```bash
+npm start
+```
+
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+npm test
+```
+
+
 ## Contributions
 For a guide on contributing, please reference <a href="https://github.com/agiledev-students-fall2022/final-project-team-mealhub/blob/master/CONTRIBUTING.md">CONTRIBUTING.MD</a>
 
