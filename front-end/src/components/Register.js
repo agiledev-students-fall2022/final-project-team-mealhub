@@ -78,7 +78,7 @@ function Register() {
                   <p className="text-black-50 mb-5">Welcome to MealHub!</p>
 
                   <MDBCol md="12">
-                    <MDBValidationItem
+                    <MDBValidationItem className='col-md-9'
                       feedback="Please enter your first name"
                       invalid
                     >
@@ -95,7 +95,7 @@ function Register() {
                       />
                     </MDBValidationItem>
 
-                    <MDBValidationItem
+                    <MDBValidationItem className='col-md-9'
                       feedback="Please enter your last name"
                       invalid
                     >
@@ -111,7 +111,7 @@ function Register() {
                         required
                       />
                     </MDBValidationItem>
-                    <MDBValidationItem
+                    <MDBValidationItem className='col-md-9'
                       feedback="Please enter your email"
                       invalid
                     >
@@ -127,7 +127,7 @@ function Register() {
                         required
                       />
                     </MDBValidationItem>
-                    <MDBValidationItem
+                    <MDBValidationItem className='col-md-9'
                       feedback="Please enter your password"
                       invalid
                     >
@@ -143,7 +143,7 @@ function Register() {
                         required
                       />
                     </MDBValidationItem>
-                    <MDBValidationItem
+                    <MDBValidationItem className='col-md-9'
                       feedback="Please confirm your password"
                       invalid
                     >

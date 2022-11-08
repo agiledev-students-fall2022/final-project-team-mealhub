@@ -91,7 +91,7 @@ function Login() {
                   Please enter your login and password!
                 </p>
 				<MDBCol md="12" className="mb-3">
-				<MDBValidationItem
+				<MDBValidationItem className='col-md-9'
                         feedback= "Please provide email address"
                         invalid
                       >
@@ -110,7 +110,7 @@ function Login() {
                 />
 				</MDBValidationItem>
 				
-				<MDBValidationItem
+				<MDBValidationItem className='col-md-9'
 						feedback= "Please provide password"
 						invalid
 					>
