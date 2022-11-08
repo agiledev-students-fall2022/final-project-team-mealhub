@@ -23,8 +23,8 @@ function App() {
 					<Route path="/editProfilePage" element={<EditProfilePage />} />
 					<Route path="/addImage" element={<EditImage />} />
 					<Route path="/createGroup" element={<Group />} />
-					<Route path="/Login" element={<Login />} />
-					<Route path="/Register" element={<Register />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route path="/myGroup" element={<MyGroup />} />
 				</Routes>
 			</Router>

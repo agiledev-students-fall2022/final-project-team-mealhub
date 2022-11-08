@@ -3,19 +3,52 @@ import Footer from "./footer";
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
 import "./Register.css";
+import axios from "axios";
 
 import {
-	MDBBtn,
 	MDBContainer,
 	MDBRow,
 	MDBCol,
 	MDBCard,
 	MDBCardBody,
 	MDBInput,
-	MDBIcon,
 } from "mdb-react-ui-kit";
 
 function Register() {
+	const [firstname, setFirstName] = React.useState("");
+	const [secondname, setSecondName] = React.useState("");
+	const [email, setEmail] = React.useState("");
+	const [password, setPassword] = React.useState("");
+	const [confirmPassword, setConfirmPassword] = React.useState("");
+
+
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		const data = {
+			firstname: firstname,
+			secondname: secondname,
+			email: email,
+			password: password,
+			confirmPassword: confirmPassword,
+		};
+
+		axios
+			.post(`${process.env.REACT_APP_URL}/register`, data)
+			.then((res) => {
+				console.log(res);
+			}
+			)
+			.catch((err) => {
+				console.log(err);
+			}
+			);
+	
+	};
+
+
+
 	return (
 		<div>
 			<NavbarComponent />
@@ -41,6 +74,9 @@ function Register() {
 									id="formControlLg"
 									type="text"
 									size="lg"
+									value={firstname}
+									onChange={(event) => setFirstName(event.target.value)}
+
 								/>
 								<MDBInput
 									wrapperClass="mb-4 mx-5 w-100"
@@ -49,6 +85,9 @@ function Register() {
 									id="formControlLg"
 									type="text"
 									size="lg"
+									value={secondname}
+									onChange={(event) => setSecondName(event.target.value)}
+
 								/>
 								<MDBInput
 									wrapperClass="mb-4 mx-5 w-100"
@@ -57,6 +96,9 @@ function Register() {
 									id="formControlLg"
 									type="email"
 									size="lg"
+									value={email}
+									onChange={(event) => setEmail(event.target.value)}
+
 								/>
 								<MDBInput
 									wrapperClass=" mb-4 mx-5 w-100"
@@ -65,6 +107,8 @@ function Register() {
 									id="formControlLg"
 									type="password"
 									size="lg"
+									value={password}
+									onChange={(event) => setPassword(event.target.value)}
 								/>
 								<MDBInput
 									wrapperClass=" mb-4 mx-5 w-100"
@@ -73,6 +117,8 @@ function Register() {
 									id="formControlLg"
 									type="password"
 									size="lg"
+									value={confirmPassword}
+									onChange={(event) => setConfirmPassword(event.target.value)}
 								/>
 
 								<MDBCol>
@@ -83,6 +129,7 @@ function Register() {
 										icon="chevron right"
 										id="SubmitBtn"
 										href="/"
+										onClick={handleSubmit}
 									/>
 								</MDBCol>
 
