@@ -28,4 +28,8 @@ app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
 app.use("/createGroup", require("./routes/createGroup"));
 
+//router for login
+app.use("/login", require("./routes/login"));
+app.use("/register", require("./routes/register"));
+
 module.exports = app;
