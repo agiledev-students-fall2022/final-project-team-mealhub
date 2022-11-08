@@ -15,25 +15,6 @@ To run this project, you will need to add the following environment variables to
 
 `REACT_APP_URL=http://localhost:3001`
 
-
-
-
-## Deployment
-
-To deploy this project run
-
-#### Frontend:
-
-```bash
-npm start
-```
-
-#### Backend:
-
-```bash
-nodemon server.js
-```
-
 ## Run Locally
 
 Clone the project
