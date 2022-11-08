@@ -35,7 +35,8 @@ function Login() {
       password: password,
     };
 
-	if (email && password) {
+
+	if (email && password)  {
     axios
       .post(`${process.env.REACT_APP_URL}/login`, data)
       .then((res) => {
@@ -62,7 +63,6 @@ function Login() {
   // 		setPassword(value);
   // 	}
 
-  console.log(email, password);
   // };
 
   return (

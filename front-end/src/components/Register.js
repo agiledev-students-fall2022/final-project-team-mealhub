@@ -17,6 +17,7 @@ import {
 } from "mdb-react-ui-kit";
 
 function Register() {
+  const checker = false;
   const [firstname, setFirstName] = React.useState("");
   const [lastname, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -36,21 +37,28 @@ function Register() {
       confirmPassword: confirmPassword,
     };
 
-    if (firstname && lastname && email && password && confirmPassword && password === confirmPassword) {
-      axios
-        .post(`${process.env.REACT_APP_URL}/register`, data)
-        .then((res) => {
-          //   console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      console.log("Please enter your details correctly");
-    }
-  };
+    if (firstname && lastname && email && password && confirmPassword) 
+	{
+		if(confirmPassword !== password) alert("Passwords do not match. Try again!");
+		else
+		{
+		axios
+			.post(`${process.env.REACT_APP_URL}/register`, data)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => {
+			console.log(err);
+			});
+		}
+	}
+	else {
+		console.log("Please enter your details correctly");
+   	 }
+	};
 
-  console.log("sdfg");
+
+  //console.log("sdfg");
   //   console.log(firstname, lastname, email, password, confirmPassword);
 
   return (
@@ -145,7 +153,7 @@ function Register() {
                     </MDBValidationItem>
                     <MDBValidationItem className='col-md-9'
                       feedback="Please confirm your password"
-                      invalid
+                      
                     >
                       <MDBInput
                         wrapperClass=" mb-4 mx-5 w-100"
@@ -158,7 +166,10 @@ function Register() {
                         onChange={(event) =>
                           setConfirmPassword(event.target.value)
                         }
-                        required
+						//check if password and confirm password are same, if not then confirm password is invalid
+						required
+
+						
                       />
                     </MDBValidationItem>
                   </MDBCol>
