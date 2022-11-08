@@ -10,12 +10,12 @@ router.use(express.json())
 //Make a post method to get data from register.js
 router.post('/', async (req, res) => {
         //get data from form
-        // const {email, password} = req.body
-        const email = req.body.email
-        const password = req.body.password
-        const firstname = req.body.firstname
-        const lastname = req.body.lastname
-        const confirmPassword = req.body.confirmPassword
+        const {email, password,firstname, lastname, confirmPassword} = req.body
+        // const email = req.body.email
+        // const password = req.body.password
+        // const firstname = req.body.firstname
+        // const lastname = req.body.lastname
+        // const confirmPassword = req.body.confirmPassword
     
         //hash password
         

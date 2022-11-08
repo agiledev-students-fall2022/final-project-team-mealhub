@@ -30,6 +30,6 @@ app.use("/createGroup", require("./routes/createGroup"));
 
 //router for login
 app.use("/login", require("./routes/login"));
-// app.use("/register", require("./routes/register"));
+app.use("/register", require("./routes/register"));
 
 module.exports = app;

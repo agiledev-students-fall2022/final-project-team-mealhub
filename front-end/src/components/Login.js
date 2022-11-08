@@ -12,13 +12,22 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
+  MDBValidation,
+  MDBValidationItem,
 } from "mdb-react-ui-kit";
 
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const handleSubmit = (event) => {
+  const onChange = (e) => {
+	const { name, value } = e.target;
+	setEmail(value);
+	setPassword(value);
+	  };
+	
+
+  const onSubmit = (event) => {
     event.preventDefault();
 
     const data = {
@@ -26,6 +35,7 @@ function Login() {
       password: password,
     };
 
+	if (email && password) {
     axios
       .post(`${process.env.REACT_APP_URL}/login`, data)
       .then((res) => {
@@ -36,7 +46,12 @@ function Login() {
       .catch((err) => {
         console.log(err);
       });
+	}
+	  else{
+		  console.log("Please enter your email and password")
+	  }
   };
+
 
   //const onChange to update the value
   // const onChange = (event) => {
@@ -53,6 +68,12 @@ function Login() {
   return (
     <div>
       <NavbarComponent />
+	  <MDBValidation
+				id="form"
+				className="row g-3"
+				noValidated
+				onSubmit={(e) => onSubmit(e)}
+			>
       <MDBContainer fluid>
         <MDBRow className="d-flex justify-content-center align-items-center h-100">
           <MDBCol col="12">
@@ -69,7 +90,12 @@ function Login() {
                 <p className="text-black-50 mb-5">
                   Please enter your login and password!
                 </p>
-
+				<MDBCol md="12" className="mb-3">
+				<MDBValidationItem
+                        feedback= "Please provide email address"
+                        invalid
+                      >
+                        
                 <MDBInput
                   wrapperClass="mb-4 mx-5 w-100"
                   labelClass="text-black"
@@ -80,7 +106,14 @@ function Login() {
                   size="lg"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+				  required
                 />
+				</MDBValidationItem>
+				
+				<MDBValidationItem
+						feedback= "Please provide password"
+						invalid
+					>
                 <MDBInput
                   wrapperClass=" mb-4 mx-5 w-100"
                   labelClass="text-black"
@@ -90,7 +123,11 @@ function Login() {
                   size="lg"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
+				  required
+
                 />
+				</MDBValidationItem>
+				</MDBCol>
 
                 <p className="small mb-3 pb-lg-2">
                   <a class="text-blue-50" href="#!">
@@ -104,8 +141,7 @@ function Login() {
                     labelPosition="center"
                     icon="chevron right"
                     id="SubmitBtn"
-                    href="/"
-                    onClick={handleSubmit}
+                    type="submit"	
                   />
                 </MDBCol>
 
@@ -145,6 +181,7 @@ function Login() {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+	  </MDBValidation>
       <Footer />
     </div>
   );
