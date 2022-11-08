@@ -23,6 +23,7 @@ app.use("/search", require("./routes/search"));
 
 //router for profilePage and editProfilePage
 app.use("/profilePage", require("./routes/profilePage"));
+app.use("/myGroup", require("./routes/myGroup"));
 app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
 app.use("/createGroup", require("./routes/createGroup"));
