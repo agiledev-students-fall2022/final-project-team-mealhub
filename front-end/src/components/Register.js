@@ -46,6 +46,11 @@ function Register() {
 			.post(`${process.env.REACT_APP_URL}/register`, data)
 			.then((res) => {
 				console.log(res);
+				
+				if(res.data)
+				{
+					window.location.href = "/";
+				}
 			})
 			.catch((err) => {
 			console.log(err);
