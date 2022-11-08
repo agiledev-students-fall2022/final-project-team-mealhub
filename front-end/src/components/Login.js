@@ -42,6 +42,10 @@ function Login() {
       .then((res) => {
 		
         console.log(res.data);
+		if(res.data)
+		{
+			window.location.href = "/";
+		}
 
       })
       .catch((err) => {
