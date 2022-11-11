@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
             password: hashedPassword
         })
         res.send({users})
+        
         }
     console.log(users)
 })
