@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Header, Modal, Icon } from "semantic-ui-react";
+import { Header, Modal } from "semantic-ui-react";
 import Box from "@mui/material/Box";
 import Slider, { SliderThumb } from "@mui/material/Slider";
 import PropTypes from "prop-types";
