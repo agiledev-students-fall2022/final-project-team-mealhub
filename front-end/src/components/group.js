@@ -9,57 +9,51 @@ import { Button } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 
 import {
-
-  MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBRange,
-  MDBInputGroup,
-  MDBValidation,
-  MDBValidationItem,
+	MDBContainer,
+	MDBCard,
+	MDBCardBody,
+	MDBCardImage,
+	MDBRow,
+	MDBCol,
+	MDBInput,
+	MDBRange,
+	MDBInputGroup,
+	MDBValidation,
+	MDBValidationItem,
 } from "mdb-react-ui-kit";
 
 function Group() {
-  
-  // `${process.env.REACT_APP_URL}/createGroup`
-  const url = "http://localhost:3001/createGroup";
-  // console.log(`${process.env.REACT_APP_URL}/createGroup`)
-  const [selected, setSelected] = useState(null);
-  const [cusines, setCusine] = useState([
-    { label: "American", value: "American" },
-    { label: "Indian", value: "Indian" },
-    { label: "Chinese", value: "Chinese" },
-    { label: "Italian", value: "Italian" },
-    { label: "Korean", value: "Korean" },
-    { label: "Mediterranean", value: "Mediterranean" },
-    { label: "Japanese", value: "Japanese" },
-  ]);
-
+	// `${process.env.REACT_APP_URL}/createGroup`
+	// console.log(`${process.env.REACT_APP_URL}/createGroup`)
+	const [selected, setSelected] = useState(null);
+	const [cusines, setCusine] = useState([
+		{ label: "American", value: "American" },
+		{ label: "Indian", value: "Indian" },
+		{ label: "Chinese", value: "Chinese" },
+		{ label: "Italian", value: "Italian" },
+		{ label: "Korean", value: "Korean" },
+		{ label: "Mediterranean", value: "Mediterranean" },
+		{ label: "Japanese", value: "Japanese" },
+	]);
 
 	const handleChange = (selected) => {
 		setSelected(selected);
 		console.log("Option selected:", selected);
 	};
 
-
-  const [formValue, setFormValue] = useState({
-    restaurant: "",
-    email: "",
-    cuisine: "",
-    attendees: "",
-    price: "",
-    location: "",
-    date: "",
-    time: "",
-    budget: "",
-    name: "",
-    budgetDollar: "20",
-  });
-
+	const [formValue, setFormValue] = useState({
+		restaurant: "",
+		email: "",
+		cuisine: "",
+		attendees: "",
+		price: "",
+		location: "",
+		date: "",
+		time: "",
+		budget: "",
+		name: "",
+		budgetDollar: "20",
+	});
 
 	const onChange = (e) => {
 		setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -88,51 +82,56 @@ function Group() {
 		console.log("Form reset");
 	};
 
-  const navigate = useNavigate();
-  const onSubmit = (e) => {
-    // if ( isEmailValid ) {
-    //   okButton.disabled = false;
-    // } else {
-    //   okButton.disabled = true;
-    // }
-    e.preventDefault();
-
+	const navigate = useNavigate();
+	const onSubmit = (e) => {
+		// if ( isEmailValid ) {
+		//   okButton.disabled = false;
+		// } else {
+		//   okButton.disabled = true;
+		// }
+		e.preventDefault();
 
 		console.log("Form submitted");
 		console.log(formValue);
 		console.log(selected);
 		console.log(value);
-    // console.log(`${process.env.REACT_APP_URL}/createGroup`)
+		// console.log(`${process.env.REACT_APP_URL}/createGroup`)
 
-    if (formValue.name && formValue.email && formValue.restaurant && selected && formValue.time && formValue.date && formValue.attendees && formValue.location){
-      // SubmitBtn.disabled = false; 
-    axios
-      .post(`${process.env.REACT_APP_URL}/createGroup`, {
-        restaurant: formValue.restaurant,
-        email: formValue.email,
-        cuisine: selected.value,
-        attendees: formValue.attendees,
-        location: formValue.location,
-        date: formValue.date,
-        time: formValue.time,
-        name: formValue.name,
-        budgetDollar: value,
-      })
-      .then((res) => {
-        console.log("sent Data");
-        console.log(res.data);
-        // navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        
-      });
-    }
-    else {
-      console.log("Please fill out all required fields");
-    }
-  };
-
+		if (
+			formValue.name &&
+			formValue.email &&
+			formValue.restaurant &&
+			selected &&
+			formValue.time &&
+			formValue.date &&
+			formValue.attendees &&
+			formValue.location
+		) {
+			// SubmitBtn.disabled = false;
+			axios
+				.post(`${process.env.REACT_APP_URL}/createGroup`, {
+					restaurant: formValue.restaurant,
+					email: formValue.email,
+					cuisine: selected.value,
+					attendees: formValue.attendees,
+					location: formValue.location,
+					date: formValue.date,
+					time: formValue.time,
+					name: formValue.name,
+					budgetDollar: value,
+				})
+				.then((res) => {
+					console.log("sent Data");
+					console.log(res.data);
+					// navigate("/");
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			console.log("Please fill out all required fields");
+		}
+	};
 
 	return (
 		<div>
@@ -195,25 +194,24 @@ function Group() {
 													required
 												/>
 											</MDBValidationItem>
-                      
-                      <MDBValidationItem
-                        feedback="Please provide the Number of Attendees"
-                        invalid
-                      >
-                        <MDBInput
-                          wrapperClass="mb-4"
-                          placeholder="Number of Attendees"
-                          name="attendees"
-                          value={formValue.attendees}
-                          size="lg"
-                          id="form3"
-                          type="number"
-                          onChange={onChange}
-                          validation="Please enter Restaurant Name"
-                          required
-                        />
-                      </MDBValidationItem>
 
+											<MDBValidationItem
+												feedback="Please provide the Number of Attendees"
+												invalid
+											>
+												<MDBInput
+													wrapperClass="mb-4"
+													placeholder="Number of Attendees"
+													name="attendees"
+													value={formValue.attendees}
+													size="lg"
+													id="form3"
+													type="number"
+													onChange={onChange}
+													validation="Please enter Restaurant Name"
+													required
+												/>
+											</MDBValidationItem>
 
 											<MDBRow>
 												<MDBCol md="6">
