@@ -20,6 +20,7 @@ import {
 	MDBInputGroup,
 	MDBValidation,
 	MDBValidationItem,
+	MDBTextArea,
 } from "mdb-react-ui-kit";
 
 function Group() {
@@ -43,7 +44,7 @@ function Group() {
 
 	const [formValue, setFormValue] = useState({
 		restaurant: "",
-		email: "",
+		dress: "",
 		cuisine: "",
 		attendees: "",
 		price: "",
@@ -53,6 +54,7 @@ function Group() {
 		budget: "",
 		name: "",
 		budgetDollar: "20",
+		description: "",
 	});
 
 	const onChange = (e) => {
@@ -66,7 +68,7 @@ function Group() {
 		document.getElementById("form").reset();
 		setFormValue({
 			restaurant: "",
-			email: "",
+			dress: "",
 			cuisine: "Select",
 			attendees: "",
 			price: "",
@@ -76,6 +78,7 @@ function Group() {
 			budget: "",
 			name: "",
 			budgetDollar: "20",
+			description: "",
 		});
 		setSelected(null);
 		setValue(20);
@@ -99,19 +102,21 @@ function Group() {
 
 		if (
 			formValue.name &&
-			formValue.email &&
+			formValue.dress &&
 			formValue.restaurant &&
 			selected &&
 			formValue.time &&
 			formValue.date &&
 			formValue.attendees &&
-			formValue.location
+			formValue.description &&
+			formValue.location &&
+			formValue.dress
 		) {
 			// SubmitBtn.disabled = false;
 			axios
 				.post(`${process.env.REACT_APP_URL}/createGroup`, {
 					restaurant: formValue.restaurant,
-					email: formValue.email,
+					dress: formValue.dress,
 					cuisine: selected.value,
 					attendees: formValue.attendees,
 					location: formValue.location,
@@ -119,11 +124,12 @@ function Group() {
 					time: formValue.time,
 					name: formValue.name,
 					budgetDollar: value,
+					description: formValue.description
 				})
 				.then((res) => {
 					console.log("sent Data");
 					console.log(res.data);
-					// navigate("/");
+					// navigate("/myGroup");
 				})
 				.catch((err) => {
 					console.log(err);
@@ -303,20 +309,40 @@ function Group() {
 											</MDBValidationItem>
 
 											<MDBValidationItem
-												feedback="Please provide the Email ID"
+												feedback="Please provide the Dress Code"
 												invalid
 											>
 												<MDBInput
 													className="form-control"
 													wrapperClass="mb-4"
-													placeholder="Email ID"
-													name="email"
-													value={formValue.email}
+													placeholder="Dress Code"
+													name="dress"
+													value={formValue.dress}
 													size="lg"
 													id="form3"
-													type="email"
+													type="text"
 													onChange={onChange}
-													validation="Please enter Restaurant Name"
+													validation="Please enter Dress Code"
+													required
+												/>
+											</MDBValidationItem>
+
+
+											<MDBValidationItem
+												feedback="Please provide the group description"
+												invalid
+											>
+												<MDBTextArea
+													className="form-control"
+													wrapperClass="mb-4"
+													placeholder="Group Description"
+													name="description"
+													value={formValue.description}
+													size="lg"
+													id="form3"
+													type="text"
+													onChange={onChange}
+													validation="Please enter the group description"
 													required
 												/>
 											</MDBValidationItem>

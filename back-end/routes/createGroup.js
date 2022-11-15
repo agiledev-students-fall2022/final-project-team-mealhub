@@ -19,27 +19,44 @@ router.use((req, res, next) => {
   next();
 });
 
-// const url = "http://localhost:8080/createGroup";
-const groupData = [];
+
 
 router.use(express.json());
 router.post("/", (req, res) => {
-  // console.log(req.body);
+  const groupData = [];
   groupData.push(req.body);
   res.send({groupData});
-  // res.json({groupData});
 
-  console.log(groupData);
+  let title = req.body.restaurant
+  let description = req.body.description;
+  let capacity = req.body.attendees;
+  let budget = req.body.budgetDollar;
+  let dress_code = req.body.dress;
+  let date = req.body.date;
+  let time = req.body.time;
+  let cuisine = req.body.cuisine.toLowerCase();
+  // let user = req.body.user;
+  let location = req.body.location
+
+  // console.log(req.body)
+
+  // let members = req.body.members;
+
+
+  //destructure groupData into individual vairables
+  // const { name, description, location, category, image } = groupData;
+  // console.log(name, description, location, category, image);
+  // console.log(name, description)
+
 });
 
 
 
-// router.get('/', (req, res) => {
-//     console.log(req.body);
-//     res.json(groupData);
-//     console.log("got data")
 
-// });
+
+
+
+
 
 // router.post("/group", [
 //     check("groupName", "Group name is required").not().isEmpty(),
