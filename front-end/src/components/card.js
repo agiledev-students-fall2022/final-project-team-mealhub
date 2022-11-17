@@ -8,7 +8,6 @@ function Card({ data, key }) {
 	// this.state = {
 	// 	modalOpen: false,
 	// };
-	console.log(data.joined);
 	const [open, setOpen] = React.useState(false);
 	const [joined, setJoined] = React.useState(data.joined);
 	return (
