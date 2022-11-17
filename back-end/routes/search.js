@@ -1,20 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
-
-const devURL = "https://my.api.mockaroo.com/mealhub.json?key=2f898fd0";
+const Group = require("../models/Group");
 
 router.get("/", async (req, res) => {
-	try {
-        const q = req.query;
-
-		const response = await axios.get(devURL);
-		res.json(response.data);
-	} catch (err){
-		res.json({
-			success: false,
-		});
-	}
+	const q = req.query;
+	Group.find({restaurant: new RegExp(`^${q.search}$`, 'i')}).exec((err, docs) => {
+		if (err) {
+			res.json({
+				success: false,
+			});
+		} else {
+			Group.find({restaurant: new RegExp(`^${q.search}$`, 'i')}).countDocuments((err, count) => {
+				console.log(count)
+				res.json({
+					docs,
+					count
+				})
+			})
+		}
+	})
 });
 
 module.exports = router;

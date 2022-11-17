@@ -34,20 +34,21 @@ const Load = () => {
 
 function Explore() {
 	const [cardData, setCardData] = React.useState(null);
+	const [count, setCount] = React.useState(0);
 
 	React.useEffect(() => {
 		axios.get(`${process.env.REACT_APP_URL}/explore`).then((response) => {
 			setCardData(response.data);
-			//console.log(response.data);
+			console.log(response.data);
 		});
 	}, []);
 
 	return (
 		<div>
 			<NavbarComponent />
-			<SearchBarComponent setCardData={setCardData} />
+			<SearchBarComponent setCardData={setCardData} setCount={setCount}/>
 			<h1 className="main-heading pt-5">Available Groups</h1>
-
+			<h3 className="sub-heading pt-1">Total results: {count}</h3>
 			<div>
 				{!cardData && <Load />}
 				{cardData &&
