@@ -11,6 +11,16 @@ const GroupSchema = new mongoose.Schema({
 		required: true,
 		trim: true,
 	},
+	restaurant: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	location: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 	capacity: {
 		type: Number,
 		required: true,
