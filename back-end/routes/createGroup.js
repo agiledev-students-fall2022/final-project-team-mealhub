@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Group = require("../models/Group");
 
+// @route   POST api/groups
 mongoose.connect('mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
@@ -35,7 +36,7 @@ router.post("/", (req, res) => {
   
   groupData.push(req.body);
   res.send({ groupData });
-
+  // Destrucring Data 
   let title = req.body.restaurant;
   let description = req.body.description;
   let capacity = req.body.attendees;
@@ -47,6 +48,7 @@ router.post("/", (req, res) => {
   // let user = req.body.user;
   let location = req.body.location;
 
+  // Group object to be sent to Database
   const group = new Group({
     title,
     description,
@@ -61,55 +63,12 @@ router.post("/", (req, res) => {
 
   }
   );
-  group.save()
+  group.save() // Saving it in collection 
     .then(result => {
-      console.log(result);
+      console.log(result); 
     }
     )
     .catch(err => console.log(err));
-
-
-
 });
-
-// router.post("/", (req, res) => {
-//   const groupData = [];
-//   groupData.push(req.body);
-//   res.send({groupData});
-
-//   let title = req.body.restaurant
-//   let description = req.body.description;
-//   let capacity = req.body.attendees;
-//   let budget = req.body.budgetDollar;
-//   let dress_code = req.body.dress;
-//   let date = req.body.date;
-
-//   let time = req.body.time;
-//   let cuisine = req.body.cuisine.toLowerCase();
-//   // let user = req.body.user;
-//   let location = req.body.location
-
-//   // Send group Data to MongoDB URL collection
-//   axios
-//     .post(MONGO_URI, {
-//       title,
-//       description,
-//       capacity,
-//       budget,
-//       dress_code,
-//       date,
-//       time,
-//       cuisine,
-//       location
-//     })
-//     .then((response) => {
-//       console.log(response);
-//     }
-//     )
-//     .catch((error) => {
-//       console.log(error);
-//     }
-//     );
-// });
 
 module.exports = router;
