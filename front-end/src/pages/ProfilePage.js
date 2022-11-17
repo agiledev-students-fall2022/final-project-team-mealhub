@@ -11,13 +11,17 @@ import Button from "react-bootstrap/Button";
 
 function ProfilePage() {
     const [data, setData] = useState([]);
+    const jwtToken = localStorage.getItem("token");
+    console.log(`JWT token: ${jwtToken}`); // debugging
 
     //render profile data onto the page
     const fetchProfileData = async () => {
         try {
-            //get data for id=2 (placeholder)
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage/2`
+                `${process.env.REACT_APP_URL}/profilePage`,
+                {
+                    headers: { Authorization: `JWT ${jwtToken}` },
+                }
             );
             setData(response.data);
         } catch (err) {
@@ -27,7 +31,7 @@ function ProfilePage() {
 
     useEffect(() => {
         fetchProfileData();
-    }, []);
+    });
 
     return (
         <Container>
@@ -46,28 +50,23 @@ function ProfilePage() {
             </div>
             <div id="info">
                 <Form.Group>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control placeholder={data.name} disabled />
+                    <Form.Label>Display Name</Form.Label>
+                    <Form.Control placeholder={data.displayName} disabled />
                 </Form.Group>
+                <Form.Group>
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control placeholder={data.firstName} disabled />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control placeholder={data.lastName} disabled />
+                </Form.Group>
+
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control placeholder={data.email} disabled />
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Age</Form.Label>
-                    <Form.Control placeholder={data.age} disabled />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Location</Form.Label>
-                    <Form.Control placeholder={data.location} disabled />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Cuisine Preferences</Form.Label>
-                    <Form.Control
-                        placeholder={data.cuisinePreferences}
-                        disabled
-                    />
-                </Form.Group>
+
                 <br></br>
             </div>
 

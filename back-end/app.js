@@ -17,7 +17,7 @@ const morgan = require("morgan"); // log requests
 
 // displaying loggin details in dev
 if (process.env.NODE_ENV === "development") {
-	app.use(morgan("dev"));
+    app.use(morgan("dev"));
 }
 
 // router for login and explore
@@ -26,7 +26,7 @@ app.use("/filter", require("./routes/filter"));
 app.use("/search", require("./routes/search"));
 
 //router for profilePage and editProfilePage
-app.use("/profilePage", require("./routes/profilePage"));
+app.use(require("./routes/profilePage"));
 app.use("/myGroup", require("./routes/myGroup"));
 app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
