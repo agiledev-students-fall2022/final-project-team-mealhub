@@ -1,42 +1,42 @@
 #title {
     text-align: center;
     font-size: larger;
-  }
-  
-  #info {
+}
+
+#info {
     margin: auto;
     max-width: fit-content;
-  }
+    padding-top: 20px;
+}
 
-  #infoEdit {
+#infoEdit {
     margin: auto;
     max-width: fit-content;
     padding-bottom: 100px;
-  }
+}
 
-  #pfImg {
+#pfImg {
+    padding-top: 20px;
     text-align: center;
     size: 100px;
-  }
-  
-  #button {
+}
+
+#button {
     text-align: center;
     padding-bottom: 100px;
-  }
-  
-  #changeImageText {
+}
+
+#changeImageText {
     text-align: center;
     font-size: small;
     color: grey;
-  }
-  
-  #changeImage{
+}
+
+#changeImage {
     margin: auto;
     max-width: fit-content;
-    
-  }
+}
 
-  #imageUpload{
+#imageUpload {
     border-radius: 50%;
-
-  }
+}
