@@ -3,6 +3,16 @@ const router = express.Router();
 const axios = require("axios");
 const { check, validationResult } = require("express-validator");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const Group = require("../models/Group");
+
+// @route   POST api/groups
+mongoose.connect('mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 
 // router.use(cors());
 router.use(cors());
@@ -19,66 +29,46 @@ router.use((req, res, next) => {
   next();
 });
 
-// const url = "http://localhost:8080/createGroup";
 const groupData = [];
 
 router.use(express.json());
 router.post("/", (req, res) => {
-  // console.log(req.body);
+  
   groupData.push(req.body);
-  res.send({groupData});
-  // res.json({groupData});
+  res.send({ groupData });
+  // Destrucring Data 
+  let title = req.body.restaurant;
+  let description = req.body.description;
+  let capacity = req.body.attendees;
+  let budget = req.body.budgetDollar;
+  let dress_code = req.body.dress;
+  let date = req.body.date;
+  let time = req.body.time;
+  let cuisine = req.body.cuisine.toLowerCase();
+  // let user = req.body.user;
+  let location = req.body.location;
 
-  console.log(groupData);
+  // Group object to be sent to Database
+  const group = new Group({
+    title,
+    description,
+    capacity,
+    budget,
+    dress_code,
+    date,
+    time,
+    cuisine,
+    // user,
+    location,
+
+  }
+  );
+  group.save() // Saving it in collection 
+    .then(result => {
+      console.log(result); 
+    }
+    )
+    .catch(err => console.log(err));
 });
-
-
-
-// router.get('/', (req, res) => {
-//     console.log(req.body);
-//     res.json(groupData);
-//     console.log("got data")
-
-// });
-
-// router.post("/group", [
-//     check("groupName", "Group name is required").not().isEmpty(),
-//     check("groupDescription", "Group description is required").not().isEmpty(),
-//     check("groupCategory", "Group category is required").not().isEmpty(),
-//     check("groupLocation", "Group location is required").not().isEmpty(),
-//     check("groupSize", "Group size is required").not().isEmpty(),
-//     check("groupDate", "Group date is required").not().isEmpty(),
-//     check("groupTime", "Group time is required").not().isEmpty(),
-//     check("groupDuration", "Group duration is required").not().isEmpty(),
-//     check("groupPrice", "Group price is required").not().isEmpty(),
-
-// ], (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//         return res.status(400).json({ errors: errors.array() });
-//     }
-//     const { groupName, groupDescription, groupCategory, groupLocation, groupSize, groupDate, groupTime, groupDuration, groupPrice } = req.body;
-//     const group = {
-//         groupName,
-//         groupDescription,
-//         groupCategory,
-//         groupLocation,
-//         groupSize,
-//         groupDate,
-//         groupTime,
-//         groupDuration,
-//         groupPrice
-//     }
-//     // axios.post("---------MongoDB Database here------", group)
-//     console.log(group)
-
-//         .then(function (response) {
-//             console.log(response);
-//         })
-//         .catch(function (error) {
-//             console.log(error);
-//         });
-//     res.redirect("/createGroup");
-// });
 
 module.exports = router;

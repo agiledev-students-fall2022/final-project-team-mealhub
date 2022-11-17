@@ -33,7 +33,8 @@ const GroupSchema = new mongoose.Schema({
 
 	dress_code: {
 		type: String,
-		enum: ["casual", "formal", "smart-casual", "informal"],
+		required: true,
+		trim: true,
 	},
 	user: {
 		type: mongoose.Schema.Types.ObjectID,
