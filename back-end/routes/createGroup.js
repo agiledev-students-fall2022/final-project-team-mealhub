@@ -34,8 +34,8 @@ const groupData = [];
 router.use(express.json());
 router.post("/", (req, res) => {
   
-  groupData.push(req.body);
-  res.send({ groupData });
+  // groupData.push(req.body);
+  res.send(req.body);
   // Destrucring Data 
   let title = req.body.restaurant;
   let description = req.body.description;
@@ -47,8 +47,8 @@ router.post("/", (req, res) => {
   let cuisine = req.body.cuisine.toLowerCase();
   // let user = req.body.user;
   let location = req.body.location;
+  let restaurant = req.body.restaurant;
 
-  // Group object to be sent to Database
   const group = new Group({
     title,
     description,
@@ -60,6 +60,7 @@ router.post("/", (req, res) => {
     cuisine,
     // user,
     location,
+    restaurant,
 
   }
   );
