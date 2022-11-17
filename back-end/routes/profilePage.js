@@ -10,8 +10,8 @@ const passport = require("passport");
 
 router.use(passport.initialize());
 
-const { jwtOptions, jwtStrategy } = require("../jwt-config.js"); // import setup options for using JWT in passport
-passport.use(jwtStrategy);
+//const { jwtOptions, jwtStrategy } = require("../jwt-config.js"); // import setup options for using JWT in passport
+//passport.use(jwtStrategy);
 
 //----------------------Fetch profile page api data-----------------------------------
 
