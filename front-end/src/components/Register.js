@@ -24,6 +24,11 @@ function Register() {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
+  const resetPassword = () => {
+    setPassword("");
+    setConfirmPassword("");
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -39,7 +44,7 @@ function Register() {
 
     if (firstname && lastname && email && password && confirmPassword) 
 	{
-		if(confirmPassword !== password) alert("Passwords do not match. Try again!");
+		if(confirmPassword !== password) resetPassword();
 		else
 		{
 		axios
@@ -140,6 +145,7 @@ function Register() {
                         required
                       />
                     </MDBValidationItem>
+
                     <MDBValidationItem className='col-md-9'
                       feedback="Please enter your password"
                       invalid
@@ -158,7 +164,7 @@ function Register() {
                     </MDBValidationItem>
                     <MDBValidationItem className='col-md-9'
                       feedback="Please confirm your password"
-                      
+                      invalid
                     >
                       <MDBInput
                         wrapperClass=" mb-4 mx-5 w-100"
@@ -168,13 +174,11 @@ function Register() {
                         type="password"
                         size="lg"
                         value={confirmPassword}
+                        //if checker is true, then input is valid
                         onChange={(event) =>
-                          setConfirmPassword(event.target.value)
-                        }
-						//check if password and confirm password are same, if not then confirm password is invalid
-						required
-
-						
+                          setConfirmPassword(event.target.value)}
+                        //checker={confirmPassword === password ?  : false}
+                        required
                       />
                     </MDBValidationItem>
                   </MDBCol>
