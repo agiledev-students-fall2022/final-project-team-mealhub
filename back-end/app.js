@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
+// const authRoute = require('./routes/auth')
 const session = require('express-session')
 const passport = require('passport')
 
@@ -21,6 +22,7 @@ const morgan = require("morgan"); // log requests
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
+
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
@@ -48,12 +50,17 @@ app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
 app.use("/createGroup", require("./routes/createGroup"));
 
+app.use("/auth", require("./routes/auth"));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
 //router for login
 app.use("/login", require("./routes/login"));
 app.use("/register", require("./routes/register"));
+
 
 module.exports = app;

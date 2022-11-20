@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const passport = require('passport');
 
 
 // @route   POST api/groups
@@ -44,15 +45,26 @@ router.post('/', async (req, res) => {
             lastName,
             displayName: firstName + " " +lastName,
           });
-          console.log(user)
+          //console.log(user)
+          let _id = user._id
           user.save()
-          .then(result => {
-            res.status(201).json({
-              message: "User created!",
-              result: result
-            } );
-          }
-          )
+          .then( result => {
+            // res.status(201).json({
+            //   message: "User created!",
+            //   result: result
+            // } );
+            //get user ID fromthe database and create login session with passport
+            req.login(_id, function(err)
+            {
+              console.log("User ID: " + _id)
+              if(err)
+                console.log(err)
+              else
+              {
+                return res.redirect('/')}
+            })
+            }
+            )
           .catch(err => {
             console.log(err);
             res.status(500).json({
@@ -63,5 +75,15 @@ router.post('/', async (req, res) => {
         }
         //console.log(user)
 })
+
+passport.serializeUser(function(user_id, done) {
+  done(null, user_id);
+});
+
+passport.deserializeUser(function(user_id, done) {
+  done(null, user_id);
+});
+
+
 
 module.exports = router
