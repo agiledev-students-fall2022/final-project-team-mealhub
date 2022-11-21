@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
 var path = require('path');
-const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const User = require('../models/User');
+
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
+//connect mongoose
 
 
 router.use(express.urlencoded({extended: false}))
