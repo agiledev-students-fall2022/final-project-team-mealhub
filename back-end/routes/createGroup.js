@@ -61,7 +61,6 @@ router.post("/", (req, res) => {
     // user,
     location,
     restaurant,
-
   }
   );
   group.save() // Saving it in collection 

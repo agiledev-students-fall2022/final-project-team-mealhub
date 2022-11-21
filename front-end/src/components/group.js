@@ -404,7 +404,6 @@ function Group() {
 															// onSubmit= {handleSubmit}
 														/>
 													</MDBCol>
-													{/* <MDBBtn color="primary" type="submit" >Submit form</MDBBtn> */}
 												</MDBRow>
 											</div>
 										</MDBCardBody>
