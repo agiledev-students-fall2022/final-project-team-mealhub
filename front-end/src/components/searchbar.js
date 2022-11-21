@@ -6,7 +6,7 @@ import Filter from "./filter";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function SearchBarComponent({setCardData, setCount}) {
+function SearchBarComponent({ setCardData, setCount }) {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [searchStr, setSearchStr] = useState("");
 
@@ -17,8 +17,8 @@ function SearchBarComponent({setCardData, setCount}) {
 					search: searchStr,
 				},
 			});
-			setCardData(response.data.docs)
-			setCount(response.data.count)
+			setCardData(response.data.docs);
+			setCount(response.data.count);
 		} catch (err) {
 			console.log(err);
 		}
@@ -61,6 +61,7 @@ function SearchBarComponent({setCardData, setCount}) {
 					setFilterOpen(false);
 				}}
 				setCardData={setCardData}
+				setCount={setCount}
 			/>
 		</div>
 	);

@@ -7,6 +7,7 @@ import React from "react";
 import axios from "axios";
 import SearchBarComponent from "../components/searchbar";
 import { TailSpin } from "react-loader-spinner";
+
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 // mock data
@@ -46,7 +47,7 @@ function Explore() {
 	return (
 		<div>
 			<NavbarComponent />
-			<SearchBarComponent setCardData={setCardData} setCount={setCount}/>
+			<SearchBarComponent setCardData={setCardData} setCount={setCount} />
 			<h1 className="main-heading pt-5">Available Groups</h1>
 			<h3 className="sub-heading pt-1">Total results: {count}</h3>
 			<div>
