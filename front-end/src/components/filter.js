@@ -56,6 +56,7 @@ PriceThumbComponent.propTypes = {
 };
 
 function Filter(props) {
+	const bgt = React.useRef([20, 40]);
 	const [budget, setBudget] = React.useState([20, 40]);
 	return (
 		<Modal
@@ -77,11 +78,12 @@ function Filter(props) {
 						slots={{ thumb: PriceThumbComponent }}
 						onChange={(e) => {
 							setBudget(e.target.value);
+							bgt.current = e.target.value;
 						}}
 						getAriaLabel={(index) =>
 							index === 0 ? "Minimum price" : "Maximum price"
 						}
-						defaultValue={[...budget]}
+						defaultValue={[20, 40]}
 						disableSwap
 					/>
 					<Typography>MealHub Plus</Typography>
@@ -89,9 +91,11 @@ function Filter(props) {
 
 					<FilterFields
 						budget={budget}
+						bgt={bgt}
 						setCardData={props.setCardData}
 						open={props.filterOpen}
 						close={props.handleClose}
+						setCount={props.setCount}
 					/>
 				</Box>
 			</Modal.Content>

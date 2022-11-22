@@ -2,24 +2,31 @@ const express = require("express");
 
 const router = express.Router();
 
-const axios = require("axios");
+const User = require("../models/User");
+
+const passport = require("passport");
+
+router.use(passport.initialize());
+
+//const { jwtOptions, jwtStrategy } = require("../jwt-config.js"); // import setup options for using JWT in passport
+//passport.use(jwtStrategy);
 
 //----------------------Fetch profile page api data-----------------------------------
-/*
-WILL NEED TO USE PARAMETERS ONCE LOGIN IS FIXED
-*/
-router.get("/:id", async (req, res) => {
-	try {
-		// insert the environmental variable into the URL we're requesting
-		const response = await axios.get(
-			`https://my.api.mockaroo.com/user_profiles.json?key=18bea250`
-		);
-		res.json(response.data[0]); // pass data along directly to client
-	} catch (err) {
-		res.json({
-			success: false,
-		});
-	}
-});
+
+router.get(
+    "/profilePage",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            // requesting resource from DB
+            const userInfo = await User.findOne(req.user.id);
+            res.json(userInfo); // pass data along directly to client
+        } catch (err) {
+            res.json({
+                success: false,
+            });
+        }
+    }
+);
 
 module.exports = router;

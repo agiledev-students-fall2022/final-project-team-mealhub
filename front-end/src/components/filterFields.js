@@ -8,7 +8,7 @@ import axios from "axios";
 import { MDBRow, MDBCol, MDBInput, MDBValidation } from "mdb-react-ui-kit";
 
 function FilterFields(props) {
-	const [selected, setSelected] = useState(null);
+	const [selected, setSelected] = useState("");
 	const [cusines, setCusine] = useState([
 		{ label: "American", value: "American" },
 		{ label: "Indian", value: "Indian" },
@@ -37,11 +37,9 @@ function FilterFields(props) {
 	const [formValue, setFormValue] = useState({
 		restaurant: "",
 		cuisine: "",
-		attendees: "",
 		location: "",
 		date: "",
-		time: "",
-		budget: props.budget,
+		budget: props.bgt,
 	});
 
 	const onChange = (e) => {
@@ -56,13 +54,11 @@ function FilterFields(props) {
 		setFormValue({
 			restaurant: "",
 			cuisine: "Select",
-			attendees: "",
 			location: "",
 			date: "",
-			time: "",
-			budget: props.budget,
+			budget: props.bgt,
 		});
-		setSelected(null);
+		setSelected("");
 		setValue(20);
 	};
 
@@ -75,10 +71,9 @@ function FilterFields(props) {
 			...formValue,
 		};
 		if (newData.restaurant === "") newData.restaurant = formValue.restaurant;
-		if (newData.cuisine === "") newData.cuisine = formValue.cuisine;
+		if (newData.cuisine === "") newData.cuisine = selected;
 		if (newData.location === "") newData.location = formValue.location;
 		if (newData.date === "") newData.date = formValue.date;
-		if (newData.time === "") newData.time = formValue.time;
 		if (newData.budget === "") newData.budget = formValue.budget;
 
 		axios
@@ -87,7 +82,9 @@ function FilterFields(props) {
 				// console.log(response.data);
 				// set the card data to the new data recieved
 				// props.setCardData
-				props.setCardData(response.data);
+				console.log(response.data);
+				props.setCardData(response.data.docs);
+				props.setCount(response.data.count);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -126,48 +123,16 @@ function FilterFields(props) {
 
 				<MDBInput
 					wrapperClass="mb-4"
-					placeholder="Number of Attendees"
-					name="attendees"
-					value={formValue.attendees}
+					placeholder="Date"
+					name="date"
+					value={formValue.date}
 					size="lg"
 					id="form3"
-					type="number"
+					type="date"
 					onChange={onChange}
 					validation="Please enter Restaurant Name"
 					required
 				/>
-
-				<MDBRow>
-					<MDBCol md="6">
-						<MDBInput
-							wrapperClass="mb-4"
-							placeholder="Date"
-							name="date"
-							value={formValue.date}
-							size="lg"
-							id="form3"
-							type="date"
-							onChange={onChange}
-							validation="Please enter Restaurant Name"
-							required
-						/>
-					</MDBCol>
-
-					<MDBCol md="6">
-						<MDBInput
-							wrapperClass="mb-4"
-							label=""
-							placeholder="time"
-							value={formValue.time}
-							size="lg"
-							id="form3"
-							type="time"
-							onChange={onChange}
-							validation="Please enter Restaurant Name"
-							required
-						/>
-					</MDBCol>
-				</MDBRow>
 
 				<div className="cusines">
 					<Select
