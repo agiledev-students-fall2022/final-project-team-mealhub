@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
 import "./cardmodal.css";
+import dateFormat, { masks } from "dateformat";
 
 function CardModal(props) {
 	// const [open, setOpen] = React.useState(true);
@@ -21,7 +22,9 @@ function CardModal(props) {
 						{/* <Modal.Meta>
 							<span>{"12-12-12"}</span>
 						</Modal.Meta> */}
-						<span className="modal-span">{props.data.date}</span>
+						<span className="modal-span">
+							{dateFormat(props.data.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+						</span>
 
 						<Header>{props.data.restaurant}</Header>
 						<span className="modal-span">{props.data.location}</span>
@@ -35,8 +38,10 @@ function CardModal(props) {
 					<Modal.Description>
 						<Header>Description</Header>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-							pulvinar placerat lorem id volutpat. Etiam nulla velit, posuere
+							{props.data.description ||
+								`
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+			         pulvinar placerat lorem id volutpat. Etiam nulla velit, posuere
 							nec lobortis ac, tristique a ante. Donec varius, mauris tristique
 							porta imperdiet, lacus turpis congue enim, sit amet dignissim
 							lectus nisl in purus. Vestibulum ante ipsum primis in faucibus
@@ -50,9 +55,10 @@ function CardModal(props) {
 							tristique a. Suspendisse ut viverra enim, sed efficitur ligula.
 							Integer tellus lorem, sollicitudin sed erat sed, auctor porta
 							purus. Vivamus at tellus ut felis sollicitudin sodales a et velit.
+                            `}
 						</p>
 						<p>{"Cuisine Location: " + props.data.cuisine}</p>
-						<p>{"Budget: " + "$".repeat(Math.floor(props.data.budget))}</p>
+						<p>{"Budget: $" + props.data.budget}</p>
 						<p>{`Dress-code: ${props.data.dress_code}`}</p>
 						<p>
 							{props.data.capacity -
