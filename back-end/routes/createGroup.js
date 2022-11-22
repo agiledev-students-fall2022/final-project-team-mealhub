@@ -5,16 +5,20 @@ const { check, validationResult } = require("express-validator");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Group = require("../models/Group");
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const {checkUser} = require("../middleware_auth/jwt_auth")
+
 
 // @route   POST api/groups
-mongoose.connect('mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(
+  "mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   }
 );
 
-// router.use(cors());
 router.use(cors());
 router.use((req, res, next) => {
   res.header(
@@ -29,14 +33,51 @@ router.use((req, res, next) => {
   next();
 });
 
-const groupData = [];
+// console.log(user);
+// const token = req.cookies.token;
+// const decoded = jwt.verify(token, process.env.JWT_SECRET);
+// const user = await User.findById(decoded.id);
+// router.get("/", async (req, res) => {
+//   try {
+//     // const groups = await Group.find();
+
+//     console.log(req.cookies);
+
+//     // res.json(groups);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
+//get current user using checkUser middleware
+// router.get("/", checkUser, async (req, res) => {
+//   console.log("get user groups");
+//   try {
+//     const user = await User.findByEmail(req.user.email);
+//     res.json(user);
+//     console.log(user)
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
+
 
 router.use(express.json());
-router.post("/", (req, res) => {
-  
-  groupData.push(req.body);
-  res.send({ groupData });
-  // Destrucring Data 
+router.post("/", checkUser, async (req, res) => {
+  console.log("create group");
+  const user = await User.findByEmail(req.user.email);
+    res.json(user);
+    console.log(user)
+
+
+
+  // console.log(req.cookie);
+
+  res.send(req.body);
+  // Destrucring Data
   let title = req.body.restaurant;
   let description = req.body.description;
   let capacity = req.body.attendees;
@@ -45,10 +86,12 @@ router.post("/", (req, res) => {
   let date = req.body.date;
   let time = req.body.time;
   let cuisine = req.body.cuisine.toLowerCase();
-  // let user = req.body.user;
-  let location = req.body.location;
+  //Get user ID from JWT token
 
-  // Group object to be sent to Database
+  // let user =
+  let location = req.body.location;
+  let restaurant = req.body.restaurant;
+
   const group = new Group({
     title,
     description,
@@ -60,15 +103,14 @@ router.post("/", (req, res) => {
     cuisine,
     // user,
     location,
-
-  }
-  );
-  group.save() // Saving it in collection 
-    .then(result => {
-      console.log(result); 
-    }
-    )
-    .catch(err => console.log(err));
+    restaurant,
+  });
+  group
+    .save() // Saving it in collection
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

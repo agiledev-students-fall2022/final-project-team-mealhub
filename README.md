@@ -33,6 +33,8 @@ To run this project, you will need to add the following environment variables to
 
 `NODE_ENV=development`
 
+`MONGO_URI=mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority`
+
 #### Frontend:
 
 `PORT=3000`
