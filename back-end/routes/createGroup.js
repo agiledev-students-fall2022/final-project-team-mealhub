@@ -5,12 +5,15 @@ const { check, validationResult } = require("express-validator");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Group = require("../models/Group");
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 // @route   POST api/groups
-mongoose.connect('mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(
+  "mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   }
 );
 
@@ -29,14 +32,28 @@ router.use((req, res, next) => {
   next();
 });
 
-const groupData = [];
+// console.log(user);
+// const token = req.cookies.token;
+// const decoded = jwt.verify(token, process.env.JWT_SECRET);
+// const user = await User.findById(decoded.id);
 
 router.use(express.json());
-router.post("/", (req, res) => {
-  
-  // groupData.push(req.body);
+router.post("/", async (req, res) => {
+  console.log(req.cookie.token);
+  // const token = req.cookies["token"];
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  console.log(decoded);
+
+  if (!token) {
+    console.log("User not logged in.");
+    return res.json({ error: "User not logged in." });
+    
+  }
+  const user = decoded.user;
+  console.log(user);
+
   res.send(req.body);
-  // Destrucring Data 
+  // Destrucring Data
   let title = req.body.restaurant;
   let description = req.body.description;
   let capacity = req.body.attendees;
@@ -45,7 +62,15 @@ router.post("/", (req, res) => {
   let date = req.body.date;
   let time = req.body.time;
   let cuisine = req.body.cuisine.toLowerCase();
-  // let user = req.body.user;
+  //Get user ID from JWT token
+
+  // const token = req.cookies.token;
+
+  // const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  // const user = await User.findById(decoded.id);
+  
+
+  // let user =
   let location = req.body.location;
   let restaurant = req.body.restaurant;
 
@@ -58,17 +83,16 @@ router.post("/", (req, res) => {
     date,
     time,
     cuisine,
-    // user,
+    user,
     location,
     restaurant,
-  }
-  );
-  group.save() // Saving it in collection 
-    .then(result => {
-      console.log(result); 
-    }
-    )
-    .catch(err => console.log(err));
+  });
+  group
+    .save() // Saving it in collection
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
