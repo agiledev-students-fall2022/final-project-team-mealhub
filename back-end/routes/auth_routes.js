@@ -11,13 +11,7 @@ module.exports = function(app) {
   });
 
 
-  app.post(
-    "/register",
-    [
-      verifySignUp.checkDuplicateEmail
-    ],
-    controller.signup
-  );
+  app.post("/register",[verifySignUp.checkDuplicateEmail],controller.signup);
 
   app.post("/login", controller.signin);
 
