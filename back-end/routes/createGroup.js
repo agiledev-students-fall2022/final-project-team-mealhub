@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const Group = require("../models/Group");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const {checkUser} = require("../middleware_auth/jwt_auth")
+
 
 // @route   POST api/groups
 mongoose.connect(
@@ -17,7 +19,6 @@ mongoose.connect(
   }
 );
 
-// router.use(cors());
 router.use(cors());
 router.use((req, res, next) => {
   res.header(
@@ -36,21 +37,44 @@ router.use((req, res, next) => {
 // const token = req.cookies.token;
 // const decoded = jwt.verify(token, process.env.JWT_SECRET);
 // const user = await User.findById(decoded.id);
+// router.get("/", async (req, res) => {
+//   try {
+//     // const groups = await Group.find();
+
+//     console.log(req.cookies);
+
+//     // res.json(groups);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
+//get current user using checkUser middleware
+// router.get("/", checkUser, async (req, res) => {
+//   console.log("get user groups");
+//   try {
+//     const user = await User.findByEmail(req.user.email);
+//     res.json(user);
+//     console.log(user)
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
+
 
 router.use(express.json());
-router.post("/", async (req, res) => {
-  console.log(req.cookie.token);
-  // const token = req.cookies["token"];
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(decoded);
+router.post("/", checkUser, async (req, res) => {
+  console.log("create group");
+  const user = await User.findByEmail(req.user.email);
+    res.json(user);
+    console.log(user)
 
-  if (!token) {
-    console.log("User not logged in.");
-    return res.json({ error: "User not logged in." });
-    
-  }
-  const user = decoded.user;
-  console.log(user);
+
+
+  // console.log(req.cookie);
 
   res.send(req.body);
   // Destrucring Data
@@ -63,12 +87,6 @@ router.post("/", async (req, res) => {
   let time = req.body.time;
   let cuisine = req.body.cuisine.toLowerCase();
   //Get user ID from JWT token
-
-  // const token = req.cookies.token;
-
-  // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  // const user = await User.findById(decoded.id);
-  
 
   // let user =
   let location = req.body.location;
@@ -83,7 +101,7 @@ router.post("/", async (req, res) => {
     date,
     time,
     cuisine,
-    user,
+    // user,
     location,
     restaurant,
   });
