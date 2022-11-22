@@ -66,7 +66,7 @@ exports.signup = async (req, res) => {
             });
             res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000 });
             res.redirect('/');
-      
+            console.log(token)
     } catch {
       console.log("User not registered");
       res.status(500).send();
@@ -75,31 +75,63 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-  const temp = [];
-  const user = await User.findOne({
-    where: {
-      email: req.body.email,
-    },
-  });
-
-  if (!user) {
-    return res.status(404).send({ message: "User Not found." });
-  }
-
-  const passwordIsValid = bcrypt.compare(
-    req.body.password,
-    user.password,
-    (err, res) => {
-      console.log("Compared result", req.body.password, user.password);
+  User.findOne({email: req.body.email}, function(err,user)
+  {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-  );
-
-  if (!passwordIsValid) {
-    return res.status(401).send({
-      message: "Invalid Password!",
-    });
+    if (user) {
+      bcrypt.compare(req.body.password, user.password, function(err, result) {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        if (result) {
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: 60 * 60 * 24 // expires in 24 hours
+            });
+            res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000 });
+            res.redirect('/');
+        } else {
+          res.status(400).send({ message: "Incorrect password!" });
+          return;
+        }
+      });
+    } else {
+      res.status(400).send({ message: "User not found!" });
+      return;
+    }
   }
+  )
 };
+
+//   if (!user) {
+//     return res.status(404).send({ message: "User Not found." });
+//   }
+
+//   const passwordIsValid = bcrypt.compare(
+//     req.body.password,
+//     user.password,
+//     (err, res) => {
+//       console.log("Compared result", req.body.password, user.password);
+//     }
+//   );
+
+//   if (!passwordIsValid) {
+//     return res.status(407).send({
+//       message: "Invalid Password!",
+//     });
+//   }
+
+//   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+//     expiresIn: 60 * 60 * 24 // expires in 24 hours
+//   });
+
+//   res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000 });
+//   res.redirect('/');
+//   console.log(token)
+// };
 
 //   const passwordIsValid = bcrypt.compare(req.body.password,user.password , (err, res) {
 //     if (err){
