@@ -8,6 +8,7 @@ import coverImg from "../assets/createGroup.jpg";
 import { Button } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 
+
 import {
 	MDBContainer,
 	MDBCard,
@@ -24,6 +25,9 @@ import {
 } from "mdb-react-ui-kit";
 
 function Group() {
+
+	// CHeck for JWT token/ cookie or user is signed in if not redirect to login page
+
 	// `${process.env.REACT_APP_URL}/createGroup`
 	// console.log(`${process.env.REACT_APP_URL}/createGroup`)
 	const [selected, setSelected] = useState(null);

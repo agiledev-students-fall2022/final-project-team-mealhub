@@ -6,6 +6,7 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const session = require("express-session");
+const { checkUser } = require("./middleware_auth/jwt_auth");
 
 
 const connectDB = require("./config/connectDB"); // helper to connect to DB
@@ -39,7 +40,8 @@ app.use("/search", require("./routes/search"));
 
 //router for profilePage and editProfilePage
 app.use(require("./routes/profilePage"));
-app.use("/myGroup", require("./routes/myGroup"));
+app.get("*", checkUser);
+app.use("/myGroup", require("./routes/myGroup") );
 app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
 app.use("/createGroup", require("./routes/createGroup"));

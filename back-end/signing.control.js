@@ -88,11 +88,12 @@ exports.signin = async (req, res) => {
           return;
         }
         if (result) {
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+           const token = jwt.sign({email: user.email}, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
-            res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000 });
+            res.cookie("token", token, { httpOnly: false, maxAge: 60 * 60 * 24 * 1000 });
             res.redirect('/');
+            console.log(token)
         } else {
           res.status(400).send({ message: "Incorrect password!" });
           return;

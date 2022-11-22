@@ -16,4 +16,9 @@ module.exports = function(app) {
   app.post("/login", controller.signin);
 
   app.post("/logout", controller.signout);
+
+  
+
+  
+
 };
