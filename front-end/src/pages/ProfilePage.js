@@ -42,7 +42,7 @@ function ProfilePage() {
             </div>
             <div id="pfImg">
                 <Image
-                    src="https://picsum.photos/100/100"
+                    src={data.image}
                     roundedCircle
                     height="140"
                     width="140"

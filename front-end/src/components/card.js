@@ -3,6 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Button, Item } from "semantic-ui-react";
 import "./card.css";
 import Cardmodal from "./cardmodal";
+import dateFormat, { masks } from "dateformat";
 
 function Card({ data, key }) {
 	// this.state = {
@@ -24,7 +25,9 @@ function Card({ data, key }) {
 
 					<Item.Content>
 						<Item.Meta>
-							<span>{data.date}</span>
+							<span>
+								{dateFormat(data.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+							</span>
 						</Item.Meta>
 						<Item.Header
 							as="a"

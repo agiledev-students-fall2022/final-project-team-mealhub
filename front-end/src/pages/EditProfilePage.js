@@ -12,21 +12,20 @@ import { useNavigate } from "react-router-dom";
 
 function EditProfilePage() {
     const [data, setData] = useState([]);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [age, setAge] = useState("");
-    const [location, setLocation] = useState("");
-
-    //WILL BE USED WHEN DATABASE IS INTEGRATED
-    //const [cuisinePreferences, setCusinePreferences] = useState([]);
-    const [cuisinePreferences, setCusinePreferences] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [displayName, setDisplayName] = useState("");
+    //Token
+    const jwtToken = localStorage.getItem("token");
 
     //-------------------render profile data onto the page-------------------------
     const fetchProfileData = async () => {
         try {
-            //get data for id=2 (placeholder)
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage/2`
+                `${process.env.REACT_APP_URL}/profilePage`,
+                {
+                    headers: { Authorization: `JWT ${jwtToken}` },
+                }
             );
             setData(response.data);
         } catch (err) {
@@ -36,30 +35,26 @@ function EditProfilePage() {
 
     useEffect(() => {
         fetchProfileData();
-    }, []);
+    });
     //---------------Form validation--------------------------------
 
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         let newData = {
-            id: 2,
-            name: name,
-            email: email,
-            age: age,
-            location: location,
-            cuisinePreferences: cuisinePreferences,
+            displayName: displayName,
+            firstName: firstName,
+            lastName: lastName,
         };
-        if (newData.name === "") newData.name = data.name;
-        if (newData.email === "") newData.email = data.email;
-        if (newData.age === "") newData.age = data.age;
-        if (newData.location === "") newData.location = data.location;
-        if (newData.cuisinePreferences === "")
-            newData.cuisinePreferences = data.cuisinePreferences;
+        if (newData.firstName === "") newData.firstName = data.firstName;
+        if (newData.lastName === "") newData.lastName = data.lastName;
+        if (newData.displayName === "") newData.displayName = data.displayName;
 
         axios
             // post new message to server
-            .post(`${process.env.REACT_APP_URL}/editInfo`, newData)
+            .post(`${process.env.REACT_APP_URL}/editInfo`, newData, {
+                headers: { Authorization: `JWT ${jwtToken}` },
+            })
             .then((response) => {
                 console.log(response.data);
             })
@@ -81,7 +76,7 @@ function EditProfilePage() {
 
             <div id="pfImg">
                 <Image
-                    src="https://picsum.photos/100/100"
+                    src={data.image}
                     roundedCircle
                     height="140"
                     width="140"
@@ -96,56 +91,38 @@ function EditProfilePage() {
             <div id="infoEdit">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>Display Name</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder="Name"
-                            defaultValue={data.name}
+                            placeholder="Display Name"
+                            defaultValue={data.displayName}
                             required
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => setDisplayName(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="First Name"
+                            defaultValue={data.firstName}
+                            required
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Last Name"
+                            defaultValue={data.lastName}
+                            required
+                            onChange={(e) => setLastName(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Email"
-                            defaultValue={data.email}
-                            required
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Age</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Age"
-                            defaultValue={data.age}
-                            required
-                            onChange={(e) => setAge(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Location</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Location"
-                            defaultValue={data.location}
-                            required
-                            onChange={(e) => setLocation(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Cuisine Preferences</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Cuisine preferences (Ex: Korean)"
-                            defaultValue={data.cuisinePreferences}
-                            required
-                            onChange={(e) =>
-                                setCusinePreferences(e.target.value)
-                            }
-                        />
+                        <Form.Control placeholder={data.email} disabled />
                     </Form.Group>
                     <br></br>
                     <Button type="submit" variant="primary">
