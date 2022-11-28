@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 function ProfileNavbarComponent() {
     const navigate = useNavigate();
-    //remove token
+
+    //TO LOGOUT
     const handleClick = () => {
-        localStorage.removeItem("token");
         navigate("/");
     };
 
