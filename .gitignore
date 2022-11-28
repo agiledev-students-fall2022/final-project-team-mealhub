@@ -81,7 +81,8 @@ jspm_packages/
 **/jspm_packages
 
 # public uploads Directory
-public/
+public/*
+!public/uploads/
 
 # Results of React build script
 build/
