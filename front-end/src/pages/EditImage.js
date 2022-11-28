@@ -7,16 +7,13 @@ import { useNavigate } from "react-router-dom";
 function EditImage() {
     const [selectedImage, setSelectedImage] = useState(null);
     const navigate = useNavigate();
-    const jwtToken = localStorage.getItem("token");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", selectedImage);
         console.log(formData);
-        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData, {
-            headers: { Authorization: `JWT ${jwtToken}` },
-        });
+        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData);
         navigate("/profilePage");
     };
 
