@@ -15,17 +15,12 @@ function EditProfilePage() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [displayName, setDisplayName] = useState("");
-    //Token
-    const jwtToken = localStorage.getItem("token");
 
     //-------------------render profile data onto the page-------------------------
     const fetchProfileData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`,
-                {
-                    headers: { Authorization: `JWT ${jwtToken}` },
-                }
+                `${process.env.REACT_APP_URL}/profilePage`
             );
             setData(response.data);
         } catch (err) {
@@ -35,7 +30,7 @@ function EditProfilePage() {
 
     useEffect(() => {
         fetchProfileData();
-    });
+    }, []);
     //---------------Form validation--------------------------------
 
     const navigate = useNavigate();
@@ -52,9 +47,7 @@ function EditProfilePage() {
 
         axios
             // post new message to server
-            .post(`${process.env.REACT_APP_URL}/editInfo`, newData, {
-                headers: { Authorization: `JWT ${jwtToken}` },
-            })
+            .post(`${process.env.REACT_APP_URL}/editInfo`, newData)
             .then((response) => {
                 console.log(response.data);
             })
