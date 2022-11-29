@@ -11,6 +11,7 @@ checkDuplicateEmail = async (req, res, next) => {
           return;
         }
         if (user) {
+          //send an alert to client side
           res.status(400).send({ message: "Failed! Email is already in use!" });
           return;
         }

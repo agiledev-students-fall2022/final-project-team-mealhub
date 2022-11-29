@@ -38,10 +38,9 @@ function Login() {
 
 	if (email && password)  {
     axios
-      .post(`${process.env.REACT_APP_URL}/login`, data)
+      .post(`${process.env.REACT_APP_URL}/login`, data, {withCredentials: true})
       .then((res) => {
-		
-        console.log(res.data);
+        console.log(res);
 		if(res.data)
 		{
 			window.location.href = "/";
