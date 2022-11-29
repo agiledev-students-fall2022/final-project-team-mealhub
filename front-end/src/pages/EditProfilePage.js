@@ -12,20 +12,13 @@ import { useNavigate } from "react-router-dom";
 
 function EditProfilePage() {
     const [data, setData] = useState([]);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [displayName, setDisplayName] = useState("");
-    //Token
-    const jwtToken = localStorage.getItem("token");
 
     //-------------------render profile data onto the page-------------------------
     const fetchProfileData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`,
-                {
-                    headers: { Authorization: `JWT ${jwtToken}` },
-                }
+                `${process.env.REACT_APP_URL}/profilePage`
             );
             setData(response.data);
         } catch (err) {
@@ -35,7 +28,7 @@ function EditProfilePage() {
 
     useEffect(() => {
         fetchProfileData();
-    });
+    }, []);
     //---------------Form validation--------------------------------
 
     const navigate = useNavigate();
@@ -43,18 +36,12 @@ function EditProfilePage() {
         event.preventDefault();
         let newData = {
             displayName: displayName,
-            firstName: firstName,
-            lastName: lastName,
         };
-        if (newData.firstName === "") newData.firstName = data.firstName;
-        if (newData.lastName === "") newData.lastName = data.lastName;
         if (newData.displayName === "") newData.displayName = data.displayName;
 
         axios
             // post new message to server
-            .post(`${process.env.REACT_APP_URL}/editInfo`, newData, {
-                headers: { Authorization: `JWT ${jwtToken}` },
-            })
+            .post(`${process.env.REACT_APP_URL}/editInfo`, newData)
             .then((response) => {
                 console.log(response.data);
             })
@@ -102,23 +89,11 @@ function EditProfilePage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="First Name"
-                            defaultValue={data.firstName}
-                            required
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
+                        <Form.Control placeholder={data.firstName} disabled />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Last Name"
-                            defaultValue={data.lastName}
-                            required
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
+                        <Form.Control placeholder={data.lastName} disabled />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>

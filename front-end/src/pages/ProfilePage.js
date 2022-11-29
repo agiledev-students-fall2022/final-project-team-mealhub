@@ -11,17 +11,12 @@ import Button from "react-bootstrap/Button";
 
 function ProfilePage() {
     const [data, setData] = useState([]);
-    const jwtToken = localStorage.getItem("token");
-    console.log(`JWT token: ${jwtToken}`); // debugging
 
     //render profile data onto the page
     const fetchProfileData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`,
-                {
-                    headers: { Authorization: `JWT ${jwtToken}` },
-                }
+                `${process.env.REACT_APP_URL}/profilePage`
             );
             setData(response.data);
         } catch (err) {
@@ -31,7 +26,7 @@ function ProfilePage() {
 
     useEffect(() => {
         fetchProfileData();
-    });
+    }, []);
 
     return (
         <Container>
