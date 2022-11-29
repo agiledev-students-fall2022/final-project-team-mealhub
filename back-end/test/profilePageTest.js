@@ -1,28 +1,50 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const server = require("../app");
+const User = require("../models/User");
 
 //Assertion style
 chai.should();
 chai.use(chaiHttp);
 
+//COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
+/*
+//=============================================================
+const userLoginInfo = {
+    email: "applepie@gmail.com",
+    password: "password",
+};
+
+//=============================================================
+*/
 describe("TEST API- profilePage", () => {
     /**
      * Test the GET route for profilePage
      */
-    describe("GET request to /profilePage/:id", () => {
+
+    //COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
+    /*
+    beforeEach((done) => {
+        chai.request(server)
+            .post("/login")
+            .send(userLoginInfo)
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+    });
+*/
+    describe("GET request to /profilePage", () => {
         it("It should GET all the user profile information by ID", (done) => {
             chai.request(server)
-                .get("/profilePage/2")
+                .get("/profilePage")
                 .end((err, res) => {
                     res.should.be.a("object");
-                    res.body.should.have.property("profileImage");
-                    res.body.should.have.property("id");
-                    res.body.should.have.property("name");
+                    res.body.should.have.property("image");
+                    res.body.should.have.property("displayName");
+                    res.body.should.have.property("firstName");
+                    res.body.should.have.property("lastName");
                     res.body.should.have.property("email");
-                    res.body.should.have.property("age");
-                    res.body.should.have.property("location");
-                    res.body.should.have.property("cuisinePreferences");
                     done();
                 });
         });
