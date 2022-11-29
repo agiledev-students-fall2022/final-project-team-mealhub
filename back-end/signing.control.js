@@ -96,6 +96,7 @@ exports.signin = async (req, res) => {
           return;
         }
         if (result) {
+          console.log(user.email)
            const token = jwt.sign({email: user.email}, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
@@ -104,7 +105,12 @@ exports.signin = async (req, res) => {
             res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
             res.send({token})
 
-            console.log(req.cookies)
+            //decode jwt token
+            const decoded = jwt.verify(req.cookies["jwt-token"], process.env.JWT_SECRET);
+            //read token from req.cookies
+            console.log(decoded)
+            
+
         } else {
           res.status(400).send({ message: "Incorrect password!" });
           return;

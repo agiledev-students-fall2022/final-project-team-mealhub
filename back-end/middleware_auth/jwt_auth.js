@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 const checkUser = (req, res, next) => {
   console.log("check user");
-  const token = req.cookies.token;
+  const token = req.cookies["jwt-token"];
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       if (err) {
