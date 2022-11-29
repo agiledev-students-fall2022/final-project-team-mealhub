@@ -43,7 +43,7 @@ function Register() {
 		else
 		{
 		axios
-			.post(`${process.env.REACT_APP_URL}/register`, data)
+			.post(`${process.env.REACT_APP_URL}/register`, data, {withCredentials: true})
 			.then((res) => {
 				console.log(res);
 				

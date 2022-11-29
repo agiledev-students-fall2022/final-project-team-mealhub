@@ -8,6 +8,9 @@ const bcrypt = require("bcrypt");
 
 const User = require("./models/User");
 
+
+
+
 //connect mongoose
 
 router.use(express.urlencoded({ extended: false }));
@@ -64,9 +67,11 @@ exports.signup = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
-            res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000 });
-            res.redirect('/');
-            console.log(token)
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
+            res.send({token})
+
+            console.log(req.cookies)
     } catch {
       console.log("User not registered");
       res.status(500).send();
@@ -74,9 +79,12 @@ exports.signup = async (req, res) => {
   }
 };
 
+
 exports.signin = async (req, res) => {
   User.findOne({email: req.body.email}, function(err,user)
   {
+    console.log("here")
+    //res.send("token")
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -91,9 +99,12 @@ exports.signin = async (req, res) => {
            const token = jwt.sign({email: user.email}, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
-            res.cookie("token", token, { httpOnly: false, maxAge: 60 * 60 * 24 * 1000 });
-            res.redirect('/');
             console.log(token)
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
+            res.send({token})
+
+            console.log(req.cookies)
         } else {
           res.status(400).send({ message: "Incorrect password!" });
           return;

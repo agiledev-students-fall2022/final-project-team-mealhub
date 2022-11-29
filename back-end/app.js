@@ -7,24 +7,32 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const session = require("express-session");
 const { checkUser } = require("./middleware_auth/jwt_auth");
+const cookieParser = require('cookie-parser')
+
 
 
 const connectDB = require("./config/connectDB"); // helper to connect to DB
 connectDB();
 
-app.use(cors());
+const corsOptions = {
+  credentials: true,
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-    cookieSession({
-      name: "mealhub-session",
-      secret: "COOKIE_SECRET", // should use as secret environment variable
-      httpOnly: true
-    })
-  );
+// app.use(
+//     cookieSession({
+//       name: "mealhub-session",
+//       secret: "COOKIE_SECRET", // should use as secret environment variable
+//       httpOnly: true
+//     })
+//   );
 
 const morgan = require("morgan"); // log requests
 
@@ -49,6 +57,10 @@ app.use("/createGroup", require("./routes/createGroup"));
 //router for login
  //app.use("/login", require("./routes/auth_routes"));
 // app.use("/register", require("./routes/auth_routes"));
+
+app.use(cookieParser());
+
+
 (require('./routes/auth_routes'))(app)
 
 module.exports = app;
