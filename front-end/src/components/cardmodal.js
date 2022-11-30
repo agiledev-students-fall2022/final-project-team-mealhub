@@ -5,6 +5,16 @@ import dateFormat, { masks } from "dateformat";
 
 function CardModal(props) {
 	// const [open, setOpen] = React.useState(true);
+	const user = {
+		createdAt: "2022-11-19T06:22:11.461Z",
+		displayName: "Test Er",
+		email: "tester@gmail.com",
+		firstName: "Test",
+		lastName: "Er",
+		password: "$2b$10$fMEQ7TK.wsR0T3jBjjaQZOms9kyPU45wU1h2aocyQf9Q/NsVI/DEC",
+		__v: 0,
+		_id: "637876133b70b16a643dfb29",
+	};
 	return (
 		<div className="modal">
 			<Modal
@@ -30,7 +40,10 @@ function CardModal(props) {
 						<span className="modal-span">{props.data.location}</span>
 						<br></br>
 						<span className="modal-span">
-							{props.data.remaining + " spots left"}
+							{props.data.members == null ? (props.data.members = []) : null}
+
+							{+(props.data.capacity - props.data.members.length) * 1 +
+								" spots left"}
 						</span>
 					</Modal.Description>
 				</Modal.Content>
@@ -61,11 +74,11 @@ function CardModal(props) {
 						<p>{"Budget: $" + props.data.budget}</p>
 						<p>{`Dress-code: ${props.data.dress_code}`}</p>
 						<p>
-							{props.data.capacity -
-								props.data.remaining +
+							{props.data.user == null ? (props.data.user = user) : 0}
+							{("" + props.data.members.length).replace(/^[0]+/g, "") +
 								"/" +
 								props.data.capacity}{" "}
-							MealHubers | {props.data.name}
+							MealHubers | {props.data.user.displayName}
 						</p>
 					</Modal.Description>
 				</Modal.Content>
