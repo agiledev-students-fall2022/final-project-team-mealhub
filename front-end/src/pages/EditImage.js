@@ -13,7 +13,9 @@ function EditImage() {
         const formData = new FormData();
         formData.append("image", selectedImage);
         console.log(formData);
-        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData);
+        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData, {
+            withCredentials: true,
+        });
         navigate("/profilePage");
     };
 
