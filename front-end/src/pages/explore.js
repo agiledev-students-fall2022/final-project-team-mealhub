@@ -38,7 +38,6 @@ function Explore() {
 	const [page, setPage] = React.useState(0);
 
 	React.useEffect(() => {
-		console.log("called");
 		axios
 			.get(`${process.env.REACT_APP_URL}/explore`, {
 				params: {
@@ -55,7 +54,6 @@ function Explore() {
 	}, []);
 
 	const loadMore = function () {
-		console.log("get 10 more");
 		axios
 			.get(`${process.env.REACT_APP_URL}/explore`, {
 				params: {
@@ -64,6 +62,7 @@ function Explore() {
 			})
 			.then((response) => {
 				const joinedData = cardData.concat(response.data.docs);
+
 				setCardData(joinedData);
 				setCount(response.data.count);
 				if (response.data.count / 10 > page) {

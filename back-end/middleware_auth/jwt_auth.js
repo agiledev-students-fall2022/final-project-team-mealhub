@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const jwt = require("jsonwebtoken");
@@ -9,28 +9,27 @@ const cookies = require("cookie-parser");
 router.use(cookies());
 
 const checkUser = (req, res, next) => {
-  console.log("check user");
-  console.log(req)
-  const token = req.cookies['jwt-token'];
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        //res.cookie("token", "", { maxAge: 1 });
-        next();
-      } else {
-        let user = await User.findByEmail(decodedToken.email);
-        res.locals.user = user;
-        next();
-      }
-    });
-  } else {
-    res.locals.user = null;
-    
-    next();
+	console.log("check user");
+	const token = req.cookies["jwt-token"];
+	console.log("token: ", token);
+	if (token) {
+		jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+			if (err) {
+				res.locals.user = null;
+				//res.cookie("token", "", { maxAge: 1 });
+				next();
+			} else {
+				let user = await User.findByEmail(decodedToken.email);
+				res.locals.user = user;
+				next();
+			}
+		});
+	} else {
+		res.locals.user = null;
 
-  }
-  next();
+		next();
+	}
+	next();
 };
 
 //   const token = req.cookies["jwt-token"];
