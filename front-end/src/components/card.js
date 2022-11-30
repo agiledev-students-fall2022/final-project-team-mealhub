@@ -39,7 +39,12 @@ function Card({ data, key }) {
 						</Item.Header>
 						<Item.Description>{data.location}</Item.Description>
 						<Item.Meta>
-							<span>{data.remaining + " spots left"}</span>
+							<span>
+								{data.members == null ? (data.members = []) : null}
+								{(data.capacity - data.members.length)
+									.toString()
+									.replace(/^[0]+/g, "0") + " spots left"}
+							</span>
 						</Item.Meta>
 						<Item.Extra>
 							<Button

@@ -12,20 +12,28 @@ router.get("/explore", async (req, res) => {
 	const q = req.query;
 	try {
 		// requesting resource from DB
-		Group.find({}).populate("user").limit(10).skip(q.page*10).sort({ createdAt: "desc" }).lean().exec((err, docs) => {
-			if (err) {
-				res.json({
-					success: false,
-				});
-			} else {
-				Group.find({}).countDocuments((err, count) => {
+		Group.find({})
+			.populate("user")
+			.limit(10)
+			.skip(q.page * 10)
+			.sort({ createdAt: "desc" })
+			.lean()
+			.exec((err, docs) => {
+				if (err) {
 					res.json({
-						docs,
-						count
-					})
-				})
-			}
-		})
+						success: false,
+					});
+				} else {
+					Group.find({})
+						.populate("user")
+						.countDocuments((err, count) => {
+							res.json({
+								docs,
+								count,
+							});
+						});
+				}
+			});
 	} catch (err) {
 		res.json({
 			success: false,

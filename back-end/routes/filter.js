@@ -39,28 +39,32 @@ router.post("/", async (req, res) => {
 				$lte: req.body.budget.current[1],
 				$gte: req.body.budget.current[0],
 			},
-		}).exec((err, docs) => {
-			if (err) {
-				console.log(err);
-				res.json({
-					success: false,
-				});
-			} else {
-				Group.find({
-					...query,
-					budget: {
-						$lte: req.body.budget.current[1],
-						$gte: req.body.budget.current[0],
-					},
-				}).countDocuments((err, count) => {
-					console.log(count);
+		})
+			.populate("user")
+			.exec((err, docs) => {
+				if (err) {
+					console.log(err);
 					res.json({
-						docs,
-						count,
+						success: false,
 					});
-				});
-			}
-		});
+				} else {
+					Group.find({
+						...query,
+						budget: {
+							$lte: req.body.budget.current[1],
+							$gte: req.body.budget.current[0],
+						},
+					})
+						.populate("user")
+						.countDocuments((err, count) => {
+							console.log(count);
+							res.json({
+								docs,
+								count,
+							});
+						});
+				}
+			});
 		// res.json(response.data);
 
 		// query the data base for the response
