@@ -47,8 +47,8 @@ app.use("/filter", require("./routes/filter"));
 app.use("/search", require("./routes/search"));
 
 //router for profilePage and editProfilePage
+app.use(checkUser);
 app.use(require("./routes/profilePage"));
-app.get("*", checkUser);
 app.use("/myGroup", require("./routes/myGroup") );
 app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
