@@ -60,9 +60,10 @@ router.use((req, res, next) => {
 router.use(express.json());
 
 router.post("/", checkUser, async (req, res) => {
+	// res.locals.user = "bob"
 	if (res.locals.user !== null) {
-		console.log(res.locals.user);
 		console.log("create group");
+		console.log("res locals: ", res.locals);
 		// const user = await User.findByEmail(req.user.email);
 		//   res.json(user);
 		//   console.log(user)
@@ -94,14 +95,14 @@ router.post("/", checkUser, async (req, res) => {
 			date,
 			time,
 			cuisine,
-			user: req.locals.user,
+			user: res.locals.user,
 			location,
 			restaurant,
 		});
 		group
 			.save() // Saving it in collection
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 			})
 			.catch((err) => console.log(err));
 	} else {
