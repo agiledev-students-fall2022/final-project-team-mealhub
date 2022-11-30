@@ -67,7 +67,7 @@ exports.signup = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.setHeader('Access-Control-Allow-Origin', `${process.env.HEADER_URL}`);
             res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
             res.send({token})
 
@@ -101,14 +101,16 @@ exports.signin = async (req, res) => {
             expiresIn: 60 * 60 * 24 // expires in 24 hours
             });
             console.log(token)
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.setHeader('Access-Control-Allow-Origin', `${process.env.HEADER_URL}`);
             res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
             res.send({token})
 
             //decode jwt token
-            const decoded = jwt.verify(req.cookies["jwt-token"], process.env.JWT_SECRET);
+            console.log(req.cookies['jwt-token'])
+            const decoded = jwt.verify(req.cookies['jwt-token'], process.env.JWT_SECRET);
             //read token from req.cookies
             console.log(decoded)
+            
             
 
         } else {
