@@ -70,8 +70,6 @@ exports.signup = async (req, res) => {
             res.setHeader('Access-Control-Allow-Origin', `${process.env.HEADER_URL}`);
             res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
             res.send({token})
-
-            console.log(req.cookies)
     } catch {
       console.log("User not registered");
       res.status(500).send();
@@ -102,16 +100,8 @@ exports.signin = async (req, res) => {
             });
             console.log(token)
             res.setHeader('Access-Control-Allow-Origin', `${process.env.HEADER_URL}`);
-            res.cookie('jwt-token', token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
+            res.cookie("jwt-token", token, { httpOnly: true, maxAge: 60 * 60 * 24 * 1000});
             res.send({token})
-
-            //decode jwt token
-            console.log(req.cookies['jwt-token'])
-            const decoded = jwt.verify(req.cookies['jwt-token'], process.env.JWT_SECRET);
-            //read token from req.cookies
-            console.log(decoded)
-            
-            
 
         } else {
           res.status(400).send({ message: "Incorrect password!" });
@@ -178,10 +168,13 @@ exports.signin = async (req, res) => {
 exports.signout = async (req, res) => {
   try {
     req.session = null;
+    //clear all cookies
+    res.clearCookie("jwt-token");
     return res
       .status(200)
       .send({ message: "You've been successfully signed out!" });
   } catch {
     res.status(500).send();
   }
+
 };
