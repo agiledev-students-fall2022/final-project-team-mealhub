@@ -6,19 +6,37 @@ const server = require("../app");
 chai.should();
 chai.use(chaiHttp);
 
+//COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
+/*
+//=============================================================
+const userLoginInfo = {
+    email: "applepie@gmail.com",
+    password: "password",
+};
+
+//=============================================================
+*/
 describe("TEST API- editProfilePage", () => {
     /**
      * Test the POST route for editProfilePage
      */
+
+    //COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
+    /*
+    beforeEach((done) => {
+        chai.request(server)
+            .post("/login")
+            .send(userLoginInfo)
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+    });
+*/
     describe("POST request to /editInfo", () => {
         it("It should POST changes to user profile", (done) => {
             const change = {
-                id: "2",
-                name: "Bob",
-                email: "bob@bob.com",
-                age: "200",
-                location: "new york",
-                cuisinePreferences: "korean",
+                displayName: "Hello Dog",
             };
             chai.request(server)
                 .post("/editInfo")
@@ -28,32 +46,11 @@ describe("TEST API- editProfilePage", () => {
                     res.body.should.have.property("status").equals("success!");
                     res.body.should.have
                         .property("your_data")
-                        .that.includes.all.key([
-                            "id",
-                            "name",
-                            "email",
-                            "age",
-                            "location",
-                            "cuisinePreferences",
-                        ]);
+                        .that.includes.all.key(["displayName"]);
                     res.body.should.have.nested
-                        .property("your_data.id")
+                        .property("your_data.displayName")
                         .not.equal("");
-                    res.body.should.have.nested
-                        .property("your_data.name")
-                        .not.equal("");
-                    res.body.should.have.nested
-                        .property("your_data.email")
-                        .not.equal("");
-                    res.body.should.have.nested
-                        .property("your_data.age")
-                        .not.equal("");
-                    res.body.should.have.nested
-                        .property("your_data.location")
-                        .not.equal("");
-                    res.body.should.have.nested
-                        .property("your_data.cuisinePreferences")
-                        .not.equal("");
+
                     done();
                 });
         });

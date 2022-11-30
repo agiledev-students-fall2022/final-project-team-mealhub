@@ -6,10 +6,34 @@ const server = require("../app");
 chai.should();
 chai.use(chaiHttp);
 
+//COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
+/*
+//=============================================================
+const userLoginInfo = {
+    email: "applepie@gmail.com",
+    password: "password",
+};
+
+//=============================================================
+*/
 describe("TEST API- editImage", () => {
     /**
      * Test the POST route for uploadImage
      */
+
+    //COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
+    /*
+    beforeEach((done) => {
+        chai.request(server)
+            .post("/login")
+            .send(userLoginInfo)
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+    });
+    */
+
     describe("POST request to /uploadImage", () => {
         it("It should POST image to editImage", (done) => {
             const f = "test/dogTestPic.jpg";

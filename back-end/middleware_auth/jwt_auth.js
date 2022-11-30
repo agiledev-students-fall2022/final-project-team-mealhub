@@ -10,12 +10,8 @@ router.use(cookies());
 
 const checkUser = (req, res, next) => {
   console.log("check user");
-  //redirect to google.com
-  return res.redirect("http://localhost:3000/Login");
-  console.log(req.cookies)
-  try {
-    // console.log(req.cookies["jwt-token"])
-    const token = req.cookies['jwt-token'];
+  const token = req.cookies['jwt-token'];
+  if (token) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
@@ -27,13 +23,9 @@ const checkUser = (req, res, next) => {
         next();
       }
     });
-  } catch (err) {
-    console.log(err);
-    //res.status(401).json({ error: "Not authorized to access this route" });
-    //res.locals.user = null;
-    console.log("no token");
-    // res.redirect('http://localhost:3000');
-    //naviagte redirect to  login rout
+  } else {
+    res.locals.user = null;
+    
     next();
 
   }
