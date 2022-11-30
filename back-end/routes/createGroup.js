@@ -7,8 +7,10 @@ const mongoose = require("mongoose");
 const Group = require("../models/Group");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const {checkUser} = require("../middleware_auth/jwt_auth")
+const { checkUser } = require("../middleware_auth/jwt_auth");
+const cookies = require("cookie-parser");
 
+router.use(cookies());
 
 // @route   POST api/groups
 mongoose.connect(
@@ -51,66 +53,60 @@ router.use((req, res, next) => {
 // });
 
 //get current user using checkUser middleware
-// router.get("/", checkUser, async (req, res) => {
-//   console.log("get user groups");
-//   try {
-//     const user = await User.findByEmail(req.user.email);
-//     res.json(user);
-//     console.log(user)
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
+// router.get("/jwt_auth", checkUser, async (req, res) => {
+//   console.log("guser found");
 // });
 
-
-
 router.use(express.json());
+
 router.post("/", checkUser, async (req, res) => {
-  console.log("create group");
-  const user = await User.findByEmail(req.user.email);
-    res.json(user);
-    console.log(user)
+  if (res.locals.user !== null) {
+    console.log(res.locals.user)
+    console.log("create group");
+    // const user = await User.findByEmail(req.user.email);
+    //   res.json(user);
+    //   console.log(user)
 
+    // console.log(req.cookie);
 
+    //res.send(req.body);
+    // Destrucring Data
+    let title = req.body.restaurant;
+    let description = req.body.description;
+    let capacity = req.body.attendees;
+    let budget = req.body.budgetDollar;
+    let dress_code = req.body.dress;
+    let date = req.body.date;
+    let time = req.body.time;
+    let cuisine = req.body.cuisine.toLowerCase();
+    //Get user ID from JWT token
 
-  // console.log(req.cookie);
+    // let user =
+    let location = req.body.location;
+    let restaurant = req.body.restaurant;
 
-  res.send(req.body);
-  // Destrucring Data
-  let title = req.body.restaurant;
-  let description = req.body.description;
-  let capacity = req.body.attendees;
-  let budget = req.body.budgetDollar;
-  let dress_code = req.body.dress;
-  let date = req.body.date;
-  let time = req.body.time;
-  let cuisine = req.body.cuisine.toLowerCase();
-  //Get user ID from JWT token
-
-  // let user =
-  let location = req.body.location;
-  let restaurant = req.body.restaurant;
-
-  const group = new Group({
-    title,
-    description,
-    capacity,
-    budget,
-    dress_code,
-    date,
-    time,
-    cuisine,
-    // user,
-    location,
-    restaurant,
-  });
-  group
-    .save() // Saving it in collection
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((err) => console.log(err));
+    const group = new Group({
+      title,
+      description,
+      capacity,
+      budget,
+      dress_code,
+      date,
+      time,
+      cuisine,
+      // user,
+      location,
+      restaurant,
+    });
+    group
+      .save() // Saving it in collection
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
+  } else {
+    console.log("user not found");
+  }
 });
 
 module.exports = router;

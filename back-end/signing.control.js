@@ -106,9 +106,9 @@ exports.signin = async (req, res) => {
             res.send({token})
 
             //decode jwt token
-            const decoded = jwt.verify(req.cookies["jwt-token"], process.env.JWT_SECRET);
+            //const decoded = jwt.verify(req.cookies["jwt-token"], process.env.JWT_SECRET);
             //read token from req.cookies
-            console.log(decoded)
+            //console.log(decoded)
             
 
         } else {
