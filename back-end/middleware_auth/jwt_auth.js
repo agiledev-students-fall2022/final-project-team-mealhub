@@ -1,7 +1,12 @@
+const express = require('express');
+const router = express.Router();
+
 const jwt = require("jsonwebtoken");
 const config = require("../config/config-auth");
 const User = require("../models/User");
+const cookies = require("cookie-parser");
 
+router.use(cookies());
 
 const checkUser = (req, res, next) => {
   console.log("check user");
@@ -10,7 +15,7 @@ const checkUser = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
-        res.cookie("token", "", { maxAge: 1 });
+        //res.cookie("token", "", { maxAge: 1 });
         next();
       } else {
         let user = await User.findByEmail(decodedToken.email);
@@ -22,8 +27,31 @@ const checkUser = (req, res, next) => {
     res.locals.user = null;
     
     next();
+
   }
+  next();
 };
+
+//   const token = req.cookies["jwt-token"];
+//   if (token) {
+//     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+//       if (err) {
+//         res.locals.user = null;
+//         res.cookie("token", "", { maxAge: 1 });
+//         next();
+//       } else {
+//         let user = await User.findByEmail(decodedToken.email);
+//         res.locals.user = user;
+//         next();
+//       }
+//     });
+//   } else {
+//     res.locals.user = null;
+//     console.log("no token");
+//     res.redirect("/login")
+//     next();
+//   }
+// };
 
 module.exports = { checkUser };
 
