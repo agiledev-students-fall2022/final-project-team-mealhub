@@ -18,7 +18,8 @@ function EditProfilePage() {
     const fetchProfileData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`
+                `${process.env.REACT_APP_URL}/profilePage`,
+                { withCredentials: true }
             );
             setData(response.data);
         } catch (err) {
@@ -40,8 +41,10 @@ function EditProfilePage() {
         if (newData.displayName === "") newData.displayName = data.displayName;
 
         axios
-            // post new message to server
-            .post(`${process.env.REACT_APP_URL}/editInfo`, newData)
+            // post new user info to server
+            .post(`${process.env.REACT_APP_URL}/editInfo`, newData, {
+                withCredentials: true,
+            })
             .then((response) => {
                 console.log(response.data);
             })

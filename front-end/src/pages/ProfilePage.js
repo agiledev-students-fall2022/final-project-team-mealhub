@@ -16,7 +16,8 @@ function ProfilePage() {
     const fetchProfileData = async () => {
         try {
             const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`
+                `${process.env.REACT_APP_URL}/profilePage`,
+                { withCredentials: true }
             );
             setData(response.data);
         } catch (err) {

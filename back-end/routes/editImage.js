@@ -1,10 +1,12 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const router = express.Router();
+router.use(cookieParser());
 const multer = require("multer");
 
 const User = require("../models/User");
 
-//const { checkUser } = require("../middleware_auth/jwt_auth");
+const { checkUser } = require("../middleware_auth/jwt_auth");
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -28,8 +30,6 @@ const upload = multer({
     },
 });
 
-//CODE FOR WHEN AUTHENTICATION IS SET
-/*
 // route for HTTP POST requests for /upload-example
 router.post(
     "/uploadImage",
@@ -46,7 +46,7 @@ router.post(
             };
             // requesting and updating resource from DB
             try {
-                await User.findByIdAndUpdate(req.user.id, {
+                await User.findByIdAndUpdate(res.locals.user.id, {
                     image: "/uploads/" + req.file.filename,
                 });
             } catch (err) {
@@ -56,7 +56,7 @@ router.post(
             res.json(data); // send response
         } else {
             try {
-                await User.findByIdAndUpdate(req.user.id, {
+                await User.findByIdAndUpdate(res.locals.user.id, {
                     image: "/uploads/defaultProfilePic.png",
                 });
             } catch (err) {
@@ -65,43 +65,5 @@ router.post(
         }
     }
 );
-
-*/
-
-router.post("/uploadImage", upload.single("image"), async (req, res, next) => {
-    // check whether anything was uploaded
-    if (req.file) {
-        // success! send data back to the client, e.g. some JSON data
-        const data = {
-            status: "success",
-            message: "The files were uploaded!!!",
-            files: req.file,
-        };
-        // requesting and updating resource from DB
-        try {
-            await User.findOneAndUpdate(
-                { firstName: "Hello" },
-                {
-                    image: "/uploads/" + req.file.filename,
-                }
-            );
-        } catch (err) {
-            res.json(err);
-        }
-
-        res.json(data); // send response
-    } else {
-        try {
-            await User.findOneAndUpdate(
-                { firstName: "Hello" },
-                {
-                    image: "/uploads/defaultProfilePic.png",
-                }
-            );
-        } catch (err) {
-            res.json(err);
-        }
-    }
-});
 
 module.exports = router;
