@@ -54,6 +54,17 @@ function Register() {
 			})
 			.catch((err) => {
 			console.log(err);
+      //if error 400 is returned
+      if(err.response.status === 400)
+      {
+        alert("Email already exists. Please try again!");
+      }
+      //if error 500 is returned
+      else if(err.response.status === 500)
+      {
+        alert("Unable to validate!");
+      }
+
 			});
 		}
 	}
@@ -61,10 +72,6 @@ function Register() {
 		console.log("Please enter your details correctly");
    	 }
 	};
-
-
-  //console.log("sdfg");
-  //   console.log(firstname, lastname, email, password, confirmPassword);
 
   return (
     <div>

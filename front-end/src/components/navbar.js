@@ -4,8 +4,27 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Logo from "../assets/logo.png";
 import React, { useState } from 'react';
+import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import "./navbar.css";
+
+
+//ctreate a functino for axios post request to logout
+
+function logout() {
+	axios
+		.get(`${process.env.REACT_APP_URL}/logout`, {withCredentials: true})
+		.then((res) => {
+			console.log(res);
+			if(res.data)
+			{
+				window.location.href = "/";
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
 
 
 function NavbarComponent() {
@@ -29,8 +48,8 @@ function NavbarComponent() {
 						<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
 							<b>Start a new group</b>
 						</Nav.Link>
-						<Nav.Link href="./" onClick={setLogged(false)} className="custom-signup ms-2 me-2">
-							Logout
+						{/* onClick of logout, go to /logout from the axios post */}
+						<Nav.Link onClick={logout()} className="custom-signup ms-2 me-2">
 						</Nav.Link>
 						<Button href="./profilePage" className="custom-btn ms-2 me-2">
 						<CgProfile />

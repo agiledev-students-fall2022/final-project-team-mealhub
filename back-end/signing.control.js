@@ -7,8 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const User = require("./models/User");
-
-
+const {check, validationResult} = require("express-validator")
 
 
 //connect mongoose
@@ -28,7 +27,15 @@ function emailIsValid(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-exports.signup = async (req, res) => {
+exports.signup = 
+  // [
+  //   check("email", "Please enter a valid email").isEmail(),
+  //   check("password", "Please enter a password with 4 or more characters").isLength({ min: 4 }),
+  //   check("firstname", "Please enter an alphabetic name").isAlpha().not().isEmpty(),
+  //   check("lastname","Please enter an alphabetic name").isAlpha().not().isEmpty(),
+  // ],
+
+  async (req, res) => {
   //get data from form
     
     let email = req.body.email
@@ -98,12 +105,12 @@ exports.signin = async (req, res) => {
             res.send({token})
 
         } else {
-          res.status(400).send({ message: "Incorrect password!" });
+          res.status(403).send({ message: "Incorrect password!" });
           return;
         }
       });
     } else {
-      res.status(400).send({ message: "User not found!" });
+      res.status(405).send({ message: "User not found!" });
       return;
     }
   }
@@ -112,6 +119,7 @@ exports.signin = async (req, res) => {
 
 exports.signout = async (req, res) => {
   try {
+    console.log("signing out")
     req.session = null;
     //clear all cookies
     res.clearCookie("jwt-token");
