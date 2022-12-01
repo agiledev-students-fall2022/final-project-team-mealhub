@@ -77,14 +77,6 @@ function Card({ data, key }) {
 											window.location.href = "/myGroup";
 											// navigate("/myGroup");
 										});
-									
-									
-
-
-
-
-									
-									
 
 								}}
 							>

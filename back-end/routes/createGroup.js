@@ -21,7 +21,14 @@ mongoose.connect(
 	}
 );
 
-router.use(cors());
+const corsOptions = {
+  credentials: true,
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+
+router.use(cors(corsOptions));
+
 router.use((req, res, next) => {
 	res.header(
 		"Access-Control-Allow-Headers, *, Access-Control-Allow-Origin",
@@ -35,42 +42,21 @@ router.use((req, res, next) => {
 	next();
 });
 
-// console.log(user);
-// const token = req.cookies.token;
-// const decoded = jwt.verify(token, process.env.JWT_SECRET);
-// const user = await User.findById(decoded.id);
-// router.get("/", async (req, res) => {
-//   try {
-//     // const groups = await Group.find();
-
-//     console.log(req.cookies);
-
-//     // res.json(groups);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// });
-
-//get current user using checkUser middleware
-// router.get("/jwt_auth", checkUser, async (req, res) => {
-//   console.log("guser found");
-// });
-
 router.use(express.json());
 
-router.post("/", checkUser, async (req, res) => {
+router.post("/",
+  [
+    check("name", "Please enter a name").not().isEmpty(),
+    check("description", "Please enter a description").not().isEmpty(),
+    check("email", 'Your email is not valid').not().isEmpty(),
+    check("email", 'Your email is not valid').isEmail(),
+    check("members", "Please enter members").not().isEmpty(),
+  ],
+
+  checkUser, async (req, res) => {
+
 	// res.locals.user = "bob"
 	if (res.locals.user !== null) {
-		console.log("create group");
-		console.log("res locals: ", res.locals);
-		// const user = await User.findByEmail(req.user.email);
-		//   res.json(user);
-		//   console.log(user)
-
-		// console.log(req.cookie);
-
-		//res.send(req.body);
 		// Destrucring Data
 		let title = req.body.restaurant;
 		let description = req.body.description;
@@ -80,9 +66,9 @@ router.post("/", checkUser, async (req, res) => {
 		let date = req.body.date;
 		let time = req.body.time;
 		let cuisine = req.body.cuisine.toLowerCase();
+
 		//Get user ID from JWT token
 
-		// let user =
 		let location = req.body.location;
 		let restaurant = req.body.restaurant;
 
@@ -93,6 +79,7 @@ router.post("/", checkUser, async (req, res) => {
 			budget,
 			dress_code,
 			date,
+      members: [res.locals.user],
 			time,
 			cuisine,
 			user: res.locals.user,
@@ -102,11 +89,16 @@ router.post("/", checkUser, async (req, res) => {
 		group
 			.save() // Saving it in collection
 			.then((result) => {
-				// console.log(result);
+				console.log(result);
+        res.status(200).json({
+          message: "Group Created",
+          group: result,
+        });
 			})
 			.catch((err) => console.log(err));
 	} else {
 		console.log("user not found");
+    return res.status(400).send("user not found");
 	}
 });
 
