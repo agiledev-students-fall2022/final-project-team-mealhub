@@ -126,13 +126,12 @@ function Group() {
 					}
 				})
 				.catch((err) => {
-					console.log("Error caught s");
+					// console.log("Error caught s");
 					//if error status if 400 redirect to login 
 					if (err.response.status === 400) {
 						console.log("Error redirect");						
 						navigate("/login");
 					}
-					console.log("My err", err);
 				});
 		} else {
 			console.log("Please fill out all required fields");
