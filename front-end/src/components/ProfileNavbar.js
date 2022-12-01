@@ -6,12 +6,16 @@ import Logo from "../assets/logo.png";
 import "./navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function ProfileNavbarComponent() {
     const navigate = useNavigate();
 
     //TO LOGOUT
     const handleClick = () => {
+        axios.get(`${process.env.REACT_APP_URL}/logout`, {
+            withCredentials: true,
+        });
         navigate("/");
     };
 
