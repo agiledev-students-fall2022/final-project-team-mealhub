@@ -8,25 +8,22 @@ const Group = require("../models/Group");
 // Getting data at my group
 router.get("/", async (req, res) => {
 	try {
+		const user = res.locals.user
+		console.log(user)
+		const groups = await Group.find({members: user._id})
 		// requesting resource from DB
-		const groups = await Group.find({})
+		// const groups = await Group.find({})
 			.populate("user")
 			.sort({ createdAt: "desc" })
 			.lean();
+			console.log(groups)
 
-		// console.log(groups);
-		// const response = await axios.get(
-		// 	`https://my.api.mockaroo.com/mealhub.json?key=2f898fd0`
-		// );
-
-		//console.log(response.data);
-		// res.json([...groups]); // pass data along directly to client
     res.json([...groups]);
     
 	} catch (err) {
-		res.json({
-			success: false,
-		});
+		console.log(err);
+		res.json({ message: err });
+
 	}
 })
 

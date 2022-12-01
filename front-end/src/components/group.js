@@ -26,10 +26,6 @@ import {
 
 function Group() {
 
-	// CHeck for JWT token/ cookie or user is signed in if not redirect to login page
-
-	// `${process.env.REACT_APP_URL}/createGroup`
-	// console.log(`${process.env.REACT_APP_URL}/createGroup`)
 	const [selected, setSelected] = useState(null);
 	const [cusines, setCusine] = useState([
 		{ label: "American", value: "American" },
@@ -91,19 +87,12 @@ function Group() {
 
 	const navigate = useNavigate();
 	const onSubmit = (e) => {
-		// if ( isEmailValid ) {
-		//   okButton.disabled = false;
-		// } else {
-		//   okButton.disabled = true;
-		// }
 		e.preventDefault();
 
 		console.log("Form submitted");
 		console.log(formValue);
 		console.log(selected);
 		console.log(value);
-		// console.log(`${process.env.REACT_APP_URL}/createGroup`)
-
 		if (
 			formValue.name &&
 			formValue.dress &&
@@ -131,12 +120,19 @@ function Group() {
 					description: formValue.description
 				}, {withCredentials: true})
 				.then((res) => {
-					console.log("sent Data");
-					console.log(res.data);
-					// navigate("/myGroup");
+					if (res.status === 200) {
+						navigate("/myGroup");
+						resetForm();
+					}
 				})
 				.catch((err) => {
-					console.log(err);
+					console.log("Error caught s");
+					//if error status if 400 redirect to login 
+					if (err.response.status === 400) {
+						console.log("Error redirect");						
+						navigate("/login");
+					}
+					console.log("My err", err);
 				});
 		} else {
 			console.log("Please fill out all required fields");
