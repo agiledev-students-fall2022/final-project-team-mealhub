@@ -50,31 +50,12 @@ function CardModal(props) {
 				<Modal.Content>
 					<Modal.Description>
 						<Header>Description</Header>
-						<p>
-							{props.data.description ||
-								`
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-			         pulvinar placerat lorem id volutpat. Etiam nulla velit, posuere
-							nec lobortis ac, tristique a ante. Donec varius, mauris tristique
-							porta imperdiet, lacus turpis congue enim, sit amet dignissim
-							lectus nisl in purus. Vestibulum ante ipsum primis in faucibus
-							orci luctus et ultrices posuere cubilia curae; Duis ipsum nunc,
-							laoreet sit amet molestie ac, rhoncus at lectus. Fusce eu velit
-							ligula. Etiam augue magna, facilisis et mollis ac, finibus ut
-							massa. Vivamus eu metus luctus, rhoncus lectus vel, accumsan ante.
-							Vivamus aliquam eros ut nulla rhoncus, non dapibus nisl fringilla.
-							Phasellus ut mi a purus vulputate vehicula. Cras sed porttitor
-							nulla. Aliquam pellentesque sapien velit, at volutpat metus
-							tristique a. Suspendisse ut viverra enim, sed efficitur ligula.
-							Integer tellus lorem, sollicitudin sed erat sed, auctor porta
-							purus. Vivamus at tellus ut felis sollicitudin sodales a et velit.
-                            `}
-						</p>
+						<p>{props.data.description}</p>
 						<p>{"Cuisine Location: " + props.data.cuisine}</p>
 						<p>{"Budget: $" + props.data.budget}</p>
 						<p>{`Dress-code: ${props.data.dress_code}`}</p>
 						<p>
-							{props.data.user == null ? (props.data.user = user) : 0}
+							{props.data.user == null ? (props.data.user = user) : null}
 							{("" + props.data.members.length).replace(/^[0]+/g, "") +
 								"/" +
 								props.data.capacity}{" "}
@@ -87,7 +68,8 @@ function CardModal(props) {
 						Close
 					</Button>
 					<Button
-						content={props.joined ? "Joined!" : "Join"}
+						content={props.joined ? "Leave" : "Join"}
+						color={props.joined ? "red" : "green"}
 						labelPosition="right"
 						icon="checkmark"
 						onClick={props.handleJoined}
