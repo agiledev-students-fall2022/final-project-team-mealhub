@@ -9,18 +9,17 @@ const axios = require("axios");
 // 	res.redirect("/explore");
 // });
 
-router.post("/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
 	// const query = req.query;
 	try {
 		Group.findById(req.body.groupID, function (err, group) {
-			if (group) {
-				group.members.push(mongoose.Types.ObjectId(req.params.id));
-				group.save(function (err) {
-					if (err) {
-						console.error(err, " cant add ERROR!");
-					}
-				});
-			}
+			// if (group) {
+			group.members.push(mongoose.Types.ObjectId(req.params.id));
+			group.save(function (err) {
+				if (err) {
+					console.error(err, " cant add ERROR!");
+				}
+			});
 		});
 		res.json({
 			success: true,
@@ -38,17 +37,16 @@ router.delete("/", async (req, res) => {
 	try {
 		// find one and delete by ID and delete the entire group from the mongoDB database
 		Group.findById(req.query.groupID, function (err, group) {
-			if (group) {
-				group.members.pull(mongoose.Types.ObjectId(req.query.userID));
-				// group.members = group.members.filter(function (value, index, arr) {
-				// 	return value._id != mongoose.Types.ObjectId(req.params.id);
-				// });
-				group.save(function (err) {
-					if (err) {
-						console.error("ERROR!");
-					}
-				});
-			}
+			// if (group) {
+			group.members.pull(mongoose.Types.ObjectId(req.query.userID));
+			// group.members = group.members.filter(function (value, index, arr) {
+			// 	return value._id != mongoose.Types.ObjectId(req.params.id);
+			// });
+			group.save(function (err) {
+				if (err) {
+					console.error("ERROR!");
+				}
+			});
 		});
 		// const group = await Group.findById(req.params.id);
 		// const group = await Group.findOne({ _id: req.params.id });

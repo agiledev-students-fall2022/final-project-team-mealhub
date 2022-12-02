@@ -1,6 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import { Button, Item } from "semantic-ui-react";
+import { Button, Item, Image } from "semantic-ui-react";
 import "./card.css";
 import Cardmodal from "./cardmodal";
 import axios from "axios";
@@ -10,11 +10,14 @@ function Card({ data, key }) {
 	// this.state = {
 	// 	modalOpen: false,
 	// };
+
 	let userDetails = JSON.parse(localStorage.getItem("user"));
+	// localStorage.getItem("user") == undefined
+	// 	? null
+	// 	: JSON.parse(localStorage.getItem("user"));
 	const [open, setOpen] = React.useState(false);
 	const [joined, setJoined] = React.useState(
 		userDetails &&
-			data &&
 			data.members.some((element) => element._id === userDetails._id)
 			? true
 			: false
@@ -23,7 +26,7 @@ function Card({ data, key }) {
 	const joinGroup = function () {
 		if (userDetails) {
 			axios
-				.post(`${process.env.REACT_APP_URL}/${userDetails._id}`, {
+				.patch(`${process.env.REACT_APP_URL}/${userDetails._id}`, {
 					groupID: data._id,
 				})
 				.then((response) => {
@@ -45,6 +48,7 @@ function Card({ data, key }) {
 				})
 				.then((response) => {
 					setJoined(!joined);
+					// console.log("deleted");
 				});
 		} else {
 			data.members.length > 1
@@ -59,6 +63,7 @@ function Card({ data, key }) {
 		} else {
 			joinGroup();
 		}
+		window.location.reload();
 	};
 	return (
 		<div className="card-component">
@@ -67,9 +72,6 @@ function Card({ data, key }) {
 					<Item.Image
 						size="small"
 						src={data.image}
-						width="200"
-						height="200"
-						className="card-image"
 						onClick={() => {
 							setOpen(true);
 						}}
