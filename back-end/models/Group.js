@@ -30,6 +30,10 @@ const GroupSchema = new mongoose.Schema({
 		required: true,
 	},
 	members: [{ type: mongoose.Schema.Types.ObjectID, ref: "User" }],
+	image: {
+		type: String,
+		required: true,
+	},
 
 	dress_code: {
 		type: String,

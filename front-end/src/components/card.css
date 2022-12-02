@@ -13,3 +13,8 @@
 a:hover{
     color: #eb6f3f !important;
 }
+
+.card-image{
+    width: 130px !important;
+    height: 100px !important;
+}
