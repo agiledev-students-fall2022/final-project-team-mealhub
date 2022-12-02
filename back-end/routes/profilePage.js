@@ -12,7 +12,7 @@ const { checkUser } = require("../middleware_auth/jwt_auth");
 router.get("/profilePage", checkUser, async (req, res) => {
     try {
         // requesting resource from DB
-        const userInfo = await User.findById(res.locals.user.id);
+        const userInfo = await User.findById(res.locals.user._id);
         res.json({
             image: userInfo.image,
             displayName: userInfo.displayName,

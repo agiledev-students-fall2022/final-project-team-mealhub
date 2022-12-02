@@ -46,21 +46,25 @@ router.post(
             };
             // requesting and updating resource from DB
             try {
-                await User.findByIdAndUpdate(res.locals.user.id, {
+                await User.findByIdAndUpdate(res.locals.user._id, {
                     image: "/uploads/" + req.file.filename,
                 });
             } catch (err) {
-                res.json(err);
+                res.json({
+                    success: false,
+                });
             }
 
             res.json(data); // send response
         } else {
             try {
-                await User.findByIdAndUpdate(res.locals.user.id, {
+                await User.findByIdAndUpdate(res.locals.user._id, {
                     image: "/uploads/defaultProfilePic.png",
                 });
             } catch (err) {
-                res.json(err);
+                res.json({
+                    success: false,
+                });
             }
         }
     }
