@@ -90,7 +90,6 @@ router.post(
 
 	checkUser,
 	async (req, res) => {
-		console.log(req.locals.user);
 		if (res.locals.user !== null) {
 			// Destrucring Data
 
