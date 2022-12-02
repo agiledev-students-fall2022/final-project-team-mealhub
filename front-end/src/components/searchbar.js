@@ -6,7 +6,7 @@ import Filter from "./filter";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function SearchBarComponent({ setCardData, setCount, page, setPage }) {
+function SearchBarComponent({ setCardData, setCount, setisSearch}) {
 	const [filterOpen, setFilterOpen] = useState(false);
 	const [searchStr, setSearchStr] = useState("");
 
@@ -15,14 +15,10 @@ function SearchBarComponent({ setCardData, setCount, page, setPage }) {
 			const response = await axios.get(`${process.env.REACT_APP_URL}/search`, {
 				params: {
 					search: searchStr,
-					page: page,
 				},
 			});
 			setCardData(response.data.docs);
 			setCount(response.data.count);
-			if (response.data.count / 10 > page) {
-				setPage(page + 1);
-			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -43,8 +39,12 @@ function SearchBarComponent({ setCardData, setCount, page, setPage }) {
 				<Button
 					className="custom-btn2 me-2"
 					onClick={() => {
-						setPage(0);
-						getResponse();
+						if(searchStr == ""){
+							window.location.href="./";
+						} else {
+							setisSearch(true);
+							getResponse();
+						}
 					}}
 				>
 					Search
