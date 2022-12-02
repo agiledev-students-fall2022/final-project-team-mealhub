@@ -117,6 +117,17 @@ exports.signin = async (req, res) => {
   )
 };
 
+exports.verify = async (req, res) => {
+  const token = req.cookies["jwt-token"];
+  if (!token) {
+    return res.status(401).send({ message: "No token provided!" });
+  }
+  else{
+    return res.status(200).send({ message: "Success!" });
+  }
+};
+
+
 exports.signout = async (req, res) => {
   try {
     console.log("signing out")

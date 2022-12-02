@@ -2,8 +2,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
+import React from "react";
 import Logo from "../assets/logo.png";
-import React, { useState } from 'react';
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import "./navbar.css";
@@ -11,7 +11,8 @@ import "./navbar.css";
 
 //ctreate a functino for axios post request to logout
 
-function logout() {
+function logout(setLogged) {
+	console.log("here")
 	axios
 		.get(`${process.env.REACT_APP_URL}/logout`, {withCredentials: true})
 		.then((res) => {
@@ -20,6 +21,8 @@ function logout() {
 			{
 				window.location.href = "/";
 			}
+			//change state to true
+			setLogged(true);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -28,7 +31,27 @@ function logout() {
 
 
 function NavbarComponent() {
-	const [logged, setLogged] = useState(false);
+	const [logged,setLogged] = React.useState(false)
+	
+	React.useEffect(() => {
+		axios
+			.get(`${process.env.REACT_APP_URL}/checklogin`, {withCredentials: true})
+			.then((res) => {
+				console.log(res);
+				//if we get status 200, then user is signed in
+				if(res.status === 200)
+				{
+					setLogged(true);
+				}
+				else
+				{
+					setLogged(false);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
 	return (
 		<Navbar
@@ -48,8 +71,8 @@ function NavbarComponent() {
 						<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
 							<b>Start a new group</b>
 						</Nav.Link>
-						{/* onClick of logout, go to /logout from the axios post */}
-						<Nav.Link onClick={logout()} className="custom-signup ms-2 me-2">
+						<Nav.Link onClick={()=>{logout(setLogged)}} className="custom-signup ms-2 me-2">
+							<b>Logout</b>
 						</Nav.Link>
 						<Button href="./profilePage" className="custom-btn ms-2 me-2">
 						<CgProfile />

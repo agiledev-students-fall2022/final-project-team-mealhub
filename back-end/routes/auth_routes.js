@@ -19,4 +19,6 @@ module.exports = function (app) {
     app.post("/login", controller.signin);
 
     app.get("/logout", controller.signout);
+
+    app.get("/checklogin", controller.verify);
 };
