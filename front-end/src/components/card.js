@@ -14,9 +14,8 @@ function Card({ data, key }) {
 	const [open, setOpen] = React.useState(false);
 	const [joined, setJoined] = React.useState(
 		userDetails &&
-			data.members.some(
-				(element) => element._id.toString() === userDetails._id.toString()
-			)
+			data &&
+			data.members.some((element) => element._id === userDetails._id)
 			? true
 			: false
 	);
