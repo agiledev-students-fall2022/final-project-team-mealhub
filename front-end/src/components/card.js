@@ -68,6 +68,9 @@ function Card({ data, key }) {
 					<Item.Image
 						size="small"
 						src={data.image}
+						width="200"
+						height="200"
+						className="card-image"
 						onClick={() => {
 							setOpen(true);
 						}}

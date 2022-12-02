@@ -93,11 +93,6 @@ function Explore() {
 				>
 					{cardData &&
 						cardData.map((e) => {
-							if (rand()) {
-								e["image"] = "https://picsum.photos/200";
-							} else {
-								e["image"] = "https://random.imagecdn.app/200/200";
-							}
 							return <Card data={e} />;
 						})}
 				</InfiniteScroll>
