@@ -39,13 +39,13 @@ To run this project, you will need to add the following environment variables to
 
 `HEADER_URL=http://localhost:3000`
 
-'CLOUDINARY_CLOUD_NAME=asgomda'
+`CLOUDINARY_CLOUD_NAME=asgomda`
 
-'CLOUDINARY_API_KEY=681632229379417'
+`CLOUDINARY_API_KEY=681632229379417`
 
-'CLOUDINARY_API_SECRET=77uyU1Xp2Kek_gOVvFWPgzlrXX4'
+`CLOUDINARY_API_SECRET=77uyU1Xp2Kek_gOVvFWPgzlrXX4`
 
-'CLOUDINARY_URL=cloudinary://681632229379417:77uyU1Xp2Kek_gOVvFWPgzlrXX4@asgomda'
+`CLOUDINARY_URL=cloudinary://681632229379417:77uyU1Xp2Kek_gOVvFWPgzlrXX4@asgomda`
 
 #### Frontend:
 
