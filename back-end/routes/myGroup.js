@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const mongoose = require("mongoose");
-
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+const { checkUser } = require("../middleware_auth/jwt_auth");
 const Group = require("../models/Group");
 
 // Getting data at my group
-router.get("/", async (req, res) => {
+router.get("/", checkUser, async (req, res) => {
 	try {
 		const user = res.locals.user
-		console.log(user)
+		console.log("User is", user)
 		const groups = await Group.find({members: user._id})
 		// requesting resource from DB
 		// const groups = await Group.find({})
@@ -30,11 +32,13 @@ router.get("/", async (req, res) => {
 // get axios delete request from Mycards and remove user ID from the members list of the group object
 router.delete("/:id", async (req, res) => {
   try {
-    const group = await Group.findById(req.params.id);
-    const members = group.members;
-    const index = members.indexOf(req.body.user);
-    members.splice(index, 1);
-    await group.save();
+	// find one and delete by ID and delete the entire group from the mongoDB database
+	const group
+		= await Group.findByIdAndDelete(req.params.id);
+	// const group = await Group.findById(req.params.id);
+	// const group = await Group.findOne({ _id: req.params.id });
+
+    // await group.save();
     res.json({
       success: true,
     });

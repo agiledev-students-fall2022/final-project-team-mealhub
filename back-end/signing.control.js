@@ -16,15 +16,15 @@ router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
+	"mongodb+srv://mealhub12345:mealhub12345@cluster0.rx68d3c.mongodb.net/?retryWrites=true&w=majority",
+	{
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	}
 );
 
 function emailIsValid(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 exports.signup = 
@@ -80,7 +80,6 @@ exports.signup =
     }
   }
 };
-
 
 exports.signin = async (req, res) => {
   User.findOne({email: req.body.email}, function(err,user)
@@ -140,5 +139,4 @@ exports.signout = async (req, res) => {
   } catch {
     res.status(500).send();
   }
-
 };
