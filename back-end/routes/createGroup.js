@@ -9,8 +9,42 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const { checkUser } = require("../middleware_auth/jwt_auth");
 const cookies = require("cookie-parser");
+const cloudinary = require("cloudinary");
 
 router.use(cookies());
+
+// creating a default dict class for
+class DefaultDict {
+	constructor(defaultInit) {
+		return new Proxy(
+			{},
+			{
+				get: (target, name) =>
+					name in target
+						? target[name]
+						: (target[name] =
+								typeof defaultInit === "function"
+									? new defaultInit().valueOf()
+									: defaultInit),
+			}
+		);
+	}
+}
+
+// fetching data from cloudinary
+const cuisineImages = new DefaultDict(Array);
+const getImages = async () => {
+	await cloudinary.v2.api
+		.resources({ folder: "MealHub/italian", max_results: 100 })
+		.then((result) => {
+			result["resources"].forEach((element) => {
+				if (element["folder"].includes("MealHub")) {
+					cuisineImages[element["folder"]].push(element["url"]);
+				}
+			});
+		});
+};
+getImages();
 
 // @route   POST api/groups
 mongoose.connect(
@@ -22,9 +56,9 @@ mongoose.connect(
 );
 
 const corsOptions = {
-  credentials: true,
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200,
+	credentials: true,
+	origin: "http://localhost:3000",
+	optionsSuccessStatus: 200,
 };
 
 router.use(cors(corsOptions));
@@ -44,62 +78,108 @@ router.use((req, res, next) => {
 
 router.use(express.json());
 
-router.post("/",
-  [
-    check("name", "Please enter a name").not().isEmpty(),
-    check("description", "Please enter a description").not().isEmpty(),
-    check("email", 'Your email is not valid').not().isEmpty(),
-    check("email", 'Your email is not valid').isEmail(),
-    check("members", "Please enter members").not().isEmpty(),
-  ],
+router.post(
+	"/",
+	[
+		check("name", "Please enter a name").not().isEmpty(),
+		check("description", "Please enter a description").not().isEmpty(),
+		check("email", "Your email is not valid").not().isEmpty(),
+		check("email", "Your email is not valid").isEmail(),
+		// check("members", "Please enter members").not().isEmpty(),
+	],
 
-  checkUser, async (req, res) => {
+	checkUser,
+	async (req, res) => {
+		console.log(req.locals.user);
+		if (res.locals.user !== null) {
+			// Destrucring Data
 
-	// res.locals.user = "bob"
-	if (res.locals.user !== null) {
-		// Destrucring Data
-		let title = req.body.restaurant;
-		let description = req.body.description;
-		let capacity = req.body.attendees;
-		let budget = req.body.budgetDollar;
-		let dress_code = req.body.dress;
-		let date = req.body.date;
-		let time = req.body.time;
-		let cuisine = req.body.cuisine.toLowerCase();
+			let title = req.body.restaurant;
+			let description = req.body.description;
+			let capacity = req.body.attendees;
+			let budget = req.body.budgetDollar;
+			let dress_code = req.body.dress;
+			let date = req.body.date;
+			let time = req.body.time;
+			let cuisine = req.body.cuisine.toLowerCase();
 
-		//Get user ID from JWT token
+			//Get user ID from JWT token
+			let image;
+			console.log("cuisine: ", cuisine);
 
-		let location = req.body.location;
-		let restaurant = req.body.restaurant;
+			// adding the cuisine image to the
 
-		const group = new Group({
-			title,
-			description,
-			capacity,
-			budget,
-			dress_code,
-			date,
-      members: [res.locals.user],
-			time,
-			cuisine,
-			user: res.locals.user,
-			location,
-			restaurant,
-		});
-		group
-			.save() // Saving it in collection
-			.then((result) => {
-				console.log(result);
-        res.status(200).json({
-          message: "Group Created",
-          group: result,
-        });
-			})
-			.catch((err) => console.log(err));
-	} else {
-		console.log("user not found");
-    return res.status(400).send("user not found");
+			// adding cuisine cuisineImages
+			if (cuisine == "korean") {
+				image =
+					cuisineImages["MealHub/korean"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			} else if (cuisine == "american") {
+				image =
+					cuisineImages["MealHub/american"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			} else if (cuisine == "indian") {
+				image =
+					cuisineImages["MealHub/indian"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			} else if (cuisine == "italian") {
+				image =
+					cuisineImages["MealHub/italian"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			} else if (cuisine == "chinese") {
+				image =
+					cuisineImages["MealHub/chinese"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			} else if (cuisine == "mediterranean") {
+				image =
+					cuisineImages["MealHub/mediterranean"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			} else if (cuisine == "japanese") {
+				image =
+					cuisineImages["MealHub/japanese"][
+						Math.floor(Math.random() * cuisineImages["MealHub/korean"].length)
+					];
+			}
+
+			let location = req.body.location;
+			let restaurant = req.body.restaurant;
+
+			const group = new Group({
+				title,
+				description,
+				capacity,
+				budget,
+				dress_code,
+				date,
+				image,
+				members: [res.locals.user],
+				time,
+				cuisine,
+				user: res.locals.user,
+				location,
+				restaurant,
+			});
+			group
+				.save() // Saving it in collection
+				.then((result) => {
+					console.log(result);
+					res.status(200).json({
+						message: "Group Created",
+						group: result,
+					});
+				})
+				.catch((err) => console.log(err));
+		} else {
+			console.log("user not found");
+			return res.status(400).send("user not found");
+		}
 	}
-});
+);
 
 module.exports = router;

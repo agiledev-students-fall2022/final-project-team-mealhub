@@ -8,6 +8,7 @@ import axios from "axios";
 import SearchBarComponent from "../components/searchbar";
 import { TailSpin } from "react-loader-spinner";
 import InfiniteScroll from "react-infinite-scroller";
+import useState from 'react-usestateref'
 
 // mock data
 const rand = function () {
@@ -36,8 +37,10 @@ function Explore() {
 	const [cardData, setCardData] = React.useState(null);
 	const [count, setCount] = React.useState(0);
 	const [page, setPage] = React.useState(0);
+	const [isSearch, setisSearch, isSearchRef] = useState(false);
 
 	React.useEffect(() => {
+		setisSearch(false);
 		axios
 			.get(`${process.env.REACT_APP_URL}/explore`, {
 				params: {
@@ -62,7 +65,6 @@ function Explore() {
 			})
 			.then((response) => {
 				const joinedData = cardData.concat(response.data.docs);
-
 				setCardData(joinedData);
 				setCount(response.data.count);
 				if (response.data.count / 10 > page) {
@@ -77,18 +79,17 @@ function Explore() {
 			<SearchBarComponent
 				setCardData={setCardData}
 				setCount={setCount}
-				page={page}
-				setPage={setPage}
+				setisSearch={setisSearch}
 			/>
-			<h1 className="main-heading pt-5">Available Groups</h1>
-			<h3 className="sub-heading pt-1">Total results: {count}</h3>
+			{count!=0 && <h1 className="main-heading pt-5">Available Groups</h1> || !cardData && <h1 className="main-heading pt-5">Available Groups</h1> }
+			{count!=0 && <h3 className="sub-heading pt-1">Total results: {count}</h3> || !cardData && <h3 className="sub-heading pt-1">Total results: {count}</h3>}
 			<div>
 				{!cardData && <Load />}
 				<InfiniteScroll
 					pageStart={0}
-					loadMore={loadMore}
+					loadMore={!isSearchRef.current && loadMore}
 					hasMore={count / 10 > page}
-					loader={<Load />}
+					loader={!isSearchRef.current && <Load />}
 				>
 					{cardData &&
 						cardData.map((e) => {
@@ -96,6 +97,11 @@ function Explore() {
 						})}
 				</InfiniteScroll>
 			</div>
+			{cardData && count==0 && <div>
+				<h2 className="main-heading2 d-flex justify-content-center pt-5">No results :(</h2>
+				<h3 className="sub-heading2 d-flex justify-content-center  pt-1">We couldn't find what you were looking for...</h3>
+				</div>
+			}
 			<Footer />
 		</div>
 	);

@@ -19,7 +19,7 @@ function Footer() {
 						<NavLink className="d-flex justify-content-center me-2 ms-2">
 							© 2022 MealHub
 						</NavLink>
-						<NavLink
+						{/* <NavLink
 							href=""
 							className="d-flex justify-content-center me-2 ms-2"
 						>
@@ -30,7 +30,7 @@ function Footer() {
 							className="d-flex justify-content-center me-2 ms-2"
 						>
 							Privacy Policy
-						</NavLink>
+						</NavLink> */}
 					</Nav>
 				</Container>
 			</Navbar>
