@@ -51,7 +51,12 @@ function CardModal(props) {
 					<Modal.Description>
 						<Header>Description</Header>
 						<p>{props.data.description}</p>
-						<p>{"Cuisine Location: " + props.data.cuisine}</p>
+						<p>
+							{}
+							{"Cuisine Location: " +
+								props.data.cuisine.charAt(0).toUpperCase() +
+								props.data.cuisine.slice(1)}
+						</p>
 						<p>{"Budget: $" + props.data.budget}</p>
 						<p>{`Dress-code: ${props.data.dress_code}`}</p>
 						<p>

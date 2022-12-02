@@ -25,50 +25,48 @@ function Login() {
 		setEmail(value);
 		setPassword(value);
 	};
-  
+
 	const onSubmit = (event) => {
-    event.preventDefault();
-    
+		event.preventDefault();
+
 		const data = {
 			email: email,
 			password: password,
 		};
-    
-		if (email && password)  {
-      axios
-        .post(`${process.env.REACT_APP_URL}/login`, data, {withCredentials: true})
-        .then((res) => {
-          console.log(res);
-          if(res.data)
-      {
-        const user = res.data.user;
-        localStorage.setItem("user", JSON.stringify(user));
-        window.location.href = "/";
-      }
-  
-        })
-        .catch((err) => {
-          console.log(err);
-          //if error 403 is returned
-          if(err.response.status === 403)
-          {
-            alert("Invalid email or password. Please try again!");
-          }
-          //if error 405 is returned
-          if(err.response.status === 405)
-          {
-            alert("This email is not registered yet! Try registering first!");
-          }
-        });
-    }
-      else{
-        console.log("Please enter your email and password")
-      }
-    };
-  return (
-    <div>
-      <NavbarComponent />
-	  <MDBValidation
+
+		if (email && password) {
+			axios
+				.post(`${process.env.REACT_APP_URL}/login`, data, {
+					withCredentials: true,
+				})
+				.then((res) => {
+					console.log(res);
+					if (res.data) {
+						const user = res.data.user;
+						console.log("user: ", user);
+						localStorage.setItem("user", JSON.stringify(user));
+						window.location.href = "/";
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+					//if error 403 is returned
+					if (err.response.status === 403) {
+						alert("Invalid email or password. Please try again!");
+					}
+					//if error 405 is returned
+					if (err.response.status === 405) {
+						alert("This email is not registered yet! Try registering first!");
+					}
+				});
+		} else {
+			console.log("Please enter your email and password");
+		}
+	};
+	return (
+		<div>
+			<NavbarComponent />
+			<MDBValidation
 				id="form"
 				className="row g-3"
 				noValidated

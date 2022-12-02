@@ -8,17 +8,16 @@ import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import "./navbar.css";
 
-
 //ctreate a functino for axios post request to logout
 
 function logout(setLogged) {
-	console.log("here")
+	console.log("here");
+
 	axios
-		.get(`${process.env.REACT_APP_URL}/logout`, {withCredentials: true})
+		.get(`${process.env.REACT_APP_URL}/logout`, { withCredentials: true })
 		.then((res) => {
-			console.log(res);
-			if(res.data)
-			{
+			localStorage.removeItem("user");
+			if (res.data) {
 				window.location.href = "/";
 			}
 			//change state to true
@@ -29,22 +28,18 @@ function logout(setLogged) {
 		});
 }
 
-
 function NavbarComponent() {
-	const [logged,setLogged] = React.useState(false)
-	
+	const [logged, setLogged] = React.useState(false);
+
 	React.useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_URL}/checklogin`, {withCredentials: true})
+			.get(`${process.env.REACT_APP_URL}/checklogin`, { withCredentials: true })
 			.then((res) => {
 				console.log(res);
 				//if we get status 200, then user is signed in
-				if(res.status === 200)
-				{
+				if (res.status === 200) {
 					setLogged(true);
-				}
-				else
-				{
+				} else {
 					setLogged(false);
 				}
 			})
@@ -67,29 +62,36 @@ function NavbarComponent() {
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="me-auto"></Nav>
-					{logged ? <Nav>
-						<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
-							<b>Start a new group</b>
-						</Nav.Link>
-						<Nav.Link onClick={()=>{logout(setLogged)}} className="custom-signup ms-2 me-2">
-							<b>Logout</b>
-						</Nav.Link>
-						<Button href="./profilePage" className="custom-btn ms-2 me-2">
-						<CgProfile />
-						</Button>
-					</Nav>
-					: <Nav>
-						<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
-							<b>Start a new group</b>
-						</Nav.Link>
-						<Nav.Link href="./Register" className="custom-signup ms-2 me-2">
-							Sign up
-						</Nav.Link>
-						<Button href="./Login" className="custom-btn ms-2 me-2">
-							Sign in
-						</Button>
-					</Nav>
-					}
+					{logged ? (
+						<Nav>
+							<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
+								<b>Start a new group</b>
+							</Nav.Link>
+							<Nav.Link
+								onClick={() => {
+									logout(setLogged);
+								}}
+								className="custom-signup ms-2 me-2"
+							>
+								<b>Logout</b>
+							</Nav.Link>
+							<Button href="./profilePage" className="custom-btn ms-2 me-2">
+								<CgProfile />
+							</Button>
+						</Nav>
+					) : (
+						<Nav>
+							<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
+								<b>Start a new group</b>
+							</Nav.Link>
+							<Nav.Link href="./Register" className="custom-signup ms-2 me-2">
+								Sign up
+							</Nav.Link>
+							<Button href="./Login" className="custom-btn ms-2 me-2">
+								Sign in
+							</Button>
+						</Nav>
+					)}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

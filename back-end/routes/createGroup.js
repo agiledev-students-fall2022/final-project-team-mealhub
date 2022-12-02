@@ -35,8 +35,15 @@ class DefaultDict {
 const cuisineImages = new DefaultDict(Array);
 const getImages = async () => {
 	await cloudinary.v2.api
-		.resources({ folder: "MealHub/italian", max_results: 100 })
+		.resources({
+			folder: "MealHub/italian",
+			max_results: 100,
+			width: 400,
+			height: 120,
+			crop: "scale",
+		})
 		.then((result) => {
+			console.log(result);
 			result["resources"].forEach((element) => {
 				if (element["folder"].includes("MealHub")) {
 					cuisineImages[element["folder"]].push(element["url"]);
