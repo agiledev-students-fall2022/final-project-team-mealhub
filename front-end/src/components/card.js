@@ -18,6 +18,7 @@ function Card({ data, key }) {
 	const [open, setOpen] = React.useState(false);
 	const [joined, setJoined] = React.useState(
 		userDetails &&
+			data &&
 			data.members.some((element) => element._id === userDetails._id)
 			? true
 			: false
@@ -31,6 +32,7 @@ function Card({ data, key }) {
 				})
 				.then((response) => {
 					setJoined(!joined);
+					window.location.reload();
 				});
 		} else {
 			alert("Please login");
@@ -48,6 +50,7 @@ function Card({ data, key }) {
 				})
 				.then((response) => {
 					setJoined(!joined);
+					window.location.reload();
 					// console.log("deleted");
 				});
 		} else {
@@ -57,13 +60,22 @@ function Card({ data, key }) {
 		}
 	};
 
+	const truncateText = function (str1, leng) {
+		if (str1.length > leng && str1.length > 0) {
+			let new_str = str1 + " ";
+			new_str = str1.substr(0, leng);
+			new_str = str1.substr(0, new_str.lastIndexOf(" "));
+			new_str = new_str.length > 0 ? new_str : str1.substr(0, leng);
+			return new_str + "...";
+		}
+		return str1;
+	};
 	const joinButtonAction = () => {
 		if (joined) {
 			leaveGroup();
 		} else {
 			joinGroup();
 		}
-		window.location.reload();
 	};
 	return (
 		<div className="card-component">
@@ -92,15 +104,10 @@ function Card({ data, key }) {
 							{data.restaurant}
 						</Item.Header>
 						<Item.Description>{data.location}</Item.Description>
-						<Item.Meta>
-							<span>
-								{data.members == null ? (data.members = []) : null}
-								{(data.capacity - data.members.length)
-									.toString()
-									.replace(/^[0]+/g, "0") + " spots left"}
-							</span>
-						</Item.Meta>
+
 						<Item.Extra>
+							<div> {truncateText(data.description, 320)}</div>
+							<br></br>
 							<Button
 								floated="right"
 								color={joined ? "red" : "green"}
@@ -112,7 +119,23 @@ function Card({ data, key }) {
 							>
 								{joined ? "Leave" : "Join"}
 							</Button>
+							<Item.Meta>
+								<span>
+									{data.members == null ? (data.members = []) : null}
+									{(data.capacity - data.members.length)
+										.toString()
+										.replace(/^[0]+/g, "0") + " spots left"}
+								</span>
+							</Item.Meta>
 						</Item.Extra>
+						{/* <Item.Meta>
+							<span>
+								{data.members == null ? (data.members = []) : null}
+								{(data.capacity - data.members.length)
+									.toString()
+									.replace(/^[0]+/g, "0") + " spots left"}
+							</span>
+						</Item.Meta> */}
 					</Item.Content>
 				</Item>
 			</Item.Group>

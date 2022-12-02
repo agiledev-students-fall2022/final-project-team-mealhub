@@ -43,7 +43,6 @@ const getImages = async () => {
 			crop: "scale",
 		})
 		.then((result) => {
-			console.log(result);
 			result["resources"].forEach((element) => {
 				if (element["folder"].includes("MealHub")) {
 					cuisineImages[element["folder"]].push(element["url"]);
@@ -111,9 +110,10 @@ router.post(
 
 			//Get user ID from JWT token
 			let image;
-			console.log("cuisine: ", cuisine);
 
 			// adding the cuisine image to the
+			console.log(cuisine);
+			console.log(cuisineImages);
 
 			// adding cuisine cuisineImages
 			if (cuisine == "korean") {
@@ -153,6 +153,7 @@ router.post(
 					];
 			}
 
+			console.log("image: ", image);
 			let location = req.body.location;
 			let restaurant = req.body.restaurant;
 
