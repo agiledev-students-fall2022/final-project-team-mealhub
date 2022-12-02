@@ -5,41 +5,34 @@ const server = require("../app");
 //Assertion style
 chai.should();
 chai.use(chaiHttp);
-
-//COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
-/*
+const jwt = require("jsonwebtoken");
 //=============================================================
-const userLoginInfo = {
-    email: "applepie@gmail.com",
-    password: "password",
-};
+const token = jwt.sign(
+    { email: "applepie@gmail.com" },
+    process.env.JWT_SECRET,
+    {
+        expiresIn: 60 * 60 * 24, // expires in 24 hours
+    }
+);
 
+const invalid_token = "hi";
+const invalid_id_token = jwt.sign({ id: "abcd" }, process.env.JWT_SECRET, {
+    expiresIn: 60 * 60 * 24, // expires in 24 hours
+});
 //=============================================================
-*/
+
 describe("TEST API- editImage", () => {
     /**
      * Test the POST route for uploadImage
      */
 
-    //COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
-    /*
-    beforeEach((done) => {
-        chai.request(server)
-            .post("/login")
-            .send(userLoginInfo)
-            .end((err, res) => {
-                res.should.have.status(200);
-                done();
-            });
-    });
-    */
-
     describe("POST request to /uploadImage", () => {
         it("It should POST image to editImage", (done) => {
-            const f = "test/dogTestPic.jpg";
+            const f = "test/pecanpietest.jpg";
             chai.request(server)
                 .post("/uploadImage")
                 .set("content-type", "multipart/form-data")
+                .set("Cookie", `jwt-token=${token}`)
                 .attach("image", f)
                 .end((err, res) => {
                     res.should.be.a("object");
@@ -48,6 +41,37 @@ describe("TEST API- editImage", () => {
                         .property("message")
                         .equals("The files were uploaded!!!");
                     res.body.should.have.property("files");
+                    done();
+                });
+        });
+        it("It should fail to POST image to editImage with invalid id", (done) => {
+            const f = "test/pecanpietest.jpg";
+            chai.request(server)
+                .post("/uploadImage")
+                .set("content-type", "multipart/form-data")
+                .set("Cookie", `jwt-token=${invalid_id_token}`)
+                .attach("image", f)
+                .end((err, res) => {
+                    res.should.be.a("object");
+                    res.body.should.have.property("success");
+                    res.body.should.have.property("success").equals(false);
+
+                    done();
+                });
+        });
+
+        it("It should fail to POST image to editImage with invalid token", (done) => {
+            const f = "test/pecanpietest.jpg";
+            chai.request(server)
+                .post("/uploadImage")
+                .set("content-type", "multipart/form-data")
+                .set("Cookie", `jwt-token=${invalid_token}`)
+                .attach("image", f)
+                .end((err, res) => {
+                    res.should.be.a("object");
+                    res.body.should.have.property("success");
+                    res.body.should.have.property("success").equals(false);
+
                     done();
                 });
         });

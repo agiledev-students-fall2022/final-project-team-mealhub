@@ -29,7 +29,8 @@ router.post(
                         displayName: req.body.displayName.trim(),
                     },
                 };
-                await User.findByIdAndUpdate(res.locals.user.id, {
+                console.log(res.locals.user._id);
+                await User.findByIdAndUpdate(res.locals.user._id, {
                     displayName: req.body.displayName.trim(),
                 });
                 res.json(dataRecieved);

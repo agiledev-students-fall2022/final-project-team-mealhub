@@ -5,42 +5,32 @@ const server = require("../app");
 //Assertion style
 chai.should();
 chai.use(chaiHttp);
-
-//COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
-/*
+const jwt = require("jsonwebtoken");
 //=============================================================
-const userLoginInfo = {
-    email: "applepie@gmail.com",
-    password: "password",
-};
+const token = jwt.sign(
+    { email: "applepie@gmail.com" },
+    process.env.JWT_SECRET,
+    {
+        expiresIn: 60 * 60 * 24, // expires in 24 hours
+    }
+);
 
 //=============================================================
-*/
+
 describe("TEST API- editProfilePage", () => {
     /**
      * Test the POST route for editProfilePage
      */
 
-    //COMMENTED CODE FOR WHEN AUTHENTICATION IS SET
-    /*
-    beforeEach((done) => {
-        chai.request(server)
-            .post("/login")
-            .send(userLoginInfo)
-            .end((err, res) => {
-                res.should.have.status(200);
-                done();
-            });
-    });
-*/
     describe("POST request to /editInfo", () => {
         it("It should POST changes to user profile", (done) => {
             const change = {
-                displayName: "Hello Dog",
+                displayName: "Pie",
             };
             chai.request(server)
                 .post("/editInfo")
                 .send(change)
+                .set("Cookie", `jwt-token=${token}`)
                 .end((err, res) => {
                     res.should.be.a("object");
                     res.body.should.have.property("status").equals("success!");
