@@ -54,23 +54,31 @@ function Login() {
 		} else {
 			console.log("Please enter your email and password");
 		}
-	};
 
-	//const onChange to update the value
-	// const onChange = (event) => {
-	// 	const { name, value } = event.target;
-	// 	if (name === "email") {
-	// 		setEmail(value);
-	// 	} else if (name === "password") {
-	// 		setPassword(value);
-	// 	}
+      })
+      .catch((err) => {
+        console.log(err);
+        //if error 403 is returned
+        if(err.response.status === 403)
+        {
+          alert("Invalid email or password. Please try again!");
+        }
+        //if error 405 is returned
+        if(err.response.status === 405)
+        {
+          alert("This email is not registered yet. Try signing up instead!");
+        }
+      });
+	}
+	  else{
+		  console.log("Please enter your email and password")
+	  }
+  };
 
-	// };
-
-	return (
-		<div>
-			<NavbarComponent />
-			<MDBValidation
+  return (
+    <div>
+      <NavbarComponent />
+	  <MDBValidation
 				id="form"
 				className="row g-3"
 				noValidated
