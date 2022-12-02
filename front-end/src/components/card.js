@@ -3,14 +3,64 @@ import "semantic-ui-css/semantic.min.css";
 import { Button, Item } from "semantic-ui-react";
 import "./card.css";
 import Cardmodal from "./cardmodal";
+import axios from "axios";
 import dateFormat, { masks } from "dateformat";
 
 function Card({ data, key }) {
 	// this.state = {
 	// 	modalOpen: false,
 	// };
+	let userDetails = JSON.parse(localStorage.getItem("user"));
 	const [open, setOpen] = React.useState(false);
-	const [joined, setJoined] = React.useState(data.joined);
+	const [joined, setJoined] = React.useState(
+		userDetails &&
+			data.members.some(
+				(element) => element._id.toString() === userDetails._id.toString()
+			)
+			? true
+			: false
+	);
+
+	const joinGroup = function () {
+		if (userDetails) {
+			axios
+				.post(`${process.env.REACT_APP_URL}/${userDetails._id}`, {
+					groupID: data._id,
+				})
+				.then((response) => {
+					setJoined(!joined);
+				});
+		} else {
+			alert("Please login");
+		}
+	};
+
+	const leaveGroup = function () {
+		if (userDetails && data.members.length > 1) {
+			axios
+				.delete(`${process.env.REACT_APP_URL}/`, {
+					params: {
+						groupID: data._id,
+						userID: userDetails._id,
+					},
+				})
+				.then((response) => {
+					setJoined(!joined);
+				});
+		} else {
+			data.members.length > 1
+				? alert("Please login")
+				: alert("You can't abandon your group");
+		}
+	};
+
+	const joinButtonAction = () => {
+		if (joined) {
+			leaveGroup();
+		} else {
+			joinGroup();
+		}
+	};
 	return (
 		<div className="card-component">
 			<Item.Group>
@@ -49,12 +99,14 @@ function Card({ data, key }) {
 						<Item.Extra>
 							<Button
 								floated="right"
+								color={joined ? "red" : "green"}
 								onClick={() => {
 									// setOpen(true);
-									setJoined(!joined);
+
+									joinButtonAction();
 								}}
 							>
-								{joined ? "Joined!" : "Join"}
+								{joined ? "Leave" : "Join"}
 							</Button>
 						</Item.Extra>
 					</Item.Content>
@@ -66,7 +118,7 @@ function Card({ data, key }) {
 				modalOpen={open}
 				joined={joined}
 				handleJoined={() => {
-					setJoined(!joined);
+					joinButtonAction();
 				}}
 				handleClose={() => {
 					setOpen(false);
