@@ -41,6 +41,10 @@ To run this project, you will need to add the following environment variables to
 
 `REACT_APP_URL=http://localhost:3001`
 
+`JWT_SECRET="catdog"`
+
+`HEADER_URL=http://localhost:3000`
+
 ## Run Locally
 
 Clone the project
