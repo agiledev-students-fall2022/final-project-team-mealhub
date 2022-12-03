@@ -8,20 +8,8 @@ import dateFormat, { masks } from "dateformat";
 
 
 function Card({ data, key }) {
-  // this.state = {
-  // 	modalOpen: false,
-  // };
   const [open, setOpen] = React.useState(false);
   const [joined, setJoined] = React.useState(data.joined);
-
-  // const Remove = () => {
-  // 	axios
-  // 		.delete(`${process.env.REACT_APP_URL}/myGroup/${data._id}`)
-  // 		.then((response) => {
-  // 			console.log(response.data);
-  // 			setJoined(false);
-  // 		});
-  // };
 
   return (
     <div className="card-component">
