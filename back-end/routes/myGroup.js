@@ -13,7 +13,6 @@ router.get("/", checkUser, async (req, res) => {
 		const user = res.locals.user;
 		const groups = await Group.find({ members: user._id })
 			// requesting resource from DB
-			// const groups = await Group.find({})
 			.populate("user")
 			.sort({ createdAt: "desc" })
 			.lean();
@@ -28,12 +27,7 @@ router.get("/", checkUser, async (req, res) => {
 // get axios delete request from Mycards and remove user ID from the members list of the group object
 router.delete("/:id", async (req, res) => {
 	try {
-		// find one and delete by ID and delete the entire group from the mongoDB database
 		const group = await Group.findByIdAndDelete(req.params.id);
-		// const group = await Group.findById(req.params.id);
-		// const group = await Group.findOne({ _id: req.params.id });
-
-		// await group.save();
 		res.json({
 			success: true,
 		});

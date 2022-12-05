@@ -67,6 +67,11 @@ function NavbarComponent() {
 							<Nav.Link href="./createGroup" className="custom-start ms-2 me-2">
 								<b>Start a new group</b>
 							</Nav.Link>
+
+							<Nav.Link href="./myGroup" className="custom-signup ms-2 me-2">
+								<b>My Groups</b>
+							</Nav.Link>
+
 							<Nav.Link
 								onClick={() => {
 									logout(setLogged);
