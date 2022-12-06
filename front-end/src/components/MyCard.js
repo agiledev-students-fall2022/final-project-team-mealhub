@@ -2,14 +2,24 @@ import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Button, Item } from "semantic-ui-react";
 import "./card.css";
-import Cardmodal from "./cardmodal";
+import Cardmodal from "./Mycardmodal";
 import axios from "axios";
 import dateFormat, { masks } from "dateformat";
-
 
 function Card({ data, key }) {
   const [open, setOpen] = React.useState(false);
   const [joined, setJoined] = React.useState(data.joined);
+
+  const truncateText = function (str1, leng) {
+    if (str1.length > leng && str1.length > 0) {
+      let new_str = str1 + " ";
+      new_str = str1.substr(0, leng);
+      new_str = str1.substr(0, new_str.lastIndexOf(" "));
+      new_str = new_str.length > 0 ? new_str : str1.substr(0, leng);
+      return new_str + "...";
+    }
+    return str1;
+  };
 
   return (
     <div className="card-component">
@@ -38,14 +48,28 @@ function Card({ data, key }) {
               {data.restaurant}
             </Item.Header>
             <Item.Description>{data.location}</Item.Description>
-            <Item.Meta>
+
+            <Item.Extra>
+              <div> {truncateText(data.description, 320)}</div>
+              <br></br>
+              <Item.Meta>
+                <span>
+                  {data.members == null ? (data.members = []) : null}
+                  {(data.capacity - data.members.length)
+                    .toString()
+                    .replace(/^[0]+/g, "0") + " spots left"}
+                </span>
+              </Item.Meta>
+            </Item.Extra>
+
+            {/* <Item.Meta>
               <span>
                 {data.members == null ? (data.members = []) : null}
                 {(data.capacity - data.members.length)
                   .toString()
                   .replace(/^[0]+/g, "0") + " spots left"}
               </span>
-            </Item.Meta>
+            </Item.Meta> */}
 
             <Item.Extra>
               <Button
