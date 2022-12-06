@@ -4,16 +4,19 @@ import "./cardmodal.css";
 import dateFormat, { masks } from "dateformat";
 
 function CardModal(props) {
-	// const [open, setOpen] = React.useState(true);
-	const user = {
-		createdAt: "2022-11-19T06:22:11.461Z",
-		displayName: "Test Er",
-		email: "tester@gmail.com",
-		firstName: "Test",
-		lastName: "Er",
-		password: "$2b$10$fMEQ7TK.wsR0T3jBjjaQZOms9kyPU45wU1h2aocyQf9Q/NsVI/DEC",
-		__v: 0,
-		_id: "637876133b70b16a643dfb29",
+	const convertTime = function (time) {
+		// Check correct time format and split into components
+		time = time
+			.toString()
+			.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+		if (time.length > 1) {
+			// If time format correct
+			time = time.slice(1); // Remove full string match value
+			time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+			time[0] = +time[0] % 12 || 12; // Adjust hours
+		}
+		return time.join(""); // return adjusted time or original string
 	};
 	return (
 		<div className="modal">
@@ -33,15 +36,15 @@ function CardModal(props) {
 							<span>{"12-12-12"}</span>
 						</Modal.Meta> */}
 						<span className="modal-span">
-							{dateFormat(props.data.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+							{dateFormat(props.data.date, "dddd, mmmm dS, yyyy").toString() +
+								" @ " +
+								convertTime(props.data.time)}
 						</span>
 
 						<Header>{props.data.restaurant}</Header>
 						<span className="modal-span">{props.data.location}</span>
 						<br></br>
 						<span className="modal-span">
-							{props.data.members == null ? (props.data.members = []) : null}
-
 							{+(props.data.capacity - props.data.members.length) * 1 +
 								" spots left"}
 						</span>
@@ -52,7 +55,6 @@ function CardModal(props) {
 						<Header>Description</Header>
 						<p>{props.data.description}</p>
 						<p>
-							{}
 							{"Cuisine Location: " +
 								props.data.cuisine.charAt(0).toUpperCase() +
 								props.data.cuisine.slice(1)}
@@ -60,7 +62,6 @@ function CardModal(props) {
 						<p>{"Budget: $" + props.data.budget}</p>
 						<p>{`Dress-code: ${props.data.dress_code}`}</p>
 						<p>
-							{props.data.user == null ? (props.data.user = user) : null}
 							{("" + props.data.members.length).replace(/^[0]+/g, "") +
 								"/" +
 								props.data.capacity}{" "}
