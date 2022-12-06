@@ -66,10 +66,26 @@ function Card({ data, key }) {
 			new_str = str1.substr(0, leng);
 			new_str = str1.substr(0, new_str.lastIndexOf(" "));
 			new_str = new_str.length > 0 ? new_str : str1.substr(0, leng);
-			return new_str + "...";
+			return new_str + " ...";
 		}
 		return str1;
 	};
+
+	const convertTime = function (time) {
+		// Check correct time format and split into components
+		time = time
+			.toString()
+			.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+		if (time.length > 1) {
+			// If time format correct
+			time = time.slice(1); // Remove full string match value
+			time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+			time[0] = +time[0] % 12 || 12; // Adjust hours
+		}
+		return time.join(""); // return adjusted time or original string
+	};
+
 	const joinButtonAction = () => {
 		if (joined) {
 			leaveGroup();
@@ -92,7 +108,9 @@ function Card({ data, key }) {
 					<Item.Content>
 						<Item.Meta>
 							<span>
-								{dateFormat(data.date, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+								{dateFormat(data.date, "dddd, mmmm dS, yyyy").toString() +
+									" @ " +
+									convertTime(data.time)}
 							</span>
 						</Item.Meta>
 						<Item.Header
