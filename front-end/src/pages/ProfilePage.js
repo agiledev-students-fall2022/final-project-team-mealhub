@@ -11,15 +11,14 @@ import Button from "react-bootstrap/Button";
 
 function ProfilePage() {
     const [data, setData] = useState([]);
-
     //render profile data onto the page
     const fetchProfileData = async () => {
         try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`,
-                { withCredentials: true }
-            );
-            setData(response.data);
+            await axios
+                .get(`${process.env.REACT_APP_URL}/profilePage`, {
+                    withCredentials: true,
+                })
+                .then((response) => setData(response.data));
         } catch (err) {
             console.log(err);
         }
@@ -32,47 +31,60 @@ function ProfilePage() {
     return (
         <Container>
             <ProfileNavbarComponent />
-            <div id="title">
-                <br></br>
-                <p>My Profile</p>
-            </div>
-            <div id="pfImg">
-                <Image
-                    src={data.image}
-                    roundedCircle
-                    height="140"
-                    width="140"
-                />
-            </div>
-            <div id="info">
-                <Form.Group>
-                    <Form.Label>Display Name</Form.Label>
-                    <Form.Control placeholder={data.displayName} disabled />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control placeholder={data.firstName} disabled />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control placeholder={data.lastName} disabled />
-                </Form.Group>
+            <div id="backgroundColor">
+                <div id="title">
+                    <br></br>
+                    <p>My Profile</p>
+                </div>
+                <div id="page">
+                    <div id="pfImg">
+                        <Image
+                            src={data.image}
+                            roundedCircle
+                            height="140"
+                            width="140"
+                        />
+                    </div>
+                    <div id="info">
+                        <Form.Group>
+                            <Form.Label>Display Name</Form.Label>
+                            <Form.Control
+                                placeholder={data.displayName}
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                placeholder={data.firstName}
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control
+                                placeholder={data.lastName}
+                                disabled
+                            />
+                        </Form.Group>
 
-                <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control placeholder={data.email} disabled />
-                </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control placeholder={data.email} disabled />
+                        </Form.Group>
 
-                <br></br>
-            </div>
+                        <br></br>
+                    </div>
 
-            <div id="button">
-                <Button
-                    href={"/editProfilePage"}
-                    className="custom-btn ms-2 me-2"
-                >
-                    Edit profile
-                </Button>
+                    <div id="button">
+                        <Button
+                            href={"/editProfilePage"}
+                            className="custom-btn ms-2 me-2"
+                        >
+                            Edit profile
+                        </Button>
+                    </div>
+                </div>
             </div>
             <Footer />
         </Container>
