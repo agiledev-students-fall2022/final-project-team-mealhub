@@ -6,9 +6,16 @@ import { useNavigate } from "react-router-dom";
 
 function EditImage() {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    //Create a timeout function which will be used while loading data to database
+    function timeout(delay) {
+        return new Promise((res) => setTimeout(res, delay));
+    }
+
+    //Handle save
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", selectedImage);
@@ -16,6 +23,9 @@ function EditImage() {
         axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData, {
             withCredentials: true,
         });
+
+        setLoading(true);
+        await timeout(3000);
         navigate("/profilePage");
     };
 
@@ -53,6 +63,11 @@ function EditImage() {
             <Button href={"/profilePage"} variant="secondary">
                 Done
             </Button>{" "}
+            <br></br>
+            <br></br>
+            <div id="saving">
+                <div className="saving">{loading ? "Saving..." : ""}</div>
+            </div>
         </div>
     );
 }
