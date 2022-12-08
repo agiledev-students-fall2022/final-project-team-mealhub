@@ -59,57 +59,65 @@ function EditProfilePage() {
     return (
         <div>
             <ProfileNavbarComponent />
-            <div id="title">
-                <br></br>
-                <p>Edit Profile</p>
-            </div>
-
-            <div id="pfImg">
-                <Image
-                    src={data.image}
-                    roundedCircle
-                    height="140"
-                    width="140"
-                />
-            </div>
-
-            <div id="changeImageText">
-                <Link to={"/addImage"}>Change Profile Image</Link>
-            </div>
-
-            {/*------------------------------Form section------------------------*/}
-            <div id="infoEdit">
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Display Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Display Name"
-                            defaultValue={data.displayName}
-                            required
-                            onChange={(e) => setDisplayName(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control placeholder={data.firstName} disabled />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control placeholder={data.lastName} disabled />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control placeholder={data.email} disabled />
-                    </Form.Group>
+            <div id="backgroundColor">
+                <div id="title">
                     <br></br>
-                    <Button type="submit" variant="primary">
-                        Save
-                    </Button>{" "}
-                    <Button href={"/profilePage"} variant="secondary">
-                        Done
-                    </Button>{" "}
-                </Form>
+                    <p>Edit Profile</p>
+                </div>
+
+                <div id="pfImg">
+                    <Image
+                        src={data.image}
+                        roundedCircle
+                        height="140"
+                        width="140"
+                    />
+                </div>
+
+                <div id="changeImageText">
+                    <Link to={"/addImage"}>Change Profile Image</Link>
+                </div>
+
+                {/*------------------------------Form section------------------------*/}
+                <div id="infoEdit">
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group>
+                            <Form.Label>Display Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Display Name"
+                                defaultValue={data.displayName}
+                                required
+                                onChange={(e) => setDisplayName(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                placeholder={data.firstName}
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control
+                                placeholder={data.lastName}
+                                disabled
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control placeholder={data.email} disabled />
+                        </Form.Group>
+                        <br></br>
+                        <Button type="submit" variant="primary">
+                            Save
+                        </Button>{" "}
+                        <Button href={"/profilePage"} variant="secondary">
+                            Done
+                        </Button>{" "}
+                    </Form>
+                </div>
             </div>
             <Footer />
         </div>
