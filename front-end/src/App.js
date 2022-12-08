@@ -11,6 +11,7 @@ import Group from "./components/group";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Explore from "./pages/explore";
+import ErrorPage from "./pages/errorPage";
 
 function App() {
 	return (
@@ -26,6 +27,8 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/myGroup" element={<MyGroup />} />
+					{/* Route everyother route to */}
+					<Route path="*" element={<ErrorPage />} />
 				</Routes>
 			</Router>
 		</div>

@@ -1,0 +1,33 @@
+.errorPage{
+    background-color: #f5f5f5;
+    margin-top: 2%;
+    height: 87vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 3%;
+    padding-top: 2%;
+    text-align: center;
+}
+
+.errorPage h1{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #eb6f3f;
+}
+
+
+
+.errorPage p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #eb6f3f;
+}
+
+.errorPage a{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #eb6f3f;
+    text-decoration: none;
+}
