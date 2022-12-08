@@ -112,8 +112,6 @@ router.post(
 			let image;
 
 			// adding the cuisine image to the
-			console.log(cuisine);
-			console.log(cuisineImages);
 
 			// adding cuisine cuisineImages
 			if (cuisine == "korean") {

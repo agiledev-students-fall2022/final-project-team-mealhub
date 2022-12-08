@@ -25,7 +25,7 @@ function Card({ data, key }) {
 	);
 
 	const joinGroup = function () {
-		if (userDetails) {
+		if (userDetails && data && data.members.length < data.capacity) {
 			axios
 				.patch(`${process.env.REACT_APP_URL}/${userDetails._id}`, {
 					groupID: data._id,
@@ -34,6 +34,8 @@ function Card({ data, key }) {
 					setJoined(!joined);
 					window.location.reload();
 				});
+		} else if (data.members.length >= data.capacity) {
+			alert("The Group is unfortunately full!");
 		} else {
 			alert("Please login");
 		}
