@@ -199,6 +199,23 @@ function Register() {
 
                   <hr className="my-4 w-100" />
 
+                  {/* <p className="text-black-50 mb-1">or sign up with:</p>
+
+                  <div className="d-flex flex-row mt-3 mb-5">
+                    <Icon
+                      name="facebook f"
+                      size="large"
+                      id="paddingright"
+                      className="socials"
+                    />
+                    <Icon
+                      name="google"
+                      size="large"
+                      id="paddingleft"
+                      className="socials"
+                    />
+                  </div> */}
+
                   <div>
                     <p className="mb-0">
                       Already have an account?{" "}
