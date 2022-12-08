@@ -1,8 +1,9 @@
 .card-component{
     margin-left: 20%;
-    padding: 5px;
-    border-top: 1px solid rgb(217 217 217) !important;
+    padding: 15px;
     width: 50% !important;
+    box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5) !important;
+    margin-top: 15px !important;
 }
 
 .card-text{
@@ -13,8 +14,3 @@
 a:hover{
     color: #eb6f3f !important;
 }
-
-/* .card-image{
-    width: 130px !important;
-    height: 100px !important;
-} */

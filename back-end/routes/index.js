@@ -71,8 +71,8 @@ router.get("/explore", async (req, res) => {
 		Group.find({})
 			.populate("user")
 			.populate("members")
-			.limit(10)
-			.skip(q.page * 10)
+			.limit(5)
+			.skip(q.page * 5)
 			.sort({ createdAt: "desc" })
 			.lean()
 			.exec((err, docs) => {
