@@ -21,11 +21,11 @@ const invalid_id_token = jwt.sign({ id: "abcd" }, process.env.JWT_SECRET, {
 });
 //=============================================================
 
-describe("TEST API- editImage", () => {
+describe("TEST API- editImage", function () {
     /**
      * Test the POST route for uploadImage
      */
-
+    this.timeout(10000);
     describe("POST request to /uploadImage", () => {
         it("It should POST image to editImage", (done) => {
             const f = "test/pecanpietest.jpg";
