@@ -41,6 +41,13 @@ function ProfileNavbarComponent() {
                             <b>Start a new group</b>
                         </Nav.Link>
                         <Nav.Link
+                            href="./myGroup"
+                            className="custom-signup ms-2 me-2"
+                        >
+                            <b>My Groups</b>
+                        </Nav.Link>
+
+                        <Nav.Link
                             className="custom-signup ms-2 me-2"
                             onClick={handleClick}
                         >

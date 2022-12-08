@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
 import "./cardmodal.css";
 import dateFormat, { masks } from "dateformat";
+import AddToCalendar from "./addToCalendar";
 
 function CardModal(props) {
 	const convertTime = function (time) {
@@ -68,7 +69,11 @@ function CardModal(props) {
 							MealHubers | {props.data.user.displayName}
 						</p>
 					</Modal.Description>
+					<div className="addToCal">
+						<AddToCalendar data={props.data}></AddToCalendar>
+					</div>
 				</Modal.Content>
+
 				<Modal.Actions>
 					<Button color="black" onClick={props.handleClose}>
 						Close
