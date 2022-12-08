@@ -2,6 +2,7 @@ import React from "react";
 import { atcb_init } from "add-to-calendar-button";
 import "add-to-calendar-button/assets/css/atcb.css";
 import dateFormat, { masks } from "dateformat";
+import "./addToCalendar.css";
 
 const MyComponent = ({ data }) => {
 	React.useEffect(() => {

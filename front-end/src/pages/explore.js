@@ -50,7 +50,7 @@ function Explore() {
 			.then((response) => {
 				setCardData(response.data.docs);
 				setCount(response.data.count);
-				if (response.data.count / 10 > page) {
+				if (response.data.count / 5 > page) {
 					setPage(page + 1);
 				}
 			});
@@ -67,7 +67,7 @@ function Explore() {
 				const joinedData = cardData.concat(response.data.docs);
 				setCardData(joinedData);
 				setCount(response.data.count);
-				if (response.data.count / 10 > page) {
+				if (response.data.count / 5 > page) {
 					setPage(page + 1);
 				}
 			});
@@ -96,7 +96,7 @@ function Explore() {
 				<InfiniteScroll
 					pageStart={0}
 					loadMore={!isSearchRef.current && loadMore}
-					hasMore={count / 10 > page}
+					hasMore={count / 5 > page}
 					loader={!isSearchRef.current && <Load />}
 				>
 					{cardData &&
