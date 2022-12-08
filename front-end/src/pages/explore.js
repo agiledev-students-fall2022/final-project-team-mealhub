@@ -8,7 +8,7 @@ import axios from "axios";
 import SearchBarComponent from "../components/searchbar";
 import { TailSpin } from "react-loader-spinner";
 import InfiniteScroll from "react-infinite-scroller";
-import useState from 'react-usestateref'
+import useState from "react-usestateref";
 
 // mock data
 const rand = function () {
@@ -81,8 +81,16 @@ function Explore() {
 				setCount={setCount}
 				setisSearch={setisSearch}
 			/>
-			{count!=0 && <h1 className="main-heading pt-5">Available Groups</h1> || !cardData && <h1 className="main-heading pt-5">Available Groups</h1> }
-			{count!=0 && <h3 className="sub-heading pt-1">Total results: {count}</h3> || !cardData && <h3 className="sub-heading pt-1">Total results: {count}</h3>}
+			{(count != 0 && (
+				<h1 className="main-heading pt-5">Available Groups</h1>
+			)) ||
+				(!cardData && <h1 className="main-heading pt-5">Available Groups</h1>)}
+			{(count != 0 && (
+				<h3 className="sub-heading pt-1">Total results: {count}</h3>
+			)) ||
+				(!cardData && (
+					<h3 className="sub-heading pt-1">Total results: {count}</h3>
+				))}
 			<div>
 				{!cardData && <Load />}
 				<InfiniteScroll
@@ -93,15 +101,20 @@ function Explore() {
 				>
 					{cardData &&
 						cardData.map((e) => {
-							return <Card data={e} />;
+							return <Card data={e} key={e._id} />;
 						})}
 				</InfiniteScroll>
 			</div>
-			{cardData && count==0 && <div>
-				<h2 className="main-heading2 d-flex justify-content-center pt-5">No results :(</h2>
-				<h3 className="sub-heading2 d-flex justify-content-center  pt-1">We couldn't find what you were looking for...</h3>
+			{cardData && count == 0 && (
+				<div>
+					<h2 className="main-heading2 d-flex justify-content-center pt-5">
+						No results :(
+					</h2>
+					<h3 className="sub-heading2 d-flex justify-content-center  pt-1">
+						We couldn't find what you were looking for...
+					</h3>
 				</div>
-			}
+			)}
 			<Footer />
 		</div>
 	);

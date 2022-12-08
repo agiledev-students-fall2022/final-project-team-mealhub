@@ -41,7 +41,6 @@ function Explore() {
 			.get(`${process.env.REACT_APP_URL}/myGroup`, { withCredentials: true })
 			.then((response) => {
 				setCardData(response.data);
-				console.log(response.data);
 			});
 	}, []);
 
@@ -55,7 +54,7 @@ function Explore() {
 				{!cardData && <Load />}
 				{cardData &&
 					cardData.map((e) => {
-						return <Card data={e} />;
+						return <Card data={e} key={e._id} />;
 					})}
 			</div>
 			<Footer />
