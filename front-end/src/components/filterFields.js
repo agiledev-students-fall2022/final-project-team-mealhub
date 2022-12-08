@@ -21,7 +21,6 @@ function FilterFields(props) {
 
 	const handleChange = (selected) => {
 		setSelected(selected);
-		console.log("Option selected:", selected);
 	};
 	//   const numberFormat = (value) =>
 	//     new Intl.NumberFormat("en-IN", {
@@ -82,7 +81,6 @@ function FilterFields(props) {
 				// console.log(response.data);
 				// set the card data to the new data recieved
 				// props.setCardData
-				console.log(response.data);
 				props.setCardData(response.data.docs);
 				props.setCount(response.data.count);
 			})

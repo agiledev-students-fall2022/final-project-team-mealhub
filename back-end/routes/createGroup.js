@@ -34,14 +34,16 @@ class DefaultDict {
 // fetching data from cloudinary
 const cuisineImages = new DefaultDict(Array);
 const getImages = async () => {
-	await cloudinary.v2.api
-		.resources({
-			folder: "MealHub/italian",
-			max_results: 100,
-			width: 400,
-			height: 120,
-			crop: "scale",
-		})
+	await cloudinary.v2.search
+		.max_results(1000)
+		// .resources({
+		// 	folder: "MealHub",
+		// 	max_results: 100000,
+		// 	width: 400,
+		// 	height: 120,
+		// 	crop: "scale",
+		// })
+		.execute("folder=MealHub/*")
 		.then((result) => {
 			result["resources"].forEach((element) => {
 				if (element["folder"].includes("MealHub")) {
