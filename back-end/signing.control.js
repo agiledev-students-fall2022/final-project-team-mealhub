@@ -107,6 +107,7 @@ exports.signin = async (req, res) => {
 						"Access-Control-Allow-Origin",
 						`${process.env.HEADER_URL}`
 					);
+					
 					res.cookie("jwt-token", token, {
 						httpOnly: true,
 						maxAge: 60 * 60 * 24 * 1000,

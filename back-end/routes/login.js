@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
         
         }
     console.log(users)
+    console.log("Redirecting")
 })
 
 module.exports = router
