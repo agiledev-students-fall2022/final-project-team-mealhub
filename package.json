@@ -1,0 +1,22 @@
+{
+    "name": "mealhub",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "run-p start:** server",
+        "start:app": "cd front-end && npm run start",
+        "production": "run-p production:** back-end",
+        "production:build": "cd front-end && npm run build",
+        "server": "cd back-end && npm run start",
+        "dev": "pm2 startOrReload ecosystem.json --env development",
+        "prod": "pm2 startOrReload prod-ecosystem.json --env production",
+        "cock": "concurrently \"npm run start:app\" \"npm run server\""
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "concurrently": "^7.6.0",
+        "npm-run-all": "^4.1.5",
+        "pm2": "^5.2.2"
+    }
+}
