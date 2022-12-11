@@ -105,6 +105,7 @@ exports.signin = async (req, res) => {
 					);
 					res.setHeader(
 						"Access-Control-Allow-Origin",
+						"Access-Control-Allow-HEADERS".
 						`${process.env.HEADER_URL}`
 					);
 					
@@ -127,6 +128,7 @@ exports.signin = async (req, res) => {
 
 exports.verify = async (req, res) => {
 	const token = req.cookies["jwt-token"];
+
 	if (!token) {
 		return res.status(401).send({ message: "No token provided!" });
 	} else {
