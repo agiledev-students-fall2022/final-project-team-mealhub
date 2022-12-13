@@ -7,21 +7,26 @@ import Logo from "../assets/logo.png";
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import "./navbar.css";
+//import { set } from "mongoose";
 
 //ctreate a functino for axios post request to logout
 
-function logout(setLogged) {
-	console.log("here");
+const token = {
+	jwt: localStorage.getItem("token"),
+}
 
+function logout(setLogged) {
 	axios
-		.get(`${process.env.REACT_APP_URL}/logout`, { withCredentials: true })
+		.post(`${process.env.REACT_APP_URL}/logout`,token , { withCredentials: true })
 		.then((res) => {
 			localStorage.removeItem("user");
-			if (res.data) {
+			//remove jwt-token cookie
+			if (res.status==200) {
+				localStorage.removeItem("token");
+				document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+				setLogged(false)
 				window.location.href = "/";
 			}
-			//change state to true
-			setLogged(true);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -32,8 +37,15 @@ function NavbarComponent() {
 	const [logged, setLogged] = React.useState(false);
 
 	React.useEffect(() => {
+		if(!(localStorage.getItem("token")))
+		{
+			setLogged(false);
+		}
+		else
+		{
+		{
 		axios
-			.get(`${process.env.REACT_APP_URL}/checklogin`, { withCredentials: true })
+			.post(`${process.env.REACT_APP_URL}/checkuser`, token, { withCredentials: true })
 			.then((res) => {
 				console.log(res);
 				//if we get status 200, then user is signed in
@@ -46,6 +58,8 @@ function NavbarComponent() {
 			.catch((err) => {
 				console.log(err);
 			});
+		}
+		}
 	}, []);
 
 	return (

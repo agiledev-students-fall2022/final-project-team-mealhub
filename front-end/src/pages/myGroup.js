@@ -32,16 +32,47 @@ const Load = () => {
 	);
 };
 
+const data={
+	"jwt": localStorage.getItem("token")
+}
+
+
+
+
+console.log(data);
+
 function Explore() {
+
 	const [cardData, setCardData] = React.useState(null);
 	const [count, setCount] = React.useState(0);
 
+	//axios post request to checkuser
+	axios.post(`${process.env.REACT_APP_URL}/checkuser`, data, { withCredentials: true })
+	.then((res) => {
+		console.log("in  my grounds", res.data.user);
+		//save the res.data.user
+		localStorage.setItem("groupLeader", JSON.stringify(res.data.user));
+	}
+	)
+	.catch((err) => {
+		console.log(err);
+	});
+
+	console.log("group leader", localStorage.getItem("groupLeader"));
+
 	React.useEffect(() => {
+		const groupLeader = localStorage.getItem("groupLeader");
 		axios
-			.get(`${process.env.REACT_APP_URL}/myGroup`, { withCredentials: true })
+			.post(`${process.env.REACT_APP_URL}/myGroup`, groupLeader,  { withCredentials: true })
 			.then((response) => {
+				console.log(response)
 				setCardData(response.data);
-			});
+			})
+			.catch((err) => {
+				console.log("error in my group", err);
+			}
+			);
+			
 	}, []);
 
 	return (

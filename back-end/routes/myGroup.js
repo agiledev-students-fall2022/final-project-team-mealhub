@@ -7,6 +7,10 @@ const jwt = require("jsonwebtoken");
 const { checkUser } = require("../middleware_auth/jwt_auth");
 const Group = require("../models/Group");
 
+//create an empty variable of type User
+
+
+
 // Getting data at my group
 router.get("/", checkUser, async (req, res) => {
 	try {

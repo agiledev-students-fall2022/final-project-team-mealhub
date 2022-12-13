@@ -109,8 +109,9 @@ exports.signin = async (req, res) => {
 					);
 					
 					res.cookie("jwt-token", token, {
-						httpOnly: true,
 						maxAge: 60 * 60 * 24 * 1000,
+						sameSite: 'none',
+						secure: true,
 					});
 					res.send({ token, user });
 				} else {
@@ -126,7 +127,7 @@ exports.signin = async (req, res) => {
 };
 
 exports.verify = async (req, res) => {
-	const token = req.cookies["jwt-token"];
+	
 	if (!token) {
 		return res.status(401).send({ message: "No token provided!" });
 	} else {
@@ -145,5 +146,52 @@ exports.signout = async (req, res) => {
 			.send({ message: "You've been successfully signed out!" });
 	} catch {
 		res.status(500).send();
+	}
+};
+
+// const checkUser = async (req, res, next) => {
+// 	if(req.cookies == null)
+// 	{
+// 	  next()
+// 	}
+// 	else{
+// 	  const token = req.cookies["jwt-token"];
+// 	  if (token) {
+// 		  jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+// 			  if (err) {
+// 				  res.locals.user = null;
+// 				  next();
+// 			  } else {
+// 				  let user = await User.findOne({email:decodedToken.email}).then((resp)=>{
+// 			res.locals.user = resp;
+// 			next();
+// 		  }
+// 		  );
+// 			  }
+// 		  });
+// 	  } else {
+// 		  res.locals.user = null;
+  
+// 		  next();
+// 	  }
+//   }
+//   };
+
+exports.checkUser = async (req, res) => {
+	if (req.body.token) {
+		jwt.verify(req.body.token, process.env.JWT_SECRET, async (err, decodedToken) => {
+			if (err) {
+				res.locals.user = null;
+				res.status(200).send({ user: null });
+			} else {
+				let user = await User.findOne({email:decodedToken.email}).then((resp)=>{
+				res.locals.user = resp;}
+				);
+				res.status(200).send({ user: user });
+			}
+		});
+	} else {
+		res.locals.user = null;
+		res.status(200).send({ user: null });
 	}
 };

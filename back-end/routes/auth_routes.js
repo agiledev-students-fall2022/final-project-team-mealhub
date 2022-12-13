@@ -4,7 +4,7 @@ const controller = require("../signing.control.js");
 module.exports = function (app) {
     app.use(function (req, res, next) {
         res.header(
-            "Access-Control-Allow-Headers",
+            "Access-Control-Allow-Headers, *",
             "Origin, Content-Type, Accept"
         );
         next();
@@ -20,5 +20,7 @@ module.exports = function (app) {
 
     app.get("/logout", controller.signout);
 
-    app.get("/checklogin", controller.verify);
+    app.post("/checklogin", controller.verify);
+
+    app.get("/checkuser", controller.checkUser);
 };
