@@ -105,8 +105,7 @@ exports.signin = async (req, res) => {
 					);
 					res.setHeader(
 						"Access-Control-Allow-Origin",
-						"Access-Control-Allow-HEADERS".
-						`${process.env.HEADER_URL}`
+						"*"
 					);
 					
 					res.cookie("jwt-token", token, {

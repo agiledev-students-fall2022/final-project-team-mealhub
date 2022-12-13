@@ -36,7 +36,26 @@ function Explore() {
 	const [cardData, setCardData] = React.useState(null);
 	const [count, setCount] = React.useState(0);
 
+	// const token = localStorage.getItem("token");
+	// const data = {
+	// 	email: "test",
+	// 	token
+	//   };
+
 	React.useEffect(() => {
+		// axios
+		// 	.post(`${process.env.REACT_APP_URL}/checkuser`, data, { withCredentials: true })
+		// 	.then((res) => {
+		// 		console.log(res.data);
+		// 		//if res.data has data, save the item in local storage
+		// 		if (res.data) {
+		// 			localStorage.setItem("userData", JSON.stringify(res.data));
+		// 		}
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
+
 		axios
 			.get(`${process.env.REACT_APP_URL}/myGroup`, { withCredentials: true })
 			.then((response) => {

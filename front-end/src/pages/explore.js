@@ -39,6 +39,8 @@ function Explore() {
 	const [page, setPage] = React.useState(0);
 	const [isSearch, setisSearch, isSearchRef] = useState(false);
 
+	
+
 	React.useEffect(() => {
 		setisSearch(false);
 		axios

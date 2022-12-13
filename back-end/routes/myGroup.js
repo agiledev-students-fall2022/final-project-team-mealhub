@@ -7,11 +7,46 @@ const jwt = require("jsonwebtoken");
 const { checkUser } = require("../middleware_auth/jwt_auth");
 const Group = require("../models/Group");
 
+//create an new empty user object vairbale global
+let test = {
+	_id: "",
+	firstname: "",
+	lastname: "",
+	email: "",
+	password: "",
+	image: "",
+	createdAt: "",
+};
+
+// displayName: 'Dev Kalavadiya',
+// 0|mealhub  |   firstName: 'Dev',
+// 0|mealhub  |   lastName: 'Kalavadiya',
+// 0|mealhub  |   email: 'dk3936@nyu.edu',
+// 0|mealhub  |   password: '$2b$10$fGxkTbWUdXaIHY4b1OITye8voHUgyjRptmFo8czX0.DRHWb/DwsM2',
+// 0|mealhub  |   image: '/uploads/defaultProfilePic.png',
+// 0|mealhub  |   createdAt: 2022-11-30T06:58:41.010Z,
+
+
+
+
 // Getting data at my group
-router.get("/", checkUser, async (req, res) => {
+router.get("/", async (req, res) => {
 	try {
 		const user = res.locals.user;
+		test = 
+		{
+			_id: user._id,
+			firstname: user.firstName,
+			lastname: user.lastName,
+			email: user.email,
+			password: user.password,
+			image: user.image,
+			createdAt: user.createdAt,
+		};
+		// console.log(test);
+
 		const groups = await Group.find({ members: user._id })
+
 			// requesting resource from DB
 			.populate("user")
 			.sort({ createdAt: "desc" })

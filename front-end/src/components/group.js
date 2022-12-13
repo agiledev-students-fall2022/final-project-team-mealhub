@@ -120,7 +120,8 @@ function Group() {
 					description: formValue.description
 				}, {withCredentials: true})
 				.then((res) => {
-					if (res.status === 200) {
+					const token = localStorage.getItem("token");
+					if (token) {
 						navigate("/myGroup");
 						resetForm();
 					}
@@ -128,7 +129,8 @@ function Group() {
 				.catch((err) => {
 					// console.log("Error caught s");
 					//if error status if 400 redirect to login 
-					if (err.response.status === 400) {
+					const token = localStorage.getItem("token");
+					if (!token) {
 						console.log("Error redirect");						
 						navigate("/login");
 					}

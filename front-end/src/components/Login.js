@@ -3,8 +3,7 @@ import Footer from "./footer";
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
 import axios from "axios";
-import Cookies from 'js-cookie'
-
+import Cookies from "js-cookie";
 
 import "./Login.css";
 import {
@@ -31,10 +30,13 @@ function Login() {
   const onSubmit = (event) => {
     event.preventDefault();
 
+	const token = localStorage.getItem("token");
+	// console.log("tt",token);
+
     const data = {
       email: email,
       password: password,
-	  
+	  token
     };
 
     if (email && password) {
@@ -44,20 +46,24 @@ function Login() {
         })
 
         .then((res) => {
-			console.log("HELLloo", res.data.token)
-			
-			Cookies.get()
-			Cookies.set('jwt-token', res.data.token)
+          console.log("HELLloo", res.data.token);
+
+          Cookies.get();
+		 Cookies.set("jwt-token", res.data.token, {sameSite: 'None', secure: true})
 
           console.log("hee;;;lo", res);
           if (res.data) {
-			console.log(res.cookies)
+            console.log(res.cookie);
+			//asign the jwt-token in the res cookie
+			
+			
             const user = res.data.user;
-			res.cookie = res.data.token;
-			console.log("heel00o", res.cookie)
+            res.cookie = res.data.token;
+            console.log("heel00o", res.cookie);
             console.log("user: ", user);
             localStorage.setItem("user", JSON.stringify(user));
-			alert("success");
+            localStorage.setItem("token", res.data.token);
+            alert("success");
             window.location.href = "/";
           }
         })
@@ -72,12 +78,11 @@ function Login() {
             alert("This email is not registered yet! Try registering first!");
           }
 
-		  // Send cookie to the express backend 
+          // Send cookie to the express backend
         });
     } else {
       console.log("Please enter your email and password");
     }
-
   };
   return (
     <div>

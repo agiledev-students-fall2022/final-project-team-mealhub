@@ -54,6 +54,9 @@ app.use(require("./routes/editProfilePage"));
 app.use(require("./routes/editImage"));
 app.use("/createGroup", require("./routes/createGroup"));
 
+//router for testauth
+app.use("/testAuth", require("./routes/testAuth"));
+
 //Redirect everyother 404 request to errorPage
 
 

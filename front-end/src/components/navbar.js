@@ -7,6 +7,7 @@ import Logo from "../assets/logo.png";
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import "./navbar.css";
+import Cookies from "js-cookie";
 
 //ctreate a functino for axios post request to logout
 
@@ -17,6 +18,10 @@ function logout(setLogged) {
 		.get(`${process.env.REACT_APP_URL}/logout`, { withCredentials: true })
 		.then((res) => {
 			localStorage.removeItem("user");
+			localStorage.removeItem("token");
+			localStorage.removeItem("jwt-token");
+			document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+
 			if (res.data) {
 				window.location.href = "/";
 			}
@@ -31,16 +36,41 @@ function logout(setLogged) {
 function NavbarComponent() {
 	const [logged, setLogged] = React.useState(false);
 
+	const token = localStorage.getItem("token");
+	const data = {
+		email: "test",
+		token
+	  };
+	
+
 	React.useEffect(() => {
+		console.log(data);
 		axios
-			.get(`${process.env.REACT_APP_URL}/checklogin`, { withCredentials: true })
+			.post(`${process.env.REACT_APP_URL}/checklogin`, data, { withCredentials: true })
 			.then((res) => {
 				console.log(res);
+				//read token from local storage and print it 
+				const token = localStorage.getItem("token");
+				console.log("tt",token);
+
 				//if we get status 200, then user is signed in
 				if (res.status === 200) {
 					setLogged(true);
 				} else {
 					setLogged(false);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+
+			axios
+			.post(`${process.env.REACT_APP_URL}/checkuser`, data, { withCredentials: true })
+			.then((res) => {
+				console.log(res.data);
+				//if res.data has data, save the item in local storage
+				if (res.data) {
+					localStorage.setItem("userData", JSON.stringify(res.data));
 				}
 			})
 			.catch((err) => {
