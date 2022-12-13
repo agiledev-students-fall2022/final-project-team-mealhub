@@ -13,19 +13,32 @@ function EditImage() {
     function timeout(delay) {
         return new Promise((res) => setTimeout(res, delay));
     }
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("USer",user);
 
     //Handle save
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", selectedImage);
-        console.log(formData);
-        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, formData, {
+        formData.append("user", user);
+        let data ={
+            user: user,
+            image: selectedImage,
+            formData,
+        }
+        console.log("HI fin form data", data);
+        axios.post(`${process.env.REACT_APP_URL}/uploadImage`, data, {
+            headers: {'Content-type': 'multipart/form-data; boundary=XXX' },
+            body: '--XXX\r\nContent-Disposition: form-data; name="file"; filename="filename.csv"\r\nContent-Type: text/csv\r\n\r\nA,B,C\r\n1,1.1,name1\r\n2,2.2,name2\r\n\r\n--XXX--',
+  
             withCredentials: true,
         });
 
         setLoading(true);
         await timeout(3000);
+        alert("csvd");
+
         navigate("/profilePage");
     };
 

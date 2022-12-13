@@ -86,7 +86,33 @@ function Group() {
 	};
 
 	const navigate = useNavigate();
+
+	const data={
+		"jwt": localStorage.getItem("token")
+	}
+
+	axios.post(`${process.env.REACT_APP_URL}/checkuser`, data, { withCredentials: true })
+	.then((res) => {
+		//console.log("in  my grounds", res.data.user);
+		//save the res.data.user
+		localStorage.setItem("groupLeader", JSON.stringify(res.data.user));
+		// req.send(res.data.user)
+	}
+	)
+	.catch((err) => {
+		console.log(err);
+	});
+
+	let groupLeader = localStorage.getItem("user");
+	const tempdata = {
+		DATA: groupLeader
+	}
+
+	//print groupleader in local storage
+	console.log("group leader  ", JSON.parse(groupLeader));
+
 	const onSubmit = (e) => {
+
 		e.preventDefault();
 
 		console.log("Form submitted");
@@ -117,10 +143,12 @@ function Group() {
 					time: formValue.time,
 					name: formValue.name,
 					budgetDollar: value,
-					description: formValue.description
+					description: formValue.description,
+					memberdata: JSON.parse(groupLeader)
 				}, {withCredentials: true})
 				.then((res) => {
 					if (res.status === 200) {
+						alert("suck")
 						navigate("/myGroup");
 						resetForm();
 					}

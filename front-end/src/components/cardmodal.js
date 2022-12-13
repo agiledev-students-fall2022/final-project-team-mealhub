@@ -19,6 +19,11 @@ function CardModal(props) {
 		}
 		return time.join(""); // return adjusted time or original string
 	};
+	//print props
+	//get user from local storage
+	const user = JSON.parse(localStorage.getItem("user"));
+	//props.data.user = user
+	//console.log("here", props.data.user.displayName);
 	return (
 		<div className="modal">
 			<Modal

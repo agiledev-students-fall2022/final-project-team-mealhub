@@ -39,34 +39,58 @@ function Explore() {
 	const [page, setPage] = React.useState(0);
 	const [isSearch, setisSearch, isSearchRef] = useState(false);
 
+//get 
+
+//create a data variable to store the updated values for response.data.docs and responce.data.count
+let data = {
+	docs: [],
+	count: 0,
+}
+
 	React.useEffect(() => {
 		setisSearch(false);
 		axios
-			.get(`${process.env.REACT_APP_URL}/explore`, {
+			.post(`${process.env.REACT_APP_URL}/explore`, {
 				params: {
 					page: page,
+					data
 				},
+				
 			})
+			//
 			.then((response) => {
+
+				console.log("response query", response.data)
 				setCardData(response.data.docs);
+				data.docs = response.data.docs
 				setCount(response.data.count);
+				data.count = response.data.count
+				console.log(response.data.count, response.data.docs)
 				if (response.data.count / 5 > page) {
 					setPage(page + 1);
 				}
+				console.log("params", page)
 			});
 	}, []);
 
-	const loadMore = function () {
+	const loadMore = async function () {
 		axios
-			.get(`${process.env.REACT_APP_URL}/explore`, {
+			.post(`${process.env.REACT_APP_URL}/explore`, {
 				params: {
 					page: page,
+				data
 				},
 			})
 			.then((response) => {
 				const joinedData = cardData.concat(response.data.docs);
+				console.log(response.data.count, response.data.docs)
+				data.docs = response.data.docs
+				console.log("Load more data",response.data.docs )
+				console.log("params load more ", page)
+				console.log("Load more dataaaaa",joinedData)
 				setCardData(joinedData);
 				setCount(response.data.count);
+				data.count = response.data.count
 				if (response.data.count / 5 > page) {
 					setPage(page + 1);
 				}

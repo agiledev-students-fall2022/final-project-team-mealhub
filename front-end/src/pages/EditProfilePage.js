@@ -15,10 +15,13 @@ function EditProfilePage() {
     const [displayName, setDisplayName] = useState("");
 
     //-------------------render profile data onto the page-------------------------
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("User in edit profile page",user);
+
     const fetchProfileData = async () => {
         try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_URL}/profilePage`,
+            const response = await axios.post(
+                `${process.env.REACT_APP_URL}/profilePage`,user,
                 { withCredentials: true }
             );
             setData(response.data);
@@ -37,6 +40,7 @@ function EditProfilePage() {
         event.preventDefault();
         let newData = {
             displayName: displayName,
+            UserData: user, 
         };
         if (newData.displayName === "") newData.displayName = data.displayName;
 

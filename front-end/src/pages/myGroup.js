@@ -49,21 +49,28 @@ function Explore() {
 	//axios post request to checkuser
 	axios.post(`${process.env.REACT_APP_URL}/checkuser`, data, { withCredentials: true })
 	.then((res) => {
-		console.log("in  my grounds", res.data.user);
+		//console.log("in  my grounds", res.data.user);
 		//save the res.data.user
-		localStorage.setItem("groupLeader", JSON.stringify(res.data.user));
+
+		localStorage.setItem("groupLeader", res.data.user._id);
+		// req.send(res.data.user)
 	}
 	)
 	.catch((err) => {
 		console.log(err);
 	});
 
-	console.log("group leader", localStorage.getItem("groupLeader"));
+	//console.log("group leader", localStorage.getItem("groupLeader"));
+	//create a new user object with groupLeader data
+
+
 
 	React.useEffect(() => {
-		const groupLeader = localStorage.getItem("groupLeader");
+		const user = JSON.parse(localStorage.getItem("user"));
+		console.log("user in myy group", user);
+		//console.log("HI THEREEEEEEE", groupLeader)
 		axios
-			.post(`${process.env.REACT_APP_URL}/myGroup`, groupLeader,  { withCredentials: true })
+			.post(`${process.env.REACT_APP_URL}/myGroup`, user,  { withCredentials: true })
 			.then((response) => {
 				console.log(response)
 				setCardData(response.data);

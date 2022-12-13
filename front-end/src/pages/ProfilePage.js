@@ -12,10 +12,13 @@ import Button from "react-bootstrap/Button";
 function ProfilePage() {
     const [data, setData] = useState([]);
     //render profile data onto the page
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("USer",user);
+
     const fetchProfileData = async () => {
         try {
             await axios
-                .get(`${process.env.REACT_APP_URL}/profilePage`, {
+                .post(`${process.env.REACT_APP_URL}/profilePage`, user, {
                     withCredentials: true,
                 })
                 .then((response) => setData(response.data));
