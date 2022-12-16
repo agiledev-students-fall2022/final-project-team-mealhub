@@ -4,7 +4,7 @@
 
 # MealHub
 
-Live Url: [Mealhub](https://www.mealhub.vercel.app)
+Live Url: [Mealhub](https://mealhub.vercel.app)
 
 ## Product Vision Statement
 
