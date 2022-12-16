@@ -1,0 +1,25 @@
+.main-heading{
+    /* text-align: center; */
+    padding-left: 30%;
+    padding-top: 200px;
+}
+
+.sub-heading{
+    /* text-align: center; */
+    padding-left: 21%;
+    padding-top: 200px;
+}
+
+.main-heading2{
+    padding-top: 200px;
+}
+
+.sub-heading2{
+    padding-top: 200px;
+}
+
+.loader{
+    text-align: center;
+    padding-left: 40%;
+    padding-top: 100px;
+}

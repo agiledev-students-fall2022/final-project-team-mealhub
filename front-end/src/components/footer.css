@@ -1,0 +1,48 @@
+.custom-start {
+    color: #eb6f3f !important;
+    opacity: 90%;
+}
+
+.custom-start:hover {
+    opacity: 100%;
+}
+
+.custom-signup {
+    color: #565454 !important;
+    opacity: 90%;
+}
+
+.footerLink{
+    color: #565454 !important;
+    opacity: 90%;
+}
+
+.footerLink:hover{
+    color: #565454 !important;
+    opacity: 100%;
+}
+
+.custom-signup:hover {
+    color: #565454 !important;
+    opacity: 100%;
+}
+
+.custom-btn {
+    background: #eb6f3f !important;
+    border: none;
+    opacity: 90%;
+}
+
+.custom-btn:hover {
+    opacity: 100%;
+}
+
+#pad {
+    max-width: 100%;
+    padding-top: 3.5%;
+    padding-bottom: 2%;
+}
+
+.footer{
+    z-index: -1 !important;
+}

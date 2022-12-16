@@ -79,6 +79,10 @@ node_modules/
 jspm_packages/
 **/jspm_packages
 
+# public uploads Directory
+public/*
+!public/uploads/
+
 # Results of React build script
 build/
 **/build/
@@ -113,6 +117,9 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# dotenv environment variables file
+/*.env
 
 # next.js build output
 .next

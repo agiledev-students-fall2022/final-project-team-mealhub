@@ -1,0 +1,16 @@
+.modal{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 65%;
+    transform: translate(-50%, -50%);
+}
+
+
+.modal-span{
+    padding-bottom: 3px !important;
+}
+
+.addToCal{
+    text-align: left;
+}

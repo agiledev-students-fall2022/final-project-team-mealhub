@@ -1,0 +1,17 @@
+.filter{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+}
+
+
+.modal-span{
+    padding-bottom: 3px !important;
+}
+
+.filter-header{
+    padding: auto !important;
+    text-align: center !important;
+}

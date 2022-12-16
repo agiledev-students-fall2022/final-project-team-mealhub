@@ -1,0 +1,23 @@
+#paddingright
+{
+    padding-right: 50%;
+}
+#paddingleft
+{
+    padding-left: 20%;
+}
+
+#formControlLg:focus {
+    outline: none !important;
+    border-color: #eb6f3f !important;
+    box-shadow: none;
+  }
+
+
+  .socials{
+    filter: invert(0.7);
+}
+
+.socials:hover{
+    filter: invert(0);
+}
